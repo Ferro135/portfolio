@@ -47,3 +47,9 @@ NEXT_PUBLIC_SITE_URL=https://seu-dominio.com
 ```
 
 Isso atualiza URLs absolutas usadas pelo SEO e sitemap.
+
+## V4
+- Screenshots reais com hover/zoom suave e brilho sutil nos cards.
+- WhatsApp principal: +55 16 99157-6717.
+- Botão direto "Falar no WhatsApp" no hero.
+- WhatsApp destacado como contato principal e GitHub como secundário.

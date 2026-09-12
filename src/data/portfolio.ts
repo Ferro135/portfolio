@@ -10,13 +10,15 @@ export const contact = {
   github: "https://github.com/Ferro135",
   email: "",
   linkedin: "",
-  whatsapp: "",
+  whatsapp: "https://wa.me/5516991576717",
 };
 
 export type ProjectId = "zentra" | "spazio";
 
 export type Project = {
   id: ProjectId;
+  imageSrc?: string;
+  imageAlt?: string;
   number: string;
   slug: string;
   title: string;
@@ -40,6 +42,8 @@ export const projects: Project[] = [
     title: "Zentra",
     eyebrow: "SaaS • Gestão • Automação",
     category: "Plataforma SaaS",
+    imageSrc: "/projects/zentra-dashboard.webp",
+    imageAlt: "Dashboard real do Zentra com visão geral, licenças, projetos e atividades recentes",
     description:
       "Plataforma criada para centralizar a gestão de clientes, licenças, sites e operações digitais em um único painel.",
     longDescription:
@@ -77,6 +81,8 @@ export const projects: Project[] = [
     title: "Spazio Gestão",
     eyebrow: "Financeiro • Operação • Dashboard",
     category: "Sistema administrativo",
+    imageSrc: "/projects/spazio-dashboard.webp",
+    imageAlt: "Dashboard real do Spazio Gestão com visão geral das cantinas, vendas, caixa e estoque",
     description:
       "Sistema desenvolvido para simplificar a gestão financeira e operacional de múltiplas cantinas, com foco em clareza e facilidade de uso.",
     longDescription:

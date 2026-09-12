@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { DashboardPreview } from "@/components/DashboardPreview";
+import { ProjectVisual } from "@/components/ProjectVisual";
 import { Header } from "@/components/Header";
-import { ArrowLeft, ArrowRight, Check, Github, Spark } from "@/components/Icons";
+import { ArrowLeft, ArrowRight, Check, Github, Spark, WhatsApp } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, contact, type Project } from "@/data/portfolio";
 
@@ -44,7 +44,7 @@ export function ProjectCase({ project }: { project: Project }) {
               <span>Preview da interface</span>
               <small>NEXORA / {project.slug}</small>
             </div>
-            <DashboardPreview variant={project.id} />
+            <ProjectVisual project={project} mode="case" />
           </div>
         </div>
       </section>
@@ -134,11 +134,15 @@ export function ProjectCase({ project }: { project: Project }) {
             <div>
               <span className="eyebrow">NEXORA</span>
               <h2>Um bom sistema começa com um problema bem entendido.</h2>
-              <p>Veja o outro case ou acompanhe os próximos projetos pelo GitHub.</p>
+              <p>Veja o outro case ou entre em contato para conversar sobre um novo projeto.</p>
             </div>
             <div className="case-next-actions">
               <Link className="button button-primary" href="/#projetos">Ver todos os projetos <ArrowRight /></Link>
-              <a className="button button-secondary" href={contact.github} target="_blank" rel="noreferrer"><Github /> GitHub</a>
+{contact.whatsapp ? (
+                <a className="button button-secondary" href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /> WhatsApp</a>
+              ) : (
+                <a className="button button-secondary" href={contact.github} target="_blank" rel="noreferrer"><Github /> GitHub</a>
+              )}
             </div>
           </div>
         </div>

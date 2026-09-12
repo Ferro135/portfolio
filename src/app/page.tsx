@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { DashboardPreview } from "@/components/DashboardPreview";
+import { ProjectVisual } from "@/components/ProjectVisual";
 import { Header } from "@/components/Header";
 import {
   ArrowRight,
@@ -8,9 +8,9 @@ import {
   Code,
   Github,
   Layers,
-  Mail,
   Monitor,
   Spark,
+  WhatsApp,
 } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, contact, projects, technologyGroups } from "@/data/portfolio";
@@ -38,9 +38,11 @@ export default function Home() {
               <a className="button button-primary" href="#projetos">
                 Ver projetos <ArrowRight />
               </a>
-              <a className="button button-secondary" href="#contato">
-                <Mail /> Vamos conversar
-              </a>
+              {contact.whatsapp && (
+                <a className="button button-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer">
+                  <WhatsApp /> Falar no WhatsApp
+                </a>
+              )}
             </div>
             <div className="hero-proof">
               <span><Check /> Interfaces responsivas</span>
@@ -127,7 +129,7 @@ export default function Home() {
             {projects.map((project) => (
               <article className="project-card" key={project.id}>
                 <div className="project-number">{project.number}</div>
-                <DashboardPreview variant={project.id} />
+                <ProjectVisual project={project} />
                 <div className="project-body">
                   <div className="project-meta">{project.eyebrow}</div>
                   <div className="project-title-row">
@@ -250,14 +252,20 @@ export default function Home() {
               <span className="eyebrow">Próximo projeto</span>
               <h2>Tem uma ideia?<br />Vamos torná-la real.</h2>
               <p>
-                Novos projetos e colaborações podem começar pelo GitHub, que funciona como ponto de contato
-                principal desta versão do portfólio.
+                Se quiser conversar sobre um site, dashboard ou sistema, o canal mais direto é o WhatsApp.
+                O GitHub também continua disponível para acompanhar os projetos e evolução do portfólio.
               </p>
               <span className="contact-status"><span className="pulse-dot" /> {brand.availability}</span>
             </div>
             <div className="contact-links">
-              <a href={contact.github} target="_blank" rel="noreferrer">
-                <span><Github /></span><div><small>GitHub</small><strong>github.com/Ferro135</strong></div>
+              {contact.whatsapp && (
+                <a className="contact-primary" href={contact.whatsapp} target="_blank" rel="noreferrer">
+                  <span><WhatsApp /></span><div><small>Contato principal</small><strong>WhatsApp · +55 16 99157-6717</strong></div>
+                  <ArrowUpRight className="contact-arrow" />
+                </a>
+              )}
+              <a className="contact-secondary" href={contact.github} target="_blank" rel="noreferrer">
+                <span><Github /></span><div><small>Projetos & código</small><strong>GitHub · Ferro135</strong></div>
                 <ArrowUpRight className="contact-arrow" />
               </a>
               {contact.email && (
