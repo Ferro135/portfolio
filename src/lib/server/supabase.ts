@@ -42,11 +42,18 @@ function config() {
   return { url, key };
 }
 
-function authHeaders(key: string) {
-  if (key.startsWith("sb_secret_")) {
-    return { apikey: key };
+function authHeaders(key: string): Record<string, string> {
+  const headers: Record<string, string> = {
+    apikey: key,
+  };
+
+  // Chaves JWT legadas (service_role) precisam do Bearer token.
+  // As Secret keys modernas sb_secret_* são enviadas apenas como apikey.
+  if (!key.startsWith("sb_secret_")) {
+    headers.Authorization = `Bearer ${key}`;
   }
-  return { apikey: key, Authorization: `Bearer ${key}` };
+
+  return headers;
 }
 
 export async function dbRequest<T>(path: string, options: QueryOptions = {}): Promise<T> {
