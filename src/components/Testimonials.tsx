@@ -1,30 +1,6 @@
-import { testimonials } from "@/data/portfolio";
+"use client";
+import { useEffect, useState } from "react";
+import { testimonials as staticTestimonials, type Testimonial } from "@/data/portfolio";
 
-export function Testimonials() {
-  if (!testimonials.length) return null;
-
-  return (
-    <section className="section testimonial-section" aria-labelledby="depoimentos-titulo" data-reveal>
-      <div className="shell">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">Confiança</span>
-            <h2 id="depoimentos-titulo">O que dizem sobre o trabalho.</h2>
-          </div>
-          <p>Somente depoimentos reais e autorizados aparecem nesta seção.</p>
-        </div>
-        <div className="testimonial-grid">
-          {testimonials.map((testimonial) => (
-            <blockquote key={`${testimonial.name}-${testimonial.project ?? "nexora"}`}>
-              <p>“{testimonial.quote}”</p>
-              <footer>
-                <strong>{testimonial.name}</strong>
-                <span>{testimonial.role ?? testimonial.project ?? "Cliente NEXORA"}</span>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+type Item=Testimonial & {id?:string};
+export function Testimonials(){const [items,setItems]=useState<Item[]>(staticTestimonials);useEffect(()=>{fetch('/api/public/testimonials').then(r=>r.ok?r.json():[]).then((remote:Item[])=>{if(Array.isArray(remote)&&remote.length)setItems(remote.map(item=>({name:item.name,role:item.role??undefined,quote:item.quote,project:item.project??undefined}))) }).catch(()=>undefined)},[]);if(!items.length)return null;return <section className="section testimonial-section" aria-labelledby="depoimentos-titulo" data-reveal><div className="shell"><div className="section-heading"><div><span className="eyebrow">Confiança</span><h2 id="depoimentos-titulo">O que dizem sobre o trabalho.</h2></div><p>Somente depoimentos reais e autorizados aparecem nesta seção.</p></div><div className="testimonial-grid">{items.map((testimonial,index)=><blockquote key={`${testimonial.name}-${testimonial.project??index}`}><p>“{testimonial.quote}”</p><footer><strong>{testimonial.name}</strong><span>{testimonial.role??testimonial.project??"Cliente NEXORA"}</span></footer></blockquote>)}</div></div></section>}

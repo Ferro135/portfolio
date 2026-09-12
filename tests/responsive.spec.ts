@@ -4,10 +4,17 @@ const widths = [320, 375, 390, 430, 768, 1024, 1440];
 const pages = [
   "/",
   "/servicos",
+  "/projetos",
+  "/resultados",
+  "/agendar",
   "/contato",
   "/sobre",
   "/projetos/zentra",
   "/projetos/spazio-gestao",
+  "/en",
+  "/en/services",
+  "/en/projects",
+  "/en/contact",
 ];
 
 for (const width of widths) {
