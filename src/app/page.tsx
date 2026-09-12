@@ -8,6 +8,7 @@ import {
   Code,
   Github,
   Layers,
+  Mail,
   Monitor,
   Spark,
   WhatsApp,
