@@ -43,7 +43,7 @@ export function ProjectCase({ project }: { project: Project }) {
         <div className="shell">
           <div className="section-heading">
             <div><span className="eyebrow">Interface real</span><h2>O produto em uso.</h2></div>
-            <p>Capturas e recortes reais do sistema apresentados em contexto. Clique em qualquer imagem para ampliar e navegar pela galeria.</p>
+            <p>As imagens foram reorganizadas para destacar melhor a interface desktop, os recortes mais importantes e a adaptação mobile, sem deixar a página pesada visualmente. Clique em qualquer imagem para ampliar.</p>
           </div>
           <ProjectGallery items={project.gallery} title={project.title} />
         </div>
@@ -136,7 +136,7 @@ export function ProjectCase({ project }: { project: Project }) {
         <div className="shell">
           <div className="section-heading">
             <div><span className="eyebrow">Dispositivos</span><h2>Uma apresentação pensada para mais de uma tela.</h2></div>
-            <p>A visualização abaixo combina a captura real em desktop com um recorte em moldura mobile para comunicar o cuidado com diferentes contextos de uso.</p>
+            <p>A composição abaixo apresenta o desktop em um enquadramento mais limpo e a adaptação mobile em um bloco próprio, deixando a leitura mais elegante em qualquer tamanho de tela.</p>
           </div>
           <DeviceShowcase project={project} />
         </div>
