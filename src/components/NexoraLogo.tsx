@@ -33,7 +33,6 @@ export function NexoraLogo({ compact = false, ...props }: NexoraLogoProps) {
           x="58"
           y="32"
           fill="currentColor"
-          fontFamily="Arial, Helvetica, sans-serif"
           fontSize="25"
           fontWeight="800"
           letterSpacing="3.2"

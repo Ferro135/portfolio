@@ -41,18 +41,18 @@ export function ProjectGallery({ items, title }: { items: ProjectGalleryItem[]; 
             type="button"
             key={item.src}
             onClick={() => setActive(index)}
-            className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-nexora-panel text-left shadow-[0_24px_70px_rgba(0,0,0,.22)] outline-none transition hover:-translate-y-0.5 hover:border-blue-400/30 focus-visible:ring-2 focus-visible:ring-blue-400 ${index === 0 ? "md:col-span-2" : ""}`}
+            className="group relative overflow-hidden rounded-2xl border border-white/10 bg-nexora-panel text-left shadow-[0_20px_55px_rgba(0,0,0,.18)] outline-none transition hover:-translate-y-0.5 hover:border-blue-400/30 focus-visible:ring-2 focus-visible:ring-blue-400"
             aria-label={`Abrir ${item.label} de ${title} em tela cheia`}
           >
-            <div style={{ aspectRatio: `${item.width} / ${item.height}` }} className="relative w-full">
+            <div style={{ aspectRatio: `${item.width} / ${item.height}` }} className="relative w-full bg-[linear-gradient(180deg,rgba(9,15,28,.96),rgba(6,10,20,.96))] p-3">
               <Image
                 src={item.src}
                 alt={item.alt}
                 fill
                 sizes={index === 0 ? "(max-width: 768px) 100vw, 1180px" : "(max-width: 768px) 100vw, 580px"}
-                className="object-cover object-top transition duration-500 group-hover:scale-[1.018]"
+                className="object-contain object-top transition duration-500 group-hover:scale-[1.012]"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050914]/80 via-transparent to-transparent opacity-65" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050914]/55 via-transparent to-transparent opacity-55" />
             </div>
             <span className="absolute bottom-4 left-4 rounded-full border border-white/10 bg-nexora-bg/80 px-3 py-1.5 text-xs font-semibold text-slate-100 backdrop-blur-md">
               {item.label}

@@ -27,7 +27,12 @@ export default function Home() {
         <div className="hero-orb hero-orb-two" />
         <div className="shell hero-grid">
           <div className="hero-copy reveal-up">
-            <span className="eyebrow">{brand.tagline}</span>
+            <div className="hero-kicker">
+              <span className="hero-kicker-dot" />
+              <span className="eyebrow">{brand.tagline}</span>
+              <span className="hero-kicker-line" />
+              <small>Estratégia · Interface · Desenvolvimento</small>
+            </div>
             <h1>
               Transformamos ideias em<br />
               sistemas que <span className="gradient-text">funcionam.</span>
