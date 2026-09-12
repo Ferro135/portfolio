@@ -215,6 +215,8 @@ A V5.6 transforma o portfólio em uma pequena plataforma comercial mantendo o si
 ```env
 SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
+# ou a chave secreta moderna do projeto:
+SUPABASE_SECRET_KEY=
 RATE_LIMIT_SALT=
 ```
 
@@ -238,7 +240,7 @@ LEAD_NOTIFY_EMAIL=seu-email@dominio.com
 
 ## Observação importante
 
-O `SUPABASE_SERVICE_ROLE_KEY`, a senha do admin, tokens e chaves privadas **nunca** devem usar o prefixo `NEXT_PUBLIC_`.
+O `SUPABASE_SERVICE_ROLE_KEY`/`SUPABASE_SECRET_KEY`, a senha do admin, tokens e chaves privadas **nunca** devem usar o prefixo `NEXT_PUBLIC_`.
 
 ## V5.7 — Admin Control Center
 
@@ -252,3 +254,8 @@ O painel administrativo ganhou uma camada de produtividade e segurança:
 - `/admin/configuracao` mostra o estado das integrações sem revelar segredos.
 
 O atalho de teclado **não é um mecanismo de segurança**. A rota continua protegida pela autenticação administrativa e cookies HttpOnly assinados.
+
+
+## Banco compartilhado isolado
+
+Nesta configuração, a NEXORA usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `nexora_` e o bucket é `nexora-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.

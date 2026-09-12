@@ -1,4 +1,25 @@
 import { randomUUID } from "node:crypto";
+
+const DEFAULT_SUPABASE_URL = "https://pzwtoksbbfvgsnwunzri.supabase.co";
+
+const TABLE_ALIASES: Record<string, string> = {
+  leads: "nexora_leads",
+  proposals: "nexora_proposals",
+  cms_projects: "nexora_cms_projects",
+  testimonials: "nexora_testimonials",
+  appointments: "nexora_appointments",
+  error_events: "nexora_error_events",
+  rate_events: "nexora_rate_events",
+};
+
+const STORAGE_BUCKET = "nexora-portfolio-media";
+
+function scopedPath(path: string) {
+  const [head, ...rest] = path.split("?");
+  const mapped = TABLE_ALIASES[head] || head;
+  return rest.length ? `${mapped}?${rest.join("?")}` : mapped;
+}
+
 type QueryOptions = {
   method?: "GET" | "POST" | "PATCH" | "DELETE";
   body?: unknown;
@@ -8,25 +29,34 @@ type QueryOptions = {
 };
 
 export function supabaseConfigured() {
-  return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  return Boolean((process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY));
 }
 
 function config() {
-  const url = process.env.SUPABASE_URL?.replace(/\/$/, "");
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = (process.env.SUPABASE_URL || DEFAULT_SUPABASE_URL).replace(/\/$/, "");
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
   if (!url || !key) return null;
+  if (key.startsWith("sb_publishable_")) {
+    throw new Error("Use uma Secret key do Supabase no backend, não uma Publishable key");
+  }
   return { url, key };
+}
+
+function authHeaders(key: string) {
+  if (key.startsWith("sb_secret_")) {
+    return { apikey: key };
+  }
+  return { apikey: key, Authorization: `Bearer ${key}` };
 }
 
 export async function dbRequest<T>(path: string, options: QueryOptions = {}): Promise<T> {
   const cfg = config();
   if (!cfg) throw new Error("Supabase não configurado");
 
-  const response = await fetch(`${cfg.url}/rest/v1/${path}`, {
+  const response = await fetch(`${cfg.url}/rest/v1/${scopedPath(path)}`, {
     method: options.method || "GET",
     headers: {
-      apikey: cfg.key,
-      Authorization: `Bearer ${cfg.key}`,
+      ...authHeaders(cfg.key),
       "Content-Type": "application/json",
       ...(options.prefer ? { Prefer: options.prefer } : {}),
     },
@@ -94,11 +124,10 @@ export async function uploadPublicAsset(file: File, folder: string) {
   const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : file.type === "image/avif" ? "avif" : "jpg";
   const safeFolder = folder.replace(/[^a-z0-9/_-]/gi, "-").slice(0, 120);
   const objectPath = `${safeFolder}/${Date.now()}-${randomUUID()}.${ext}`;
-  const response = await fetch(`${cfg.url}/storage/v1/object/portfolio-media/${objectPath}`, {
+  const response = await fetch(`${cfg.url}/storage/v1/object/${STORAGE_BUCKET}/${objectPath}`, {
     method: "POST",
     headers: {
-      apikey: cfg.key,
-      Authorization: `Bearer ${cfg.key}`,
+      ...authHeaders(cfg.key),
       "Content-Type": file.type,
       "x-upsert": "false",
       "Cache-Control": "3600",
@@ -107,5 +136,5 @@ export async function uploadPublicAsset(file: File, folder: string) {
     cache: "no-store",
   });
   if (!response.ok) throw new Error(`Falha no upload: ${(await response.text()).slice(0, 300)}`);
-  return `${cfg.url}/storage/v1/object/public/portfolio-media/${objectPath}`;
+  return `${cfg.url}/storage/v1/object/public/${STORAGE_BUCKET}/${objectPath}`;
 }

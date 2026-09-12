@@ -4,7 +4,7 @@ A V5.6 foi feita para continuar publicando o portfólio mesmo sem backend. Para 
 
 ## 1. Supabase
 
-Crie um projeto Supabase e execute `supabase/schema.sql` e depois `supabase/storage.sql` no SQL Editor. O bucket público é usado somente para imagens publicadas pelo CMS; uploads passam pelo backend com service role.
+Crie um projeto Supabase e execute `supabase/schema.sql` no SQL Editor.
 
 Na Vercel, adicione somente como variáveis server-side:
 
@@ -62,3 +62,43 @@ PRODUCTION_URL=https://seudominio.com
 ## 6. Branch protection e segurança
 
 Siga `GITHUB-SECURITY-SETUP.md` e `SECURITY-CHECKLIST.md`.
+
+
+## Banco compartilhado isolado
+
+Nesta configuração, a NEXORA usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `nexora_` e o bucket é `nexora-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.
+
+
+## Configuração atual — Supabase compartilhado
+
+A NEXORA deve usar o projeto Supabase geral existente, sem tocar nas tabelas dos outros sistemas.
+
+URL do projeto:
+
+```env
+SUPABASE_URL=https://pzwtoksbbfvgsnwunzri.supabase.co
+```
+
+As tabelas da NEXORA usam prefixo `nexora_` e o bucket usa `nexora-portfolio-media`.
+
+No Supabase SQL Editor, execute **uma vez**:
+
+```text
+supabase/nexora_shared_project.sql
+```
+
+Depois configure na Vercel **uma** destas chaves server-side:
+
+```env
+SUPABASE_SERVICE_ROLE_KEY=...
+```
+
+ou
+
+```env
+SUPABASE_SECRET_KEY=...
+```
+
+Use apenas uma. Nunca use `NEXT_PUBLIC_` para uma chave secreta.
+
+A URL já possui fallback server-side para este projeto compartilhado; `SUPABASE_URL` continua recomendada na Vercel para deixar a configuração explícita. A chave secreta continua obrigatória.

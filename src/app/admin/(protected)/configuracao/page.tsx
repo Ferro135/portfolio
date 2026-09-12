@@ -71,7 +71,7 @@ export default function AdminConfigurationPage() {
         <span className="eyebrow">Boas práticas</span>
         <h2>O que nunca deve aparecer no navegador.</h2>
         <div className="admin-security-grid">
-          <div><strong>SUPABASE_SERVICE_ROLE_KEY</strong><p>Somente no ambiente server-side da Vercel.</p></div>
+          <div><strong>SUPABASE_SERVICE_ROLE_KEY / SUPABASE_SECRET_KEY</strong><p>Somente no ambiente server-side da Vercel.</p></div>
           <div><strong>RESEND_API_KEY</strong><p>Nunca use prefixo NEXT_PUBLIC_.</p></div>
           <div><strong>ADMIN_SESSION_SECRET</strong><p>Mantenha aleatório, longo e fora do GitHub.</p></div>
           <div><strong>Senhas</strong><p>O painel armazena hash scrypt, não a senha em texto puro.</p></div>

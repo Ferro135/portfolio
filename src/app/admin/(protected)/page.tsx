@@ -92,7 +92,7 @@ export default async function AdminDashboard() {
 
       {!supabaseConfigured() && (
         <div className="admin-alert">
-          Execute <code>supabase/schema.sql</code> e configure <code>SUPABASE_URL</code> + <code>SUPABASE_SERVICE_ROLE_KEY</code> para ativar persistência.
+          Execute <code>supabase/schema.sql</code> e configure <code>SUPABASE_URL</code> + <code>SUPABASE_SERVICE_ROLE_KEY / SUPABASE_SECRET_KEY</code> para ativar persistência.
         </div>
       )}
 
