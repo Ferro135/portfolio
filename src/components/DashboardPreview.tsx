@@ -45,7 +45,7 @@ export function DashboardPreview({ variant }: DashboardPreviewProps) {
             <small>Painel administrativo</small>
             <strong>Visão geral</strong>
           </div>
-          <div className="dash-avatar">LF</div>
+          <div className="dash-avatar">AD</div>
         </div>
 
         <div className="dash-stats">

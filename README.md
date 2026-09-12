@@ -1,16 +1,19 @@
-# Portfólio Web
+# NEXORA — Portfolio V2
 
-Portfólio pessoal focado em desenvolvimento de sites, dashboards e sistemas web.
+Portfólio web da **NEXORA — Digital Products & Systems**, criado com Next.js, TypeScript e Tailwind CSS.
 
-## Stack
+## O que já vem pronto
 
-- Next.js 16 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- CSS responsivo e animações leves
+- Home responsiva com identidade NEXORA
+- Logo vetorial e favicon
+- Cases em destaque: Zentra e Spazio Gestão
+- Páginas individuais dos dois projetos
+- Seções de serviços, tecnologias e contato
+- Open Graph para compartilhamento em Discord/WhatsApp/LinkedIn
+- Metadata/SEO, robots e sitemap
+- GitHub configurado para `Ferro135`
 
-## Como executar
+## Rodar localmente
 
 ```bash
 npm install
@@ -19,29 +22,28 @@ npm run dev
 
 Abra `http://localhost:3000`.
 
-## Build de produção
+## Build
 
 ```bash
 npm run build
-npm start
 ```
 
-## Personalização
+## Onde editar
 
-Edite `src/data/portfolio.ts` para trocar:
+Os dados principais ficam em:
 
-- Nome
-- E-mail
-- GitHub
-- LinkedIn
-- WhatsApp
-- Textos dos projetos
+```text
+src/data/portfolio.ts
+```
 
-Os projetos Zentra e Spazio Gestão estão configurados em `src/data/portfolio.ts` e os previews visuais são gerados pelo próprio front-end, sem depender de imagens externas.
+Os campos `email`, `linkedin` e `whatsapp` estão vazios de propósito. Quando você preencher um canal, ele pode ser usado no site sem precisar espalhar os dados por vários componentes.
 
-## Publicação na Vercel
+## Vercel
 
-1. Envie o projeto para um repositório Git.
-2. Importe o repositório na Vercel.
-3. A Vercel detectará Next.js automaticamente.
-4. Publique sem necessidade de configuração extra.
+O projeto está pronto para deploy automático via GitHub + Vercel. Se futuramente usar um domínio próprio, adicione na Vercel a variável opcional:
+
+```text
+NEXT_PUBLIC_SITE_URL=https://seu-dominio.com
+```
+
+Isso atualiza URLs absolutas usadas pelo SEO e sitemap.
