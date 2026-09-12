@@ -1,48 +1,72 @@
-# NEXORA — Portfolio V5.2
+# NEXORA — Portfolio V5.3
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## O que a V5.2 adiciona
+## Destaques da V5.3
 
-- seção **Da ideia ao produto** com o processo em 4 etapas;
-- bloco **O que podemos construir** com 6 tipos de entrega;
-- **Impacto** em cada projeto sem inventar métricas;
-- comparativo **Antes & depois** nos cases;
-- **mockup interativo** com hotspots clicáveis sobre as interfaces reais;
-- galeria ampliável + apresentação desktop e recorte em moldura mobile;
-- página **/sobre** dedicada à NEXORA;
-- página **/contato** com formulário/briefing interativo;
-- briefing gera mensagem pronta para WhatsApp e também pode ser copiado;
-- CTA separado de **Solicitar orçamento**;
-- **WhatsApp flutuante** após o visitante rolar a página;
-- FAQ na Home e na página de contato;
-- indicador de disponibilidade mais presente;
-- animações sutis ao entrar no viewport, respeitando `prefers-reduced-motion`;
-- infraestrutura para **depoimentos reais**, sem publicar depoimentos fictícios;
-- sitemap atualizado com `/sobre` e `/contato`;
-- SEO e Open Graph individuais dos cases preservados;
-- Analytics, Speed Insights, headers de segurança, 404 e acessibilidade preservados da V5.1.
+- screenshots reais do **Zentra** e **Spazio Gestão** tratadas para portfólio;
+- capas próprias dos cases usando as interfaces reais;
+- galeria com visão geral + recortes reais de áreas importantes;
+- **tour visual em vídeo** para cada projeto, criado somente a partir das capturas reais;
+- infraestrutura para botão **Abrir demo**, exibido apenas se uma URL pública for configurada;
+- suporte a **email profissional** por variável de ambiente;
+- infraestrutura para **métricas reais**, que permanece oculta enquanto não houver números validados;
+- auditoria automática de Home, Contato, Zentra e Spazio com **Lighthouse** no GitHub Actions;
+- Open Graph dos cases usando a capa real do projeto;
+- Vercel Analytics e Speed Insights preservados;
+- todas as melhorias da V5.2.1 continuam presentes.
+
+## Transparência dos cases
+
+A NEXORA não inventa telas, números, depoimentos ou demos para preencher o portfólio.
+
+Os vídeos `tour.mp4` são **tours visuais baseados em screenshots reais**. Eles não são apresentados como gravações de uma demo interativa.
+
+As métricas de negócio ficam em `metrics: []` dentro de cada projeto. A seção só aparece depois que valores reais forem adicionados.
+
+## Configuração opcional na Vercel
+
+Use estas variáveis somente quando tiver os dados correspondentes:
+
+```env
+NEXT_PUBLIC_SITE_URL=
+NEXT_PUBLIC_CONTACT_EMAIL=
+NEXT_PUBLIC_ZENTRA_DEMO_URL=
+NEXT_PUBLIC_SPAZIO_DEMO_URL=
+```
+
+- `NEXT_PUBLIC_SITE_URL`: domínio canônico próprio, se quiser fixar um;
+- `NEXT_PUBLIC_CONTACT_EMAIL`: email profissional que aparecerá no contato;
+- `NEXT_PUBLIC_ZENTRA_DEMO_URL`: demo pública do Zentra;
+- `NEXT_PUBLIC_SPAZIO_DEMO_URL`: demo pública do Spazio.
+
+Se as URLs de demo ficarem vazias, o case explica que o ambiente é privado em vez de mostrar um botão quebrado.
 
 ## Depoimentos
 
-O arquivo `src/data/portfolio.ts` contém `testimonials`, que permanece vazio de propósito.
-A seção só aparece quando um depoimento real e autorizado for adicionado. A NEXORA não usa prova social fictícia.
+`src/data/portfolio.ts` contém a lista `testimonials`, mantida vazia até existir autorização de um cliente real.
 
-## Briefing / contato
+## Screenshots
 
-O formulário em `/contato` não envia informações para um servidor e não armazena dados.
-Ele monta o briefing no navegador e oferece:
+Assets principais:
 
-- envio pelo WhatsApp;
-- cópia do texto do briefing.
+```text
+public/projects/zentra/
+  cover.webp
+  overview.webp
+  dashboard-detail.webp
+  operations-detail.webp
+  tour.mp4
 
-O número configurado está centralizado em `src/data/portfolio.ts`.
+public/projects/spazio/
+  cover.webp
+  overview.webp
+  dashboard-detail.webp
+  operations-detail.webp
+  tour.mp4
+```
 
-## Screenshots e mobile
-
-Os cases utilizam capturas reais tratadas. A moldura mobile da V5.2 usa um **recorte da captura real** para apresentação visual e é rotulada como tal; ela não se apresenta como uma captura nativa do aplicativo em celular.
-
-Quando existirem screenshots mobile reais, basta adicioná-los à galeria de cada projeto em `src/data/portfolio.ts`.
+Quando houver novas telas reais, adicione-as à galeria em `src/data/portfolio.ts`.
 
 ## Rodar localmente
 
@@ -51,78 +75,47 @@ npm install
 npm run dev
 ```
 
-Abra `http://localhost:3000`.
-
 ## Validar antes de publicar
-
-```bash
-npm run typecheck
-npm run build
-```
-
-Ou:
 
 ```bash
 npm run check
 ```
 
-## Dados principais
+## Lighthouse automático
 
-Edite:
+O workflow `.github/workflows/lighthouse.yml`:
 
-```text
-src/data/portfolio.ts
-```
+- instala o projeto;
+- executa o build;
+- sobe a aplicação localmente;
+- testa `/`, `/contato`, `/projetos/zentra` e `/projetos/spazio-gestao`;
+- salva os relatórios como artifact no GitHub Actions;
+- alerta quando performance, acessibilidade, boas práticas ou SEO caem abaixo dos limites definidos.
 
-Ali ficam:
-
-- projetos;
-- impacto;
-- antes/depois;
-- hotspots interativos;
-- WhatsApp e GitHub;
-- FAQ;
-- processo;
-- capacidades;
-- depoimentos;
-- tecnologias.
-
-## Endereço / domínio na Vercel
-
-A aplicação usa a seguinte ordem para descobrir a URL do site:
-
-1. `NEXT_PUBLIC_SITE_URL`, quando configurada manualmente;
-2. domínio de produção informado pela Vercel (`VERCEL_PROJECT_PRODUCTION_URL`);
-3. URL do deployment atual (`VERCEL_URL`);
-4. `localhost` no desenvolvimento.
-
-Por isso, renomear o projeto ou trocar o domínio na Vercel não exige alterar o código.
-
-## GitHub Actions e package-lock
-
-O workflow `.github/workflows/ci.yml`:
-
-- gera `package-lock.json` automaticamente caso ainda não exista;
-- instala as dependências;
-- executa TypeScript;
-- executa o build de produção;
-- tenta commitar o lockfile no primeiro push.
-
-Se o GitHub bloquear o commit automático, em **Settings → Actions → General → Workflow permissions**, habilite **Read and write permissions** e rode o workflow novamente.
+Os limites ficam em `scripts/check-lighthouse.mjs`.
 
 ## Analytics
 
-Vercel Web Analytics e Speed Insights já estão integrados. Ative os recursos no painel da Vercel para receber dados.
+Vercel Web Analytics e Speed Insights continuam integrados no layout. Para receber dados, habilite os recursos no painel do projeto na Vercel.
 
-## Limpeza de versões antigas no GitHub
+## Domínio
 
-Mantenha somente o projeto atual na raiz. Apague pastas antigas como:
+A URL canônica segue esta prioridade:
 
-```text
-NEXORA-Portfolio-V2
-NEXORA-Portfolio-V3
-NEXORA-Portfolio-V4
-portfolio-web
-```
+1. `NEXT_PUBLIC_SITE_URL`;
+2. `VERCEL_PROJECT_PRODUCTION_URL`;
+3. `VERCEL_URL`;
+4. localhost.
 
-O `tsconfig.json` também restringe a compilação a `src/`, evitando que versões antigas sejam compiladas por acidente.
+Assim o código acompanha o domínio de produção da Vercel sem ficar preso a URLs antigas.
+
+## Estrutura principal
+
+- `src/data/portfolio.ts` — projetos, contato, demos, métricas, FAQ, processo e depoimentos;
+- `src/components/ProjectCase.tsx` — página completa dos cases;
+- `src/components/ProjectMedia.tsx` — tour visual e acesso à demo;
+- `src/components/ProjectMetrics.tsx` — métricas reais quando existirem;
+- `src/components/ProjectGallery.tsx` — galeria/lightbox;
+- `src/app/contato` — briefing e canais de contato;
+- `.github/workflows/ci.yml` — TypeScript e build;
+- `.github/workflows/lighthouse.yml` — auditoria de qualidade web.

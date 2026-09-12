@@ -1093,7 +1093,7 @@ footer { border-top: 1px solid rgba(255,255,255,.05); }
 .brief-preview p { margin: 3px 0 0; color: #6f7d95; font-size: 9px; }
 .brief-preview pre { margin: 16px 0 0; max-height: 205px; overflow: auto; white-space: pre-wrap; word-break: break-word; color: #8493aa; font: 500 10px/1.65 var(--font-geist-mono); }
 .brief-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-.contact-option-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.contact-option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .contact-option-grid a { display: flex; align-items: center; gap: 14px; min-height: 92px; padding: 20px; border: 1px solid rgba(112,145,210,.15); border-radius: 16px; background: rgba(10,18,32,.58); color: #829cff; transition: transform .2s ease, border-color .2s ease; }
 .contact-option-grid a:hover { transform: translateY(-2px); border-color: rgba(110,151,255,.34); }
 .contact-option-grid strong, .contact-option-grid span { display: block; }
@@ -1155,4 +1155,40 @@ footer { border-top: 1px solid rgba(255,255,255,.05); }
 @media (prefers-reduced-motion: reduce) {
   .reveal-ready [data-reveal] { opacity: 1; transform: none; transition: none; }
   .floating-whatsapp { transition: none; }
+}
+
+/* V5.3 — media, demos e resultados validados */
+.case-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.project-media-section { border-top: 1px solid rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.04); background: rgba(7,12,23,.35); }
+.project-media-grid { display: grid; grid-template-columns: 1.45fr .55fr; gap: 16px; align-items: stretch; }
+.project-video-card, .project-demo-card { border: 1px solid rgba(112,145,211,.15); border-radius: 20px; background: linear-gradient(145deg, rgba(12,21,39,.74), rgba(7,13,26,.8)); overflow: hidden; }
+.project-video-topbar { min-height: 46px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 15px; border-bottom: 1px solid rgba(255,255,255,.05); color: #8c9bb3; font-size: 9px; }
+.project-video-topbar span { display: inline-flex; align-items: center; gap: 8px; color: #b5c3d8; font-weight: 650; }
+.project-video-topbar small { color: #5f708d; }
+.project-video-card video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #050914; object-fit: contain; }
+.project-media-note { margin: 0; padding: 12px 15px 15px; color: #64728b; font-size: 9px; line-height: 1.65; }
+.project-demo-card { display: flex; flex-direction: column; justify-content: center; padding: 28px; }
+.project-demo-card h3 { margin: 14px 0 10px; font-size: 24px; line-height: 1.08; letter-spacing: -.035em; }
+.project-demo-card p { margin: 0 0 22px; color: #7f8da4; font-size: 12px; line-height: 1.7; }
+.project-demo-card .button { width: fit-content; }
+.private-demo-badge { width: fit-content; padding: 9px 11px; border: 1px solid rgba(124,151,211,.15); border-radius: 999px; background: rgba(10,18,33,.68); color: #70809b; font-size: 9px; font-weight: 650; }
+.project-metrics-section { padding-top: 70px; padding-bottom: 70px; }
+.project-metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.project-metrics-grid article { min-height: 210px; padding: 26px; border: 1px solid rgba(111,143,208,.14); border-radius: 18px; background: linear-gradient(145deg, rgba(13,23,42,.67), rgba(8,15,28,.67)); }
+.project-metrics-grid strong { display: block; margin-top: 34px; font-size: 38px; letter-spacing: -.05em; }
+.project-metrics-grid span { display: block; margin-top: 8px; color: #a6b3c7; font-size: 12px; font-weight: 650; }
+.project-metrics-grid p { margin: 9px 0 0; color: #74839a; font-size: 10px; line-height: 1.65; }
+
+@media (max-width: 860px) {
+  .project-media-grid { grid-template-columns: 1fr; }
+  .project-demo-card { min-height: 230px; }
+  .project-metrics-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .case-hero-actions { display: grid; }
+  .case-hero-actions .button { width: 100%; }
+  .project-video-topbar { align-items: flex-start; flex-direction: column; padding-block: 12px; }
+  .project-demo-card { padding: 22px; }
+  .project-demo-card h3 { font-size: 21px; }
 }

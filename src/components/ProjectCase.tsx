@@ -3,6 +3,8 @@ import { Header } from "@/components/Header";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectHotspots } from "@/components/ProjectHotspots";
 import { DeviceShowcase } from "@/components/DeviceShowcase";
+import { ProjectMedia } from "@/components/ProjectMedia";
+import { ProjectMetrics } from "@/components/ProjectMetrics";
 import { ArrowLeft, ArrowRight, Check, Github, WhatsApp } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, contact, type Project } from "@/data/portfolio";
@@ -23,6 +25,10 @@ export function ProjectCase({ project }: { project: Project }) {
               <h1>{project.title}</h1>
               <p>{project.description}</p>
               <div className="case-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              <div className="case-hero-actions">
+                {project.tourVideo && <a className="button button-secondary" href="#tour">Ver tour visual</a>}
+                {project.demoUrl && <a className="button button-primary" href={project.demoUrl} target="_blank" rel="noreferrer">Abrir demo</a>}
+              </div>
             </div>
             <div className="case-intro-card">
               <span>Projeto</span><strong>{project.title}</strong>
@@ -37,11 +43,13 @@ export function ProjectCase({ project }: { project: Project }) {
         <div className="shell">
           <div className="section-heading">
             <div><span className="eyebrow">Interface real</span><h2>O produto em uso.</h2></div>
-            <p>Capturas do sistema apresentadas em contexto. Clique em qualquer imagem para ampliar e navegar pela galeria.</p>
+            <p>Capturas e recortes reais do sistema apresentados em contexto. Clique em qualquer imagem para ampliar e navegar pela galeria.</p>
           </div>
           <ProjectGallery items={project.gallery} title={project.title} />
         </div>
       </section>
+
+      <ProjectMedia project={project} />
 
       <section className="case-section interactive-section" data-reveal>
         <div className="shell">
@@ -92,6 +100,8 @@ export function ProjectCase({ project }: { project: Project }) {
           </div>
         </div>
       </section>
+
+      <ProjectMetrics project={project} />
 
       <section className="case-section" data-reveal>
         <div className="shell case-story-grid">

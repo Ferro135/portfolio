@@ -12,7 +12,7 @@ const whatsappMessage = encodeURIComponent(
 
 export const contact = {
   github: "https://github.com/Ferro135",
-  email: "",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
   linkedin: "",
   whatsappBase: "https://wa.me/5516991576717",
   whatsapp: `https://wa.me/5516991576717?text=${whatsappMessage}`,
@@ -36,8 +36,18 @@ export type ProjectHotspot = {
   description: string;
 };
 
+export type ProjectMetric = {
+  value: string;
+  label: string;
+  description?: string;
+};
+
 export type Project = {
   id: ProjectId;
+  cover: ProjectGalleryItem;
+  tourVideo?: string;
+  demoUrl?: string;
+  metrics: ProjectMetric[];
   number: string;
   slug: string;
   title: string;
@@ -60,6 +70,10 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "zentra",
+    cover: { src: "/projects/zentra/cover.webp", alt: "Zentra apresentado em um frame de portfólio com captura real do dashboard", label: "Capa do case", width: 1600, height: 1000 },
+    tourVideo: "/projects/zentra/tour.mp4",
+    demoUrl: process.env.NEXT_PUBLIC_ZENTRA_DEMO_URL || "",
+    metrics: [],
     number: "01",
     slug: "zentra",
     title: "Zentra",
@@ -129,29 +143,33 @@ export const projects: Project[] = [
     gallery: [
       {
         src: "/projects/zentra/overview.webp",
-        alt: "Dashboard do Zentra com indicadores, status do sistema, atividades e operações",
-        label: "Visão geral",
-        width: 1600,
-        height: 791,
+        alt: "Dashboard real do Zentra preparado para o portfólio, com dados pessoais removidos",
+        label: "Visão geral real",
+        width: 1879,
+        height: 620,
       },
       {
         src: "/projects/zentra/dashboard-detail.webp",
-        alt: "Detalhe do dashboard do Zentra mostrando indicadores e status do sistema",
-        label: "Dashboard e status",
-        width: 1600,
-        height: 496,
+        alt: "Recorte real do Zentra mostrando indicadores e áreas centrais do dashboard",
+        label: "Indicadores e status",
+        width: 1170,
+        height: 450,
       },
       {
         src: "/projects/zentra/operations-detail.webp",
-        alt: "Detalhe das áreas operacionais do Zentra com licenças e projetos",
-        label: "Operações",
-        width: 1600,
-        height: 316,
+        alt: "Recorte real do Zentra mostrando áreas operacionais e atividades do sistema",
+        label: "Operação e atividades",
+        width: 940,
+        height: 380,
       },
     ],
   },
   {
     id: "spazio",
+    cover: { src: "/projects/spazio/cover.webp", alt: "Spazio Gestão apresentado em um frame de portfólio com captura real da interface", label: "Capa do case", width: 1600, height: 1000 },
+    tourVideo: "/projects/spazio/tour.mp4",
+    demoUrl: process.env.NEXT_PUBLIC_SPAZIO_DEMO_URL || "",
+    metrics: [],
     number: "02",
     slug: "spazio-gestao",
     title: "Spazio Gestão",
@@ -221,24 +239,24 @@ export const projects: Project[] = [
     gallery: [
       {
         src: "/projects/spazio/overview.webp",
-        alt: "Tela inicial do Spazio Gestão com ações rápidas, indicadores e gestão das cantinas",
-        label: "Visão geral",
-        width: 1600,
-        height: 803,
+        alt: "Tela inicial real do Spazio Gestão preparada para o portfólio",
+        label: "Visão geral real",
+        width: 1881,
+        height: 665,
       },
       {
         src: "/projects/spazio/dashboard-detail.webp",
-        alt: "Detalhe do Spazio Gestão com ações rápidas e indicadores operacionais",
+        alt: "Recorte real do Spazio Gestão com ações rápidas e indicadores da rotina",
         label: "Rotina e indicadores",
-        width: 1600,
-        height: 636,
+        width: 1250,
+        height: 400,
       },
       {
         src: "/projects/spazio/operations-detail.webp",
-        alt: "Detalhe do Spazio Gestão com informações operacionais e pendências",
-        label: "Operação e pendências",
-        width: 1600,
-        height: 378,
+        alt: "Recorte real do Spazio Gestão mostrando navegação e informações operacionais",
+        label: "Operação diária",
+        width: 1780,
+        height: 380,
       },
     ],
   },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactBriefForm } from "@/components/ContactBriefForm";
 import { Header } from "@/components/Header";
-import { ArrowLeft, Github, WhatsApp } from "@/components/Icons";
+import { ArrowLeft, Github, Mail, WhatsApp } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, contact, faqs } from "@/data/portfolio";
 
@@ -66,6 +66,7 @@ export default function ContactPage() {
           </div>
           <div className="contact-option-grid">
             <a href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /><div><strong>WhatsApp</strong><span>Conversa direta e rápida</span></div></a>
+            {contact.email && <a href={`mailto:${contact.email}`}><Mail /><div><strong>Email</strong><span>{contact.email}</span></div></a>}
             <a href={contact.github} target="_blank" rel="noreferrer"><Github /><div><strong>GitHub</strong><span>Projetos e código público</span></div></a>
           </div>
         </div>

@@ -9,6 +9,7 @@ import {
   Code,
   Github,
   Layers,
+  Mail,
   Monitor,
   Spark,
   WhatsApp,
@@ -280,6 +281,11 @@ export default function Home() {
               {contact.whatsapp && (
                 <a className="contact-secondary" href={contact.whatsapp} target="_blank" rel="noreferrer">
                   <span><WhatsApp /></span><div><small>WhatsApp</small><strong>{contact.whatsappDisplay}</strong></div><ArrowUpRight className="contact-arrow" />
+                </a>
+              )}
+              {contact.email && (
+                <a className="contact-secondary" href={`mailto:${contact.email}`}>
+                  <span><Mail /></span><div><small>Email</small><strong>{contact.email}</strong></div><ArrowUpRight className="contact-arrow" />
                 </a>
               )}
               <a className="contact-secondary" href={contact.github} target="_blank" rel="noreferrer">

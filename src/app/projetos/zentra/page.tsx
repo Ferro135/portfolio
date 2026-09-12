@@ -3,7 +3,7 @@ import { ProjectCase } from "@/components/ProjectCase";
 import { getProjectBySlug } from "@/data/portfolio";
 
 const project = getProjectBySlug("zentra")!;
-const preview = project.gallery[0];
+const preview = project.cover;
 
 export const metadata: Metadata = {
   title: "Zentra — Projeto",

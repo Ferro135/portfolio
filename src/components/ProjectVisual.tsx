@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Project } from "@/data/portfolio";
 
 export function ProjectVisual({ project }: { project: Project }) {
-  const image = project.gallery[0];
+  const image = project.cover;
 
   return (
     <div className="group relative mx-2.5 mt-2.5 aspect-[2/1] overflow-hidden rounded-[13px] bg-nexora-panel shadow-[0_16px_50px_rgba(0,0,0,.22)] max-[620px]:mx-2 max-[620px]:mt-2">
