@@ -9,9 +9,9 @@ import { brand } from "@/data/portfolio";
 const links = [
   ["/#inicio", "Início"],
   ["/#projetos", "Projetos"],
-  ["/#sobre", "Sobre"],
-  ["/#tecnologias", "Tecnologias"],
-  ["/#contato", "Contato"],
+  ["/#processo", "Processo"],
+  ["/sobre", "Sobre"],
+  ["/contato", "Contato"],
 ];
 
 export function Header() {
@@ -39,7 +39,7 @@ export function Header() {
           ))}
         </nav>
 
-        <Link className="availability-pill desktop-availability" href="/#contato">
+        <Link className="availability-pill desktop-availability" href="/contato">
           <span className="pulse-dot" aria-hidden="true" />
           {brand.availability}
         </Link>
@@ -62,7 +62,7 @@ export function Header() {
             {links.map(([href, label]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
-            <Link href="/#contato" className="availability-pill" onClick={() => setOpen(false)}>
+            <Link href="/contato" className="availability-pill" onClick={() => setOpen(false)}>
               <span className="pulse-dot" aria-hidden="true" />
               {brand.availability}
             </Link>

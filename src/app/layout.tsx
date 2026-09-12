@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteUrl } from "@/lib/site";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { ScrollRevealController } from "@/components/ScrollRevealController";
 import "./globals.css";
 
 const geist = Geist({
@@ -75,7 +77,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${geist.variable} ${geistMono.variable}`}>
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+        <ScrollRevealController />
         {children}
+        <FloatingWhatsApp />
         <Analytics />
         <SpeedInsights />
       </body>

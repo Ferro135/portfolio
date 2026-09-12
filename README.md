@@ -1,22 +1,48 @@
-# NEXORA — Portfolio V5
+# NEXORA — Portfolio V5.2
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## Principais melhorias da V5
+## O que a V5.2 adiciona
 
-- Cases reais de Zentra e Spazio Gestão com screenshots tratadas para portfólio
-- Galeria responsiva com lightbox e navegação por teclado
-- WhatsApp principal com mensagem pré-preenchida
-- SEO, sitemap, robots e Open Graph por projeto
-- URL canônica automática na Vercel
-- Vercel Analytics e Speed Insights
-- Página 404 própria
-- Headers de segurança
-- Melhorias de acessibilidade
-- CI do GitHub com TypeScript + build
-- Dependências em versões explícitas
-- Tailwind utilizado nos componentes novos e tokens NEXORA
-- CSS legado e preview fictício removidos
+- seção **Da ideia ao produto** com o processo em 4 etapas;
+- bloco **O que podemos construir** com 6 tipos de entrega;
+- **Impacto** em cada projeto sem inventar métricas;
+- comparativo **Antes & depois** nos cases;
+- **mockup interativo** com hotspots clicáveis sobre as interfaces reais;
+- galeria ampliável + apresentação desktop e recorte em moldura mobile;
+- página **/sobre** dedicada à NEXORA;
+- página **/contato** com formulário/briefing interativo;
+- briefing gera mensagem pronta para WhatsApp e também pode ser copiado;
+- CTA separado de **Solicitar orçamento**;
+- **WhatsApp flutuante** após o visitante rolar a página;
+- FAQ na Home e na página de contato;
+- indicador de disponibilidade mais presente;
+- animações sutis ao entrar no viewport, respeitando `prefers-reduced-motion`;
+- infraestrutura para **depoimentos reais**, sem publicar depoimentos fictícios;
+- sitemap atualizado com `/sobre` e `/contato`;
+- SEO e Open Graph individuais dos cases preservados;
+- Analytics, Speed Insights, headers de segurança, 404 e acessibilidade preservados da V5.1.
+
+## Depoimentos
+
+O arquivo `src/data/portfolio.ts` contém `testimonials`, que permanece vazio de propósito.
+A seção só aparece quando um depoimento real e autorizado for adicionado. A NEXORA não usa prova social fictícia.
+
+## Briefing / contato
+
+O formulário em `/contato` não envia informações para um servidor e não armazena dados.
+Ele monta o briefing no navegador e oferece:
+
+- envio pelo WhatsApp;
+- cópia do texto do briefing.
+
+O número configurado está centralizado em `src/data/portfolio.ts`.
+
+## Screenshots e mobile
+
+Os cases utilizam capturas reais tratadas. A moldura mobile da V5.2 usa um **recorte da captura real** para apresentação visual e é rotulada como tal; ela não se apresenta como uma captura nativa do aplicativo em celular.
+
+Quando existirem screenshots mobile reais, basta adicioná-los à galeria de cada projeto em `src/data/portfolio.ts`.
 
 ## Rodar localmente
 
@@ -48,7 +74,18 @@ Edite:
 src/data/portfolio.ts
 ```
 
-Ali ficam projetos, WhatsApp, GitHub, textos e tecnologias/entregas exibidas.
+Ali ficam:
+
+- projetos;
+- impacto;
+- antes/depois;
+- hotspots interativos;
+- WhatsApp e GitHub;
+- FAQ;
+- processo;
+- capacidades;
+- depoimentos;
+- tecnologias.
 
 ## Endereço / domínio na Vercel
 
@@ -59,31 +96,7 @@ A aplicação usa a seguinte ordem para descobrir a URL do site:
 3. URL do deployment atual (`VERCEL_URL`);
 4. `localhost` no desenvolvimento.
 
-Por isso, **renomear o projeto ou trocar o domínio na Vercel não exige alterar o código**.
-
-### Para trocar apenas o endereço gratuito `.vercel.app`
-
-No nome do projeto use somente um slug válido, por exemplo:
-
-```text
-nexora-portfolio
-nexora-web
-nexora-systems
-```
-
-Não use `https://`, barras, espaços ou um endereço completo no campo de nome do projeto. O endereço precisa ser único; se `nexora.vercel.app` já estiver em uso, escolha outro slug.
-
-### Para domínio próprio
-
-Adicione o domínio em **Vercel → Project → Settings → Domains** e siga a configuração DNS indicada pela Vercel.
-
-Depois, opcionalmente, configure:
-
-```text
-NEXT_PUBLIC_SITE_URL=https://seu-dominio.com
-```
-
-em **Settings → Environment Variables** para forçar esse domínio como canônico.
+Por isso, renomear o projeto ou trocar o domínio na Vercel não exige alterar o código.
 
 ## GitHub Actions e package-lock
 
@@ -99,17 +112,17 @@ Se o GitHub bloquear o commit automático, em **Settings → Actions → General
 
 ## Analytics
 
-Os componentes do Vercel Web Analytics e Speed Insights já estão integrados. Ative os recursos no painel da Vercel para começar a receber dados.
-
-## Screenshots
-
-As capturas incluídas em `public/projects/` foram preparadas para o portfólio:
-
-- elementos do navegador removidos;
-- dados pessoais/identificáveis ocultados;
-- imagens em WebP;
-- recortes adicionais derivados das telas reais.
+Vercel Web Analytics e Speed Insights já estão integrados. Ative os recursos no painel da Vercel para receber dados.
 
 ## Limpeza de versões antigas no GitHub
 
-Se o repositório ainda tiver pastas como `NEXORA-Portfolio-V2`, `NEXORA-Portfolio-V3`, `NEXORA-Portfolio-V4` ou `portfolio-web`, apague-as. Elas não pertencem ao projeto atual. A V5.1 também restringe o TypeScript a `src/`, portanto essas pastas antigas não quebram mais o build, mas removê-las mantém o repositório limpo.
+Mantenha somente o projeto atual na raiz. Apague pastas antigas como:
+
+```text
+NEXORA-Portfolio-V2
+NEXORA-Portfolio-V3
+NEXORA-Portfolio-V4
+portfolio-web
+```
+
+O `tsconfig.json` também restringe a compilação a `src/`, evitando que versões antigas sejam compiladas por acidente.

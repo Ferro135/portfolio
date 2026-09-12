@@ -14,6 +14,7 @@ export const contact = {
   github: "https://github.com/Ferro135",
   email: "",
   linkedin: "",
+  whatsappBase: "https://wa.me/5516991576717",
   whatsapp: `https://wa.me/5516991576717?text=${whatsappMessage}`,
   whatsappDisplay: "+55 16 99157-6717",
 };
@@ -26,6 +27,13 @@ export type ProjectGalleryItem = {
   label: string;
   width: number;
   height: number;
+};
+
+export type ProjectHotspot = {
+  x: number;
+  y: number;
+  label: string;
+  description: string;
 };
 
 export type Project = {
@@ -43,6 +51,9 @@ export type Project = {
   solution: string;
   principles: string[];
   features: { title: string; description: string }[];
+  impact: { title: string; description: string }[];
+  transformation: { before: string[]; after: string[] };
+  hotspots: ProjectHotspot[];
   gallery: ProjectGalleryItem[];
 };
 
@@ -82,6 +93,38 @@ export const projects: Project[] = [
         title: "Interface responsiva",
         description: "Leitura e ações prioritárias preservadas em diferentes tamanhos de tela.",
       },
+    ],
+    impact: [
+      {
+        title: "Operação centralizada",
+        description: "Clientes, licenças, projetos e estados operacionais passam a compartilhar o mesmo contexto de gestão.",
+      },
+      {
+        title: "Menos conferência manual",
+        description: "Status importantes ficam visíveis no painel, reduzindo a necessidade de procurar informações em ferramentas separadas.",
+      },
+      {
+        title: "Base para automação",
+        description: "A estrutura foi pensada para conectar publicação, licenciamento e provisionamento a fluxos automatizados.",
+      },
+    ],
+    transformation: {
+      before: [
+        "Informações distribuídas entre ferramentas e verificações manuais.",
+        "Dificuldade para visualizar rapidamente o que está ativo ou exige atenção.",
+        "Rotinas de publicação e licenciamento pouco centralizadas.",
+      ],
+      after: [
+        "Painel único para acompanhar clientes, projetos, licenças e operações.",
+        "Estados claros e prioridades visíveis desde a visão geral.",
+        "Fluxos preparados para automações e crescimento do ecossistema.",
+      ],
+    },
+    hotspots: [
+      { x: 27, y: 23, label: "Indicadores", description: "Resumo rápido de clientes, licenças, receita e projetos online." },
+      { x: 68, y: 48, label: "Status do sistema", description: "Saúde das integrações e serviços importantes em uma leitura direta." },
+      { x: 86, y: 48, label: "Atividades", description: "Histórico recente para entender o que mudou sem procurar em várias telas." },
+      { x: 55, y: 82, label: "Operações", description: "Licenças e projetos reunidos na mesma visão operacional." },
     ],
     gallery: [
       {
@@ -143,6 +186,38 @@ export const projects: Project[] = [
         description: "Fluxos preparados para revisar e corrigir informações inseridas incorretamente sem refazer todo o processo.",
       },
     ],
+    impact: [
+      {
+        title: "Rotina mais direta",
+        description: "Ações frequentes como vender, conferir caixa, estoque e pendências ficam acessíveis logo na entrada do sistema.",
+      },
+      {
+        title: "Leitura financeira simples",
+        description: "Entradas, gastos e resultado aparecem com linguagem direta para facilitar decisões no dia a dia.",
+      },
+      {
+        title: "Gestão por responsabilidade",
+        description: "A visão por unidade e as permissões ajudam cada pessoa a acessar apenas o que faz sentido para sua função.",
+      },
+    ],
+    transformation: {
+      before: [
+        "Operação distribuída entre controles e rotinas com diferentes níveis de complexidade.",
+        "Informações financeiras difíceis de interpretar rapidamente por usuários menos técnicos.",
+        "Risco de mistura entre unidades, funções e permissões.",
+      ],
+      after: [
+        "Atalhos claros para as ações que realmente fazem parte da rotina diária.",
+        "Resumo financeiro apresentado com linguagem simples e hierarquia visual forte.",
+        "Contexto por cantina e responsabilidades separadas por função.",
+      ],
+    },
+    hotspots: [
+      { x: 28, y: 43, label: "Ações rápidas", description: "Venda, pedidos, estoque, caixa e fechamento organizados por tarefa." },
+      { x: 46, y: 68, label: "Resumo do dia", description: "Entradas, gastos e saldo em linguagem simples para leitura rápida." },
+      { x: 73, y: 77, label: "Pendências", description: "O que exige atenção fica separado do restante da interface." },
+      { x: 12, y: 50, label: "Navegação por rotina", description: "Menu estruturado pelo trabalho diário, não por termos técnicos." },
+    ],
     gallery: [
       {
         src: "/projects/spazio/overview.webp",
@@ -168,6 +243,76 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+export const processSteps = [
+  {
+    number: "01",
+    title: "Entendimento",
+    description: "Mapeamos o problema, o público, as prioridades e o que precisa funcionar de verdade antes de pensar na interface.",
+  },
+  {
+    number: "02",
+    title: "Interface",
+    description: "Organizamos fluxos, hierarquia e direção visual para tornar o produto claro antes de aumentar a complexidade técnica.",
+  },
+  {
+    number: "03",
+    title: "Desenvolvimento",
+    description: "Transformamos a solução em código, integrações e dados com atenção a responsividade, manutenção e performance.",
+  },
+  {
+    number: "04",
+    title: "Publicação & evolução",
+    description: "Publicamos, acompanhamos o produto e deixamos uma base preparada para correções, melhorias e novos recursos.",
+  },
+];
+
+export const capabilities = [
+  { title: "Sites institucionais", description: "Presença digital rápida, responsiva e alinhada ao posicionamento da marca." },
+  { title: "SaaS & produtos digitais", description: "Aplicações com contas, regras de negócio, planos, dados e evolução contínua." },
+  { title: "Dashboards", description: "Informação organizada para facilitar leitura, acompanhamento e tomada de decisão." },
+  { title: "Sistemas administrativos", description: "Fluxos internos, permissões, cadastros, financeiro e operação em um único ambiente." },
+  { title: "Painéis internos", description: "Ferramentas para equipes controlarem processos sem depender de planilhas desconectadas." },
+  { title: "Automações & integrações", description: "Conexões entre APIs e serviços para reduzir tarefas repetitivas e falhas manuais." },
+];
+
+export const faqs = [
+  {
+    question: "A NEXORA desenvolve sistemas do zero?",
+    answer: "Sim. O projeto pode começar apenas com o problema e os objetivos. A partir disso, estruturamos fluxos, interface, desenvolvimento e publicação.",
+  },
+  {
+    question: "Vocês também trabalham em sistemas que já existem?",
+    answer: "Sim. Podemos revisar interfaces, responsividade, estrutura de código, fluxos, integrações e pontos que estejam dificultando manutenção ou uso.",
+  },
+  {
+    question: "O projeto inclui publicação e deploy?",
+    answer: "Pode incluir. A entrega pode abranger configuração de hospedagem, domínio, variáveis de ambiente, banco de dados e processo de atualização.",
+  },
+  {
+    question: "Quanto tempo leva para desenvolver um projeto?",
+    answer: "Depende do escopo. Um site institucional e um sistema com autenticação, banco de dados e regras de negócio têm necessidades diferentes. O prazo é definido após entender o projeto.",
+  },
+  {
+    question: "A NEXORA trabalha com manutenção e evolução?",
+    answer: "Sim. Produtos digitais raramente terminam na primeira publicação. A estrutura é pensada para receber correções, melhorias e novas funcionalidades.",
+  },
+  {
+    question: "Como pedir um orçamento?",
+    answer: "Use a página de contato para preencher um briefing rápido. No final, você pode enviar as informações prontas pelo WhatsApp e iniciar a conversa com mais contexto.",
+  },
+];
+
+export type Testimonial = {
+  name: string;
+  role?: string;
+  quote: string;
+  project?: string;
+};
+
+// Mantido vazio de propósito: a NEXORA não publica depoimentos fictícios.
+// Quando houver autorização de um cliente real, basta adicionar aqui.
+export const testimonials: Testimonial[] = [];
 
 export const technologyGroups = [
   {

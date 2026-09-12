@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { ProjectGallery } from "@/components/ProjectGallery";
+import { ProjectHotspots } from "@/components/ProjectHotspots";
+import { DeviceShowcase } from "@/components/DeviceShowcase";
 import { ArrowLeft, ArrowRight, Check, Github, WhatsApp } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, contact, type Project } from "@/data/portfolio";
@@ -17,79 +19,95 @@ export function ProjectCase({ project }: { project: Project }) {
           <Link className="case-back" href="/#projetos"><ArrowLeft /> Voltar aos projetos</Link>
           <div className="case-hero-grid">
             <div>
-              <span className="eyebrow">Projeto {project.number} · {project.category}</span>
+              <span className="eyebrow">Case {project.number} · {project.category}</span>
               <h1>{project.title}</h1>
               <p>{project.description}</p>
-              <div className="case-tags">
-                {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
-              </div>
+              <div className="case-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
             </div>
             <div className="case-intro-card">
-              <span>Projeto</span>
-              <strong>{project.title}</strong>
-              <span>Foco</span>
-              <strong>{project.eyebrow}</strong>
-              <span>Entrega técnica</span>
-              <strong>{project.technicalHighlights.slice(0, 3).join(" · ")}</strong>
+              <span>Projeto</span><strong>{project.title}</strong>
+              <span>Foco</span><strong>{project.eyebrow}</strong>
+              <span>Direção</span><strong>{project.principles.slice(0, 3).join(" · ")}</strong>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="pb-24 md:pb-28" aria-labelledby="galeria-title">
+      <section className="case-section case-gallery-intro" data-reveal>
         <div className="shell">
-          <div className="mb-7 grid gap-4 md:grid-cols-[1fr_.8fr] md:items-end">
-            <div>
-              <span className="eyebrow">Interface real</span>
-              <h2 id="galeria-title" className="mt-3 text-3xl font-bold tracking-[-.04em] text-white md:text-5xl">Veja o produto em detalhe.</h2>
-            </div>
-            <p className="m-0 max-w-xl text-sm leading-7 text-slate-400 md:justify-self-end">
-              Capturas preparadas para o portfólio, sem elementos do navegador e com dados pessoais ocultados. Clique para ampliar.
-            </p>
+          <div className="section-heading">
+            <div><span className="eyebrow">Interface real</span><h2>O produto em uso.</h2></div>
+            <p>Capturas do sistema apresentadas em contexto. Clique em qualquer imagem para ampliar e navegar pela galeria.</p>
           </div>
           <ProjectGallery items={project.gallery} title={project.title} />
         </div>
       </section>
 
-      <section className="case-section">
-        <div className="shell case-story-grid">
-          <div className="case-story-title">
-            <span className="eyebrow">Contexto</span>
-            <h2>Do problema<br />ao resultado.</h2>
+      <section className="case-section interactive-section" data-reveal>
+        <div className="shell">
+          <div className="section-heading">
+            <div><span className="eyebrow">Explorar interface</span><h2>Veja o que cada área resolve.</h2></div>
+            <p>Os pontos abaixo destacam decisões e funções importantes diretamente sobre a captura real do projeto.</p>
           </div>
-          <div className="case-story-content">
-            <div className="story-block">
-              <span>01</span>
-              <div>
-                <h3>O desafio</h3>
-                <p>{project.challenge}</p>
-              </div>
-            </div>
-            <div className="story-block">
-              <span>02</span>
-              <div>
-                <h3>A solução</h3>
-                <p>{project.solution}</p>
-              </div>
-            </div>
-            <div className="story-block">
-              <span>03</span>
-              <div>
-                <h3>O resultado</h3>
-                <p>{project.longDescription}</p>
-              </div>
-            </div>
+          <ProjectHotspots project={project} />
+        </div>
+      </section>
+
+      <section className="case-section transformation-section" data-reveal>
+        <div className="shell">
+          <div className="section-heading">
+            <div><span className="eyebrow">Antes & depois</span><h2>Da complexidade para a clareza.</h2></div>
+            <p>Uma comparação direta do cenário que motivou o produto e da experiência que o sistema busca entregar.</p>
+          </div>
+          <div className="transformation-grid">
+            <article className="before-card">
+              <span>Antes</span>
+              <h3>Processo fragmentado</h3>
+              <ul>{project.transformation.before.map((item) => <li key={item}><i />{item}</li>)}</ul>
+            </article>
+            <div className="transformation-arrow"><ArrowRight size={26} /></div>
+            <article className="after-card">
+              <span>Depois</span>
+              <h3>Produto orientado à rotina</h3>
+              <ul>{project.transformation.after.map((item) => <li key={item}><Check size={16} />{item}</li>)}</ul>
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="case-section case-features-section">
+      <section className="case-section impact-section" data-reveal>
         <div className="shell">
           <div className="section-heading">
-            <div>
-              <span className="eyebrow">Destaques</span>
-              <h2>O que o sistema prioriza</h2>
-            </div>
+            <div><span className="eyebrow">Impacto</span><h2>O que muda na prática.</h2></div>
+            <p>Impactos descritos sem números inventados: apenas efeitos reais esperados pela estrutura e pelos fluxos construídos.</p>
+          </div>
+          <div className="impact-grid">
+            {project.impact.map((item, index) => (
+              <article key={item.title}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="case-section" data-reveal>
+        <div className="shell case-story-grid">
+          <div className="case-story-title"><span className="eyebrow">Contexto</span><h2>Do problema<br />à solução.</h2></div>
+          <div className="case-story-content">
+            <div className="story-block"><span>01</span><div><h3>O desafio</h3><p>{project.challenge}</p></div></div>
+            <div className="story-block"><span>02</span><div><h3>A abordagem</h3><p>{project.solution}</p></div></div>
+            <div className="story-block"><span>03</span><div><h3>O produto</h3><p>{project.longDescription}</p></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="case-section case-features-section" data-reveal>
+        <div className="shell">
+          <div className="section-heading">
+            <div><span className="eyebrow">Destaques</span><h2>O que o sistema prioriza</h2></div>
             <p>Funcionalidades apresentadas pelo papel que cumprem na experiência, e não apenas como uma lista técnica.</p>
           </div>
           <div className="case-features-grid">
@@ -97,50 +115,45 @@ export function ProjectCase({ project }: { project: Project }) {
               <article key={feature.title}>
                 <span className="feature-index">0{index + 1}</span>
                 <span className="feature-icon"><Check /></span>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
+                <h3>{feature.title}</h3><p>{feature.description}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="case-section case-principles-section">
-        <div className="shell case-principles-grid">
-          <div>
-            <span className="eyebrow">Direção de produto</span>
-            <h2>Princípios do case</h2>
-            <p>Decisões de interface e estrutura guiadas pela rotina de quem realmente utiliza o sistema.</p>
+      <section className="case-section device-section" data-reveal>
+        <div className="shell">
+          <div className="section-heading">
+            <div><span className="eyebrow">Dispositivos</span><h2>Uma apresentação pensada para mais de uma tela.</h2></div>
+            <p>A visualização abaixo combina a captura real em desktop com um recorte em moldura mobile para comunicar o cuidado com diferentes contextos de uso.</p>
           </div>
-          <div className="principle-list">
-            {project.principles.map((principle, index) => (
-              <span key={principle}><b>0{index + 1}</b>{principle}</span>
-            ))}
-          </div>
+          <DeviceShowcase project={project} />
         </div>
       </section>
 
-      <section className="case-section case-stack-section">
+      <section className="case-section case-principles-section" data-reveal>
+        <div className="shell case-principles-grid">
+          <div><span className="eyebrow">Direção de produto</span><h2>Princípios do case</h2><p>Decisões de interface e estrutura guiadas pela rotina de quem realmente utiliza o sistema.</p></div>
+          <div className="principle-list">{project.principles.map((principle, index) => <span key={principle}><b>0{index + 1}</b>{principle}</span>)}</div>
+        </div>
+      </section>
+
+      <section className="case-section case-stack-section" data-reveal>
         <div className="shell">
           <span className="eyebrow">Arquitetura e entrega</span>
           <h2>O que sustenta o projeto</h2>
           <p className="case-stack-note">Somente tecnologias ou características confirmadas no projeto são apresentadas aqui.</p>
-          <div className="case-stack-list">
-            {project.technicalHighlights.map((item) => <span key={item}>{item}</span>)}
-          </div>
+          <div className="case-stack-list">{project.technicalHighlights.map((item) => <span key={item}>{item}</span>)}</div>
         </div>
       </section>
 
-      <section className="case-next-section">
+      <section className="case-next-section" data-reveal>
         <div className="shell">
           <div className="case-next-card">
-            <div>
-              <span className="eyebrow">NEXORA</span>
-              <h2>Um bom sistema começa com um problema bem entendido.</h2>
-              <p>Veja o outro case ou entre em contato para conversar sobre um novo projeto.</p>
-            </div>
+            <div><span className="eyebrow">NEXORA</span><h2>Um bom sistema começa com um problema bem entendido.</h2><p>Veja o outro case ou envie um briefing para conversar sobre um novo projeto.</p></div>
             <div className="case-next-actions">
-              <Link className="button button-primary" href="/#projetos">Ver todos os projetos <ArrowRight /></Link>
+              <Link className="button button-primary" href="/contato">Solicitar orçamento <ArrowRight /></Link>
               <a className="button button-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /> WhatsApp</a>
             </div>
           </div>
@@ -149,10 +162,7 @@ export function ProjectCase({ project }: { project: Project }) {
 
       <footer>
         <div className="shell footer-inner">
-          <Link className="footer-brand" href="/#inicio">
-            <NexoraLogo className="footer-logo" />
-            <span>{brand.tagline}</span>
-          </Link>
+          <Link className="footer-brand" href="/#inicio"><NexoraLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
           <span>© 2026 NEXORA. Produtos digitais feitos para funcionar.</span>
           <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
         </div>

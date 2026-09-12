@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Close } from "@/components/Icons";
 import type { ProjectGalleryItem } from "@/data/portfolio";
 
 export function ProjectGallery({ items, title }: { items: ProjectGalleryItem[]; title: string }) {
   const [active, setActive] = useState<number | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const close = () => setActive(null);
   const previous = () => setActive((current) => current === null ? null : (current - 1 + items.length) % items.length);
@@ -70,7 +70,7 @@ export function ProjectGallery({ items, title }: { items: ProjectGalleryItem[]; 
           role="dialog"
           aria-modal="true"
           aria-label={`${title} — ${items[active].label}`}
-          onMouseDown={(event) => {
+          onMouseDown={(event: MouseEvent<HTMLDivElement>) => {
             if (event.currentTarget === event.target) close();
           }}
         >
