@@ -67,7 +67,7 @@ export default function ContactPage() {
           <div className="contact-option-grid">
             <a href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /><div><strong>WhatsApp</strong><span>Conversa direta e rápida</span></div></a>
             {contact.email && <a href={`mailto:${contact.email}`}><Mail /><div><strong>Email</strong><span>{contact.email}</span></div></a>}
-            <a href={contact.github} target="_blank" rel="noreferrer"><Github /><div><strong>GitHub</strong><span>Projetos e código público</span></div></a>
+            <Link href="/agendar"><span className="contact-calendar-icon">↗</span><div><strong>Agendar conversa</strong><span>Solicite uma data e período preferidos</span></div></Link><a href={contact.github} target="_blank" rel="noreferrer"><Github /><div><strong>GitHub</strong><span>Projetos e código público</span></div></a>
           </div>
         </div>
       </section>

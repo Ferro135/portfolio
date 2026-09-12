@@ -1,8 +1,8 @@
-# NEXORA — Portfolio V5.5
+# NEXORA — Portfolio V5.6
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## O que a V5.5 adiciona
+## O que a V5.6 adiciona
 
 ### Conversão
 - página `/servicos` completa;
@@ -42,7 +42,7 @@ Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next
 
 ## Segurança
 
-A V5.5 preserva todo o hardening da V5.4:
+A V5.6 preserva todo o hardening da V5.4 e acrescenta rate limit persistente no backend, login administrativo com scrypt, sessão HttpOnly assinada e payload limits:
 
 - Content Security Policy;
 - HSTS;
@@ -183,3 +183,59 @@ npm run test:responsive
 ## Checklist de lançamento
 
 Consulte `LAUNCH-V5.5.md` para configurar domínio, email profissional, vídeos reais, demos públicas, métricas e uptime.
+
+---
+
+# V5.6 — Business & Production
+
+A V5.6 transforma o portfólio em uma pequena plataforma comercial mantendo o site público funcionando mesmo antes do backend ser configurado.
+
+## Novas rotas
+
+```text
+/projetos
+/resultados
+/agendar
+/termos
+/en
+/admin/login
+/proposta/[token]
+/api/leads
+/api/appointments
+/api/client-error
+/api/health
+```
+
+## Ativar o backend
+
+1. Crie um projeto no Supabase.
+2. Execute `supabase/schema.sql` no SQL Editor.
+3. Configure na Vercel:
+
+```env
+SUPABASE_URL=
+SUPABASE_SERVICE_ROLE_KEY=
+RATE_LIMIT_SALT=
+```
+
+4. Gere o acesso administrativo:
+
+```bash
+npm run admin:hash -- "uma-senha-longa-e-unica"
+```
+
+5. Copie `ADMIN_PASSWORD_HASH`, `ADMIN_SESSION_SECRET` e `RATE_LIMIT_SALT` para a Vercel.
+
+Mais detalhes em `BUSINESS-SETUP.md` e `BACKUP-RECOVERY.md`.
+
+## Email automático opcional
+
+```env
+RESEND_API_KEY=
+EMAIL_FROM=NEXORA <contato@seudominio.com>
+LEAD_NOTIFY_EMAIL=seu-email@dominio.com
+```
+
+## Observação importante
+
+O `SUPABASE_SERVICE_ROLE_KEY`, a senha do admin, tokens e chaves privadas **nunca** devem usar o prefixo `NEXT_PUBLIC_`.

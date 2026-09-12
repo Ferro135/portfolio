@@ -1,0 +1,3 @@
+import { isAdminAuthenticated } from "@/lib/server/admin-auth";
+import { listAppointments, listCmsProjects, listErrors, listLeads, listProposals, listTestimonials } from "@/lib/server/business";
+export async function GET(){if(!(await isAdminAuthenticated()))return new Response('Unauthorized',{status:401});const [leads,proposals,projects,testimonials,appointments,errors]=await Promise.all([listLeads(),listProposals(),listCmsProjects(true),listTestimonials(true),listAppointments(),listErrors()]);return Response.json({exported_at:new Date().toISOString(),leads,proposals,projects,testimonials,appointments,errors},{headers:{'Content-Disposition':`attachment; filename="nexora-backup-${new Date().toISOString().slice(0,10)}.json"`,'Cache-Control':'no-store'}})}

@@ -6,6 +6,7 @@ import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { ScrollRevealController } from "@/components/ScrollRevealController";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ClientTelemetry } from "@/components/ClientTelemetry";
+import { ClientErrorMonitor } from "@/components/ClientErrorMonitor";
 import { PageScrollProgress } from "@/components/PageScrollProgress";
 import { StructuredData } from "@/components/StructuredData";
 import { contact } from "@/data/portfolio";
@@ -49,6 +50,7 @@ export const metadata: Metadata = {
   creator: "NEXORA",
   alternates: {
     canonical: "/",
+    languages: { "pt-BR": "/", en: "/en" },
   },
   openGraph: {
     type: "website",
@@ -113,6 +115,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <FloatingWhatsApp />
         <CookieConsent />
         <ClientTelemetry />
+        <ClientErrorMonitor />
       </body>
     </html>
   );

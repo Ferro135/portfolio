@@ -176,6 +176,7 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <div className="projects-section-actions"><Link className="button button-secondary" href="/projetos">Ver todos os projetos <ArrowRight size={16} /></Link><Link className="case-link" href="/resultados">Ver resultados publicados <ArrowRight size={15} /></Link></div>
         </div>
       </section>
 
