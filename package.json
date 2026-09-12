@@ -1,13 +1,15 @@
 {
   "name": "nexora-portfolio",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run build"
+    "check": "npm run typecheck && npm run build",
+    "security:audit": "npm audit --audit-level=high",
+    "security:check": "npm run typecheck && npm audit --audit-level=high"
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",

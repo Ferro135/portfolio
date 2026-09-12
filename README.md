@@ -1,8 +1,8 @@
-# NEXORA — Portfolio V5.3.1
+# NEXORA — Portfolio V5.4
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## Destaques da V5.3.1
+## Destaques da V5.4
 
 - screenshots reais do **Zentra** e **Spazio Gestão** tratadas para portfólio;
 - apresentações **mobile adaptadas** para Zentra e Spazio na seção Dispositivos e nas galerias;
@@ -14,7 +14,7 @@ Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next
 - infraestrutura para **métricas reais**, que permanece oculta enquanto não houver números validados;
 - auditoria automática de Home, Contato, Zentra e Spazio com **Lighthouse** no GitHub Actions;
 - Open Graph dos cases usando a capa real do projeto;
-- Vercel Analytics e Speed Insights preservados;
+- Vercel Analytics e Speed Insights preservados, mas carregados somente após consentimento;
 - todas as melhorias da V5.2.1 continuam presentes.
 
 ## Transparência dos cases
@@ -122,3 +122,54 @@ Assim o código acompanha o domínio de produção da Vercel sem ficar preso a U
 - `src/app/contato` — briefing e canais de contato;
 - `.github/workflows/ci.yml` — TypeScript e build;
 - `.github/workflows/lighthouse.yml` — auditoria de qualidade web.
+
+
+## Security Hardening V5.4
+
+A V5.4 adiciona:
+
+- Content Security Policy;
+- headers de segurança adicionais;
+- `poweredByHeader: false`;
+- source maps de produção desativados;
+- sistema de consentimento de cookies;
+- páginas `/cookies` e `/privacidade`;
+- analytics condicionado ao consentimento;
+- limites no formulário de briefing;
+- validação HTTPS das URLs de demo;
+- Dependabot;
+- CodeQL;
+- `npm audit`;
+- workflows automáticos com permissão somente de leitura;
+- política `SECURITY.md`;
+- `/.well-known/security.txt`;
+- runbook de DDoS/Firewall para Vercel.
+
+Arquivos importantes:
+
+```text
+SECURITY.md
+SECURITY-VERCEL.md
+SECURITY-CHECKLIST.md
+GITHUB-SECURITY-SETUP.md
+.github/dependabot.yml
+.github/workflows/codeql.yml
+.github/workflows/security.yml
+.github/workflows/generate-lockfile.yml
+```
+
+### DDoS
+
+O site não tenta bloquear ataques volumétricos dentro do Next.js. Isso seria tarde demais e poderia aumentar o custo da aplicação.
+
+A proteção volumétrica depende das **System Mitigations / Firewall da Vercel**. Consulte `SECURITY-VERCEL.md` para Attack Mode e resposta a incidentes.
+
+### package-lock
+
+Este ambiente não conseguiu acessar o registry npm para gerar um lockfile confiável.
+
+Depois do primeiro upload da V5.4, execute manualmente no GitHub Actions:
+
+`Gerar package-lock manualmente`
+
+O workflow gera e commita somente `package-lock.json`. Depois disso, os workflows automáticos continuam com permissões read-only.

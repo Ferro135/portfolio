@@ -37,11 +37,11 @@ export function ContactBriefForm() {
       <div className="brief-form-grid">
         <label>
           <span>Seu nome</span>
-          <input required value={form.name} onChange={(event: ChangeEvent<HTMLInputElement>) => update("name", event.target.value)} placeholder="Como podemos te chamar?" />
+          <input required maxLength={80} autoComplete="name" value={form.name} onChange={(event: ChangeEvent<HTMLInputElement>) => update("name", event.target.value)} placeholder="Como podemos te chamar?" />
         </label>
         <label>
           <span>Empresa ou projeto <small>opcional</small></span>
-          <input value={form.company} onChange={(event: ChangeEvent<HTMLInputElement>) => update("company", event.target.value)} placeholder="Nome da empresa ou ideia" />
+          <input maxLength={100} autoComplete="organization" value={form.company} onChange={(event: ChangeEvent<HTMLInputElement>) => update("company", event.target.value)} placeholder="Nome da empresa ou ideia" />
         </label>
         <label>
           <span>Tipo de projeto</span>
@@ -63,7 +63,7 @@ export function ContactBriefForm() {
         </label>
         <label className="brief-details">
           <span>Conte um pouco sobre o projeto</span>
-          <textarea value={form.details} onChange={(event: ChangeEvent<HTMLTextAreaElement>) => update("details", event.target.value)} placeholder="Problema que quer resolver, páginas ou recursos necessários, referências, integrações..." rows={7} />
+          <textarea maxLength={3000} value={form.details} onChange={(event: ChangeEvent<HTMLTextAreaElement>) => update("details", event.target.value)} placeholder="Problema que quer resolver, páginas ou recursos necessários, referências, integrações..." rows={7} />
         </label>
       </div>
 
