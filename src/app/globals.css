@@ -1736,3 +1736,227 @@ footer { background: rgba(4,8,17,.44); }
     top: 12px;
   }
 }
+
+
+/* V5.3.5 — cases com composição editorial premium */
+.case-hero-premium {
+  padding: 54px 0 56px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  background:
+    radial-gradient(circle at 76% 12%, rgba(78,94,255,.10), transparent 28%),
+    radial-gradient(circle at 14% 90%, rgba(150,75,255,.06), transparent 28%);
+}
+
+.case-hero-topline {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.case-index {
+  color: #5f6f8c;
+  font: 650 10px var(--font-geist-mono);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.case-editorial-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .72fr);
+  gap: 72px;
+  align-items: center;
+  margin-top: 52px;
+}
+
+.case-editorial-copy {
+  min-width: 0;
+}
+
+.case-editorial-copy h1 {
+  margin: 16px 0 22px;
+  max-width: 760px;
+  font-size: clamp(64px, 8.3vw, 110px);
+  line-height: .9;
+  letter-spacing: -.075em;
+}
+
+.case-editorial-copy > p {
+  max-width: 700px;
+  margin: 0;
+  color: #9ca9be;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.75;
+}
+
+.case-cover-card {
+  overflow: hidden;
+  border: 1px solid rgba(113,145,211,.14);
+  border-radius: 26px;
+  background: linear-gradient(145deg, rgba(12,21,39,.84), rgba(6,12,24,.9));
+  box-shadow: 0 30px 90px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+.case-cover-topbar {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.case-cover-topbar > span { display: flex; gap: 6px; }
+.case-cover-topbar i { width: 7px; height: 7px; border-radius: 50%; background: #ff6574; }
+.case-cover-topbar i:nth-child(2) { background: #ffcc65; }
+.case-cover-topbar i:nth-child(3) { background: #51d89a; }
+.case-cover-topbar small { color: #64748f; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+
+.case-cover-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  margin: 14px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 0, rgba(77,124,255,.08), transparent 36%), #050914;
+}
+
+.case-meta-strip {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 48px;
+  overflow: hidden;
+  border: 1px solid rgba(116,146,210,.10);
+  border-radius: 18px;
+  background: rgba(8,15,28,.5);
+}
+
+.case-meta-strip > div {
+  min-width: 0;
+  padding: 20px 22px;
+}
+
+.case-meta-strip > div + div { border-left: 1px solid rgba(255,255,255,.05); }
+.case-meta-strip span, .case-meta-strip strong { display: block; }
+.case-meta-strip span { color: #53627e; font: 650 8px var(--font-geist-mono); text-transform: uppercase; letter-spacing: .14em; }
+.case-meta-strip strong { margin-top: 7px; color: #c7d2e5; font-size: 11px; line-height: 1.5; }
+
+.case-overview-band {
+  padding: 76px 0 16px;
+}
+
+.case-overview-grid {
+  display: grid;
+  grid-template-columns: .9fr 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.case-overview-lead,
+.case-overview-item {
+  min-height: 210px;
+  padding: 26px;
+  border: 1px solid rgba(111,143,208,.10);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(11,19,35,.58), rgba(7,13,25,.62));
+}
+
+.case-overview-lead {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(78,116,255,.10), transparent 35%),
+    linear-gradient(145deg, rgba(12,21,39,.72), rgba(7,13,25,.7));
+}
+
+.case-overview-lead h2 {
+  margin: 52px 0 0;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -.045em;
+}
+
+.case-overview-item > span {
+  color: #5f739c;
+  font: 650 9px var(--font-geist-mono);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.case-overview-item p {
+  margin: 52px 0 0;
+  color: #8d9bb1;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.case-gallery-intro {
+  padding-top: 78px;
+}
+
+.case-gallery-intro .section-heading {
+  margin-bottom: 34px;
+}
+
+.case-gallery-intro .section-heading > div:first-child {
+  max-width: 620px;
+}
+
+.case-gallery-intro .section-heading h2 {
+  font-size: clamp(42px, 5vw, 62px);
+}
+
+.case-story-title { position: sticky; top: 120px; align-self: start; }
+
+.case-features-grid article,
+.impact-grid article,
+.transformation-grid article,
+.principle-list span {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.012);
+}
+
+.case-next-card {
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(91,73,255,.18), transparent 30%),
+    radial-gradient(circle at 20% 110%, rgba(60,123,255,.10), transparent 35%),
+    linear-gradient(105deg, #0b152b, #101b40 58%, #091226);
+}
+
+@media (max-width: 1080px) {
+  .case-editorial-grid { grid-template-columns: 1fr .72fr; gap: 42px; }
+  .case-meta-strip { grid-template-columns: repeat(2, 1fr); }
+  .case-meta-strip > div:nth-child(3) { border-left: 0; border-top: 1px solid rgba(255,255,255,.05); }
+  .case-meta-strip > div:nth-child(4) { border-top: 1px solid rgba(255,255,255,.05); }
+  .case-overview-grid { grid-template-columns: 1fr 1fr; }
+  .case-overview-lead { grid-column: 1 / -1; min-height: 170px; }
+  .case-overview-lead h2 { margin-top: 28px; }
+}
+
+@media (max-width: 860px) {
+  .case-hero-premium { padding-top: 42px; }
+  .case-editorial-grid { grid-template-columns: 1fr; gap: 34px; margin-top: 40px; }
+  .case-editorial-copy h1 { font-size: clamp(58px, 15vw, 88px); }
+  .case-cover-card { max-width: 660px; width: 100%; }
+  .case-overview-grid { grid-template-columns: 1fr; }
+  .case-overview-lead { grid-column: auto; }
+  .case-story-title { position: static; }
+}
+
+@media (max-width: 620px) {
+  .case-hero-topline { align-items: flex-start; }
+  .case-index { padding-top: 2px; }
+  .case-editorial-grid { margin-top: 34px; }
+  .case-editorial-copy h1 { margin-bottom: 18px; font-size: clamp(52px, 18vw, 72px); }
+  .case-editorial-copy > p { font-size: 15px; }
+  .case-meta-strip { grid-template-columns: 1fr; }
+  .case-meta-strip > div + div { border-left: 0; border-top: 1px solid rgba(255,255,255,.05); }
+  .case-overview-band { padding-top: 58px; }
+  .case-overview-lead, .case-overview-item { min-height: 180px; padding: 22px; }
+  .case-overview-item p { margin-top: 34px; }
+  .case-gallery-intro { padding-top: 64px; }
+}

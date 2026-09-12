@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/Header";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectHotspots } from "@/components/ProjectHotspots";
@@ -14,14 +15,18 @@ export function ProjectCase({ project }: { project: Project }) {
     <main id="conteudo">
       <Header />
 
-      <section className="case-hero">
+      <section className="case-hero case-hero-premium">
         <div className="case-orb case-orb-one" />
         <div className="case-orb case-orb-two" />
         <div className="shell">
-          <Link className="case-back" href="/#projetos"><ArrowLeft /> Voltar aos projetos</Link>
-          <div className="case-hero-grid">
-            <div>
-              <span className="eyebrow">Case {project.number} · {project.category}</span>
+          <div className="case-hero-topline">
+            <Link className="case-back" href="/#projetos"><ArrowLeft /> Voltar aos projetos</Link>
+            <span className="case-index">Case {project.number}</span>
+          </div>
+
+          <div className="case-editorial-grid">
+            <div className="case-editorial-copy">
+              <span className="eyebrow">{project.category}</span>
               <h1>{project.title}</h1>
               <p>{project.description}</p>
               <div className="case-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
@@ -30,11 +35,47 @@ export function ProjectCase({ project }: { project: Project }) {
                 {project.demoUrl && <a className="button button-primary" href={project.demoUrl} target="_blank" rel="noreferrer">Abrir demo</a>}
               </div>
             </div>
-            <div className="case-intro-card">
-              <span>Projeto</span><strong>{project.title}</strong>
-              <span>Foco</span><strong>{project.eyebrow}</strong>
-              <span>Direção</span><strong>{project.principles.slice(0, 3).join(" · ")}</strong>
+
+            <div className="case-cover-card">
+              <div className="case-cover-topbar">
+                <span><i /><i /><i /></span>
+                <small>Preview do projeto</small>
+              </div>
+              <div className="case-cover-media">
+                <Image
+                  src={project.cover.src}
+                  alt={project.cover.alt}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 520px"
+                  className="object-contain object-center p-3"
+                  priority
+                />
+              </div>
             </div>
+          </div>
+
+          <div className="case-meta-strip">
+            <div><span>Tipo</span><strong>{project.category}</strong></div>
+            <div><span>Foco</span><strong>{project.eyebrow}</strong></div>
+            <div><span>Direção</span><strong>{project.principles.slice(0, 2).join(" · ")}</strong></div>
+            <div><span>Status</span><strong>Case em destaque</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="case-overview-band" data-reveal>
+        <div className="shell case-overview-grid">
+          <div className="case-overview-lead">
+            <span className="eyebrow">Visão geral</span>
+            <h2>Um produto pensado para resolver a rotina.</h2>
+          </div>
+          <div className="case-overview-item">
+            <span>01 · Desafio</span>
+            <p>{project.challenge}</p>
+          </div>
+          <div className="case-overview-item">
+            <span>02 · Solução</span>
+            <p>{project.solution}</p>
           </div>
         </div>
       </section>
