@@ -109,3 +109,7 @@ As capturas incluídas em `public/projects/` foram preparadas para o portfólio:
 - dados pessoais/identificáveis ocultados;
 - imagens em WebP;
 - recortes adicionais derivados das telas reais.
+
+## Limpeza de versões antigas no GitHub
+
+Se o repositório ainda tiver pastas como `NEXORA-Portfolio-V2`, `NEXORA-Portfolio-V3`, `NEXORA-Portfolio-V4` ou `portfolio-web`, apague-as. Elas não pertencem ao projeto atual. A V5.1 também restringe o TypeScript a `src/`, portanto essas pastas antigas não quebram mais o build, mas removê-las mantém o repositório limpo.
