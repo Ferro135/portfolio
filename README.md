@@ -1,17 +1,22 @@
-# NEXORA — Portfolio V2
+# NEXORA — Portfolio V5
 
-Portfólio web da **NEXORA — Digital Products & Systems**, criado com Next.js, TypeScript e Tailwind CSS.
+Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## O que já vem pronto
+## Principais melhorias da V5
 
-- Home responsiva com identidade NEXORA
-- Logo vetorial e favicon
-- Cases em destaque: Zentra e Spazio Gestão
-- Páginas individuais dos dois projetos
-- Seções de serviços, tecnologias e contato
-- Open Graph para compartilhamento em Discord/WhatsApp/LinkedIn
-- Metadata/SEO, robots e sitemap
-- GitHub configurado para `Ferro135`
+- Cases reais de Zentra e Spazio Gestão com screenshots tratadas para portfólio
+- Galeria responsiva com lightbox e navegação por teclado
+- WhatsApp principal com mensagem pré-preenchida
+- SEO, sitemap, robots e Open Graph por projeto
+- URL canônica automática na Vercel
+- Vercel Analytics e Speed Insights
+- Página 404 própria
+- Headers de segurança
+- Melhorias de acessibilidade
+- CI do GitHub com TypeScript + build
+- Dependências em versões explícitas
+- Tailwind utilizado nos componentes novos e tokens NEXORA
+- CSS legado e preview fictício removidos
 
 ## Rodar localmente
 
@@ -22,34 +27,85 @@ npm run dev
 
 Abra `http://localhost:3000`.
 
-## Build
+## Validar antes de publicar
 
 ```bash
+npm run typecheck
 npm run build
 ```
 
-## Onde editar
+Ou:
 
-Os dados principais ficam em:
+```bash
+npm run check
+```
+
+## Dados principais
+
+Edite:
 
 ```text
 src/data/portfolio.ts
 ```
 
-Os campos `email`, `linkedin` e `whatsapp` estão vazios de propósito. Quando você preencher um canal, ele pode ser usado no site sem precisar espalhar os dados por vários componentes.
+Ali ficam projetos, WhatsApp, GitHub, textos e tecnologias/entregas exibidas.
 
-## Vercel
+## Endereço / domínio na Vercel
 
-O projeto está pronto para deploy automático via GitHub + Vercel. Se futuramente usar um domínio próprio, adicione na Vercel a variável opcional:
+A aplicação usa a seguinte ordem para descobrir a URL do site:
+
+1. `NEXT_PUBLIC_SITE_URL`, quando configurada manualmente;
+2. domínio de produção informado pela Vercel (`VERCEL_PROJECT_PRODUCTION_URL`);
+3. URL do deployment atual (`VERCEL_URL`);
+4. `localhost` no desenvolvimento.
+
+Por isso, **renomear o projeto ou trocar o domínio na Vercel não exige alterar o código**.
+
+### Para trocar apenas o endereço gratuito `.vercel.app`
+
+No nome do projeto use somente um slug válido, por exemplo:
+
+```text
+nexora-portfolio
+nexora-web
+nexora-systems
+```
+
+Não use `https://`, barras, espaços ou um endereço completo no campo de nome do projeto. O endereço precisa ser único; se `nexora.vercel.app` já estiver em uso, escolha outro slug.
+
+### Para domínio próprio
+
+Adicione o domínio em **Vercel → Project → Settings → Domains** e siga a configuração DNS indicada pela Vercel.
+
+Depois, opcionalmente, configure:
 
 ```text
 NEXT_PUBLIC_SITE_URL=https://seu-dominio.com
 ```
 
-Isso atualiza URLs absolutas usadas pelo SEO e sitemap.
+em **Settings → Environment Variables** para forçar esse domínio como canônico.
 
-## V4
-- Screenshots reais com hover/zoom suave e brilho sutil nos cards.
-- WhatsApp principal: +55 16 99157-6717.
-- Botão direto "Falar no WhatsApp" no hero.
-- WhatsApp destacado como contato principal e GitHub como secundário.
+## GitHub Actions e package-lock
+
+O workflow `.github/workflows/ci.yml`:
+
+- gera `package-lock.json` automaticamente caso ainda não exista;
+- instala as dependências;
+- executa TypeScript;
+- executa o build de produção;
+- tenta commitar o lockfile no primeiro push.
+
+Se o GitHub bloquear o commit automático, em **Settings → Actions → General → Workflow permissions**, habilite **Read and write permissions** e rode o workflow novamente.
+
+## Analytics
+
+Os componentes do Vercel Web Analytics e Speed Insights já estão integrados. Ative os recursos no painel da Vercel para começar a receber dados.
+
+## Screenshots
+
+As capturas incluídas em `public/projects/` foram preparadas para o portfólio:
+
+- elementos do navegador removidos;
+- dados pessoais/identificáveis ocultados;
+- imagens em WebP;
+- recortes adicionais derivados das telas reais.

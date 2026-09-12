@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Close, Menu } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand } from "@/data/portfolio";
@@ -17,6 +17,15 @@ const links = [
 export function Header() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
     <header className="site-header">
       <div className="shell header-inner">
@@ -31,31 +40,33 @@ export function Header() {
         </nav>
 
         <Link className="availability-pill desktop-availability" href="/#contato">
-          <span className="pulse-dot" />
+          <span className="pulse-dot" aria-hidden="true" />
           {brand.availability}
         </Link>
 
         <button
+          type="button"
           className="menu-button"
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
+          aria-controls="menu-mobile"
         >
           {open ? <Close /> : <Menu />}
         </button>
       </div>
 
       {open && (
-        <div className="mobile-menu">
-          <div className="shell mobile-menu-inner">
+        <div className="mobile-menu" id="menu-mobile">
+          <nav className="shell mobile-menu-inner" aria-label="Navegação mobile">
             {links.map(([href, label]) => (
               <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
             ))}
             <Link href="/#contato" className="availability-pill" onClick={() => setOpen(false)}>
-              <span className="pulse-dot" />
+              <span className="pulse-dot" aria-hidden="true" />
               {brand.availability}
             </Link>
-          </div>
+          </nav>
         </div>
       )}
     </header>

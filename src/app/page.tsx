@@ -18,7 +18,7 @@ import { brand, contact, projects, technologyGroups } from "@/data/portfolio";
 
 export default function Home() {
   return (
-    <main>
+    <main id="conteudo">
       <Header />
 
       <section className="hero-section" id="inicio">
@@ -86,7 +86,7 @@ export default function Home() {
             </div>
             <div className="floating-chip">
               <span className="floating-icon"><Spark /></span>
-              <div><small>Digital products</small><strong>pensados para crescer</strong></div>
+              <div><small>Produtos digitais</small><strong>pensados para crescer</strong></div>
             </div>
             <div className="process-list">
               <span>ESTRATÉGIA</span>
@@ -100,7 +100,7 @@ export default function Home() {
         <div className="shell stats-panel reveal-up reveal-delay-2">
           <div className="stat-item">
             <span className="stat-icon"><Layers /></span>
-            <div><strong>2</strong><b>Cases em destaque</b><small>Produtos reais, apresentados com contexto</small></div>
+            <div><strong>2</strong><b>Projetos em destaque</b><small>Produtos reais, apresentados com contexto</small></div>
           </div>
           <div className="stat-item">
             <span className="stat-icon"><Monitor /></span>
@@ -108,7 +108,7 @@ export default function Home() {
           </div>
           <div className="stat-item">
             <span className="stat-icon"><Code /></span>
-            <div><strong className="stat-text">Web & Systems</strong><b>Produto de ponta a ponta</b><small>Interface, dados, integrações e publicação</small></div>
+            <div><strong className="stat-text">Web & Sistemas</strong><b>Produto de ponta a ponta</b><small>Interface, dados, integrações e publicação</small></div>
           </div>
         </div>
       </section>
@@ -117,7 +117,7 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">Selected work</span>
+              <span className="eyebrow">Projetos selecionados</span>
               <h2>Projetos em destaque</h2>
             </div>
             <p>
@@ -166,9 +166,9 @@ export default function Home() {
           </div>
           <div className="philosophy-copy">
             <p>
-              A NEXORA é uma identidade de desenvolvimento web focada em transformar necessidades
-              reais em produtos digitais claros, modernos e funcionais. O visual importa, mas sempre
-              trabalha junto com usabilidade, organização e código preparado para evoluir.
+              A NEXORA cria produtos digitais focados em transformar processos complexos em experiências
+              simples, modernas e funcionais. Design, usabilidade e estrutura técnica trabalham juntos
+              para que cada produto seja fácil de usar hoje e preparado para evoluir amanhã.
             </p>
             <div className="principles-grid">
               <article>
@@ -223,7 +223,7 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading tech-heading">
             <div>
-              <span className="eyebrow">Stack</span>
+              <span className="eyebrow">Tecnologias</span>
               <h2>Tecnologias</h2>
             </div>
             <p>Ferramentas escolhidas de acordo com o produto, priorizando desenvolvimento rápido, manutenção e performance.</p>
@@ -254,7 +254,8 @@ export default function Home() {
               <h2>Tem uma ideia?<br />Vamos torná-la real.</h2>
               <p>
                 Se quiser conversar sobre um site, dashboard ou sistema, o canal mais direto é o WhatsApp.
-                O GitHub também continua disponível para acompanhar os projetos e evolução do portfólio.
+                A mensagem já abre pronta para facilitar o primeiro contato. O GitHub fica como canal secundário
+                para acompanhar projetos e evolução técnica.
               </p>
               <span className="contact-status"><span className="pulse-dot" /> {brand.availability}</span>
             </div>
@@ -277,7 +278,7 @@ export default function Home() {
               )}
               <div className="contact-info-card">
                 <span><Spark /></span>
-                <div><small>Identidade</small><strong>NEXORA · Digital Products & Systems</strong></div>
+                <div><small>Identidade</small><strong>NEXORA · Produtos Digitais & Sistemas</strong></div>
               </div>
             </div>
           </div>

@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { ProjectVisual } from "@/components/ProjectVisual";
 import { Header } from "@/components/Header";
-import { ArrowLeft, ArrowRight, Check, Github, Spark, WhatsApp } from "@/components/Icons";
+import { ProjectGallery } from "@/components/ProjectGallery";
+import { ArrowLeft, ArrowRight, Check, Github, WhatsApp } from "@/components/Icons";
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, contact, type Project } from "@/data/portfolio";
 
 export function ProjectCase({ project }: { project: Project }) {
   return (
-    <main>
+    <main id="conteudo">
       <Header />
 
       <section className="case-hero">
@@ -17,7 +17,7 @@ export function ProjectCase({ project }: { project: Project }) {
           <Link className="case-back" href="/#projetos"><ArrowLeft /> Voltar aos projetos</Link>
           <div className="case-hero-grid">
             <div>
-              <span className="eyebrow">Case {project.number} · {project.category}</span>
+              <span className="eyebrow">Projeto {project.number} · {project.category}</span>
               <h1>{project.title}</h1>
               <p>{project.description}</p>
               <div className="case-tags">
@@ -29,23 +29,25 @@ export function ProjectCase({ project }: { project: Project }) {
               <strong>{project.title}</strong>
               <span>Foco</span>
               <strong>{project.eyebrow}</strong>
-              <span>Stack principal</span>
-              <strong>{project.technologies.slice(0, 3).join(" · ")}</strong>
+              <span>Entrega técnica</span>
+              <strong>{project.technicalHighlights.slice(0, 3).join(" · ")}</strong>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="case-preview-section">
+      <section className="pb-24 md:pb-28" aria-labelledby="galeria-title">
         <div className="shell">
-          <div className="case-preview-shell">
-            <div className="case-preview-topbar">
-              <div><i /><i /><i /></div>
-              <span>Preview da interface</span>
-              <small>NEXORA / {project.slug}</small>
+          <div className="mb-7 grid gap-4 md:grid-cols-[1fr_.8fr] md:items-end">
+            <div>
+              <span className="eyebrow">Interface real</span>
+              <h2 id="galeria-title" className="mt-3 text-3xl font-bold tracking-[-.04em] text-white md:text-5xl">Veja o produto em detalhe.</h2>
             </div>
-            <ProjectVisual project={project} mode="case" />
+            <p className="m-0 max-w-xl text-sm leading-7 text-slate-400 md:justify-self-end">
+              Capturas preparadas para o portfólio, sem elementos do navegador e com dados pessoais ocultados. Clique para ampliar.
+            </p>
           </div>
+          <ProjectGallery items={project.gallery} title={project.title} />
         </div>
       </section>
 
@@ -53,7 +55,7 @@ export function ProjectCase({ project }: { project: Project }) {
         <div className="shell case-story-grid">
           <div className="case-story-title">
             <span className="eyebrow">Contexto</span>
-            <h2>Do problema<br />à solução.</h2>
+            <h2>Do problema<br />ao resultado.</h2>
           </div>
           <div className="case-story-content">
             <div className="story-block">
@@ -66,14 +68,14 @@ export function ProjectCase({ project }: { project: Project }) {
             <div className="story-block">
               <span>02</span>
               <div>
-                <h3>A abordagem</h3>
+                <h3>A solução</h3>
                 <p>{project.solution}</p>
               </div>
             </div>
             <div className="story-block">
               <span>03</span>
               <div>
-                <h3>O produto</h3>
+                <h3>O resultado</h3>
                 <p>{project.longDescription}</p>
               </div>
             </div>
@@ -120,10 +122,11 @@ export function ProjectCase({ project }: { project: Project }) {
 
       <section className="case-section case-stack-section">
         <div className="shell">
-          <span className="eyebrow">Tecnologia</span>
-          <h2>Stack do projeto</h2>
+          <span className="eyebrow">Arquitetura e entrega</span>
+          <h2>O que sustenta o projeto</h2>
+          <p className="case-stack-note">Somente tecnologias ou características confirmadas no projeto são apresentadas aqui.</p>
           <div className="case-stack-list">
-            {project.technologies.map((technology) => <span key={technology}>{technology}</span>)}
+            {project.technicalHighlights.map((item) => <span key={item}>{item}</span>)}
           </div>
         </div>
       </section>
@@ -138,11 +141,7 @@ export function ProjectCase({ project }: { project: Project }) {
             </div>
             <div className="case-next-actions">
               <Link className="button button-primary" href="/#projetos">Ver todos os projetos <ArrowRight /></Link>
-{contact.whatsapp ? (
-                <a className="button button-secondary" href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /> WhatsApp</a>
-              ) : (
-                <a className="button button-secondary" href={contact.github} target="_blank" rel="noreferrer"><Github /> GitHub</a>
-              )}
+              <a className="button button-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /> WhatsApp</a>
             </div>
           </div>
         </div>

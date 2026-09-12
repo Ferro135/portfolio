@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "NEXORA — Digital Products & Systems";
+export const alt = "NEXORA — Produtos Digitais & Sistemas";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -66,7 +66,7 @@ export default function Image() {
 
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 940 }}>
             <div style={{ fontSize: 17, textTransform: "uppercase", letterSpacing: 7, color: "#8fa6dc", fontWeight: 700 }}>
-              Digital Products & Systems
+              Produtos Digitais & Sistemas
             </div>
             <div style={{ fontSize: 72, lineHeight: 1.03, fontWeight: 800, letterSpacing: -4, marginTop: 24 }}>
               Transformamos ideias em sistemas que funcionam.
