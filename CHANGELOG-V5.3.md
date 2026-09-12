@@ -38,3 +38,12 @@
 ## Observação
 
 Para adicionar telas diferentes das que já existem na galeria, ainda é necessário fornecer novas screenshots reais do Zentra/Spazio. A V5.3 não inventa páginas que não foram fornecidas.
+
+## V5.3.1 — apresentação mobile
+
+- [x] Zentra ganhou uma apresentação mobile adaptada do dashboard
+- [x] Spazio Gestão ganhou uma apresentação mobile adaptada do painel
+- [x] A seção Dispositivos deixou de usar um recorte estreito da screenshot desktop
+- [x] Desktop real + conceito mobile passam a ser apresentados lado a lado
+- [x] As artes mobile também foram adicionadas às galerias dos cases
+- [x] Texto de transparência informa que o mobile é uma adaptação visual, não uma captura nativa

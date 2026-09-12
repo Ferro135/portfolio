@@ -1032,16 +1032,19 @@ footer { border-top: 1px solid rgba(255,255,255,.05); }
 .impact-grid p { margin: 0; color: #8190a7; font-size: 12px; line-height: 1.7; }
 
 /* Device showcase */
-.device-showcase { position: relative; min-height: 560px; padding: 18px 110px 45px 0; }
+.device-showcase { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: center; }
 .desktop-device { overflow: hidden; border: 1px solid rgba(115,148,220,.2); border-radius: 20px; background: #07101e; box-shadow: 0 40px 100px rgba(0,0,0,.32); }
 .device-browser-bar { height: 42px; display: flex; align-items: center; gap: 6px; padding: 0 14px; border-bottom: 1px solid rgba(255,255,255,.06); color: #637291; font-size: 9px; }
 .device-browser-bar i { width: 7px; height: 7px; border-radius: 50%; background: #ff6574; }
 .device-browser-bar i:nth-child(2) { background: #ffcc65; }
 .device-browser-bar i:nth-child(3) { background: #51d89a; }
 .device-browser-bar span { margin-left: 8px; }
-.phone-device { position: absolute; z-index: 3; right: 5px; bottom: 0; width: 235px; height: 445px; padding: 9px; border: 1px solid rgba(140,161,224,.28); border-radius: 35px; background: #0c1426; box-shadow: 0 32px 80px rgba(0,0,0,.5); }
-.phone-notch { position: absolute; z-index: 5; left: 50%; top: 14px; width: 72px; height: 18px; transform: translateX(-50%); border-radius: 999px; background: #050914; }
-.device-caption { max-width: 820px; margin: 22px 0 0; color: #66758e; font-size: 10px; line-height: 1.65; }
+.mobile-adaptation-card { align-self: stretch; display: flex; flex-direction: column; justify-content: center; padding: 14px; border: 1px solid rgba(127,153,221,.18); border-radius: 24px; background: linear-gradient(180deg, rgba(13,23,43,.88), rgba(7,13,26,.94)); box-shadow: 0 28px 75px rgba(0,0,0,.35); }
+.mobile-adaptation-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 2px 4px 12px; }
+.mobile-adaptation-heading span { color: #7690c8; font-size: 9px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+.mobile-adaptation-heading strong { color: #dce6fa; font-size: 11px; }
+.mobile-adaptation-media { position: relative; width: 100%; max-width: 292px; margin-inline: auto; overflow: hidden; border-radius: 18px; background: #070b14; }
+.device-caption { grid-column: 1 / -1; max-width: 900px; margin: 0; color: #66758e; font-size: 10px; line-height: 1.65; }
 
 /* Inner pages */
 .inner-page-hero { position: relative; overflow: hidden; padding: 68px 0 86px; border-bottom: 1px solid rgba(255,255,255,.04); }
@@ -1105,8 +1108,7 @@ footer { border-top: 1px solid rgba(255,255,255,.05); }
   .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
   .interactive-preview-grid { grid-template-columns: 1fr; }
   .hotspot-panel { min-height: 210px; }
-  .device-showcase { padding-right: 70px; }
-  .phone-device { width: 205px; height: 390px; }
+  .device-showcase { grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; }
   .brief-layout { grid-template-columns: 1fr; }
   .brief-side { position: static; }
   .about-story-grid { gap: 55px; }
@@ -1118,8 +1120,7 @@ footer { border-top: 1px solid rgba(255,255,255,.05); }
   .impact-grid { grid-template-columns: 1fr; }
   .transformation-grid { grid-template-columns: 1fr; }
   .transformation-arrow { transform: rotate(90deg); }
-  .device-showcase { min-height: 480px; padding-right: 45px; }
-  .phone-device { width: 175px; height: 335px; }
+  .device-showcase { grid-template-columns: minmax(0, 1fr) 240px; gap: 18px; }
   .about-story-grid { grid-template-columns: 1fr; gap: 28px; }
   .values-grid { grid-template-columns: 1fr; }
   .inner-page-copy h1 { font-size: clamp(52px, 13vw, 82px); }
@@ -1136,10 +1137,10 @@ footer { border-top: 1px solid rgba(255,255,255,.05); }
   .interactive-preview-frame { overflow-x: auto; }
   .hotspot-button { width: 28px; height: 28px; }
   .transformation-grid article { min-height: auto; padding: 23px; }
-  .device-showcase { min-height: 380px; padding: 0 18px 95px 0; }
+  .device-showcase { grid-template-columns: 1fr; gap: 20px; }
   .desktop-device { border-radius: 15px; }
-  .phone-device { width: 138px; height: 270px; right: 0; }
-  .device-caption { margin-top: 16px; }
+  .mobile-adaptation-card { width: min(100%, 390px); justify-self: center; }
+  .mobile-adaptation-media { max-width: 330px; }
   .inner-page-hero { padding: 45px 0 62px; }
   .inner-page-copy { margin-top: 38px; }
   .inner-page-copy > p { font-size: 14px; }

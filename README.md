@@ -1,10 +1,11 @@
-# NEXORA — Portfolio V5.3
+# NEXORA — Portfolio V5.3.1
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## Destaques da V5.3
+## Destaques da V5.3.1
 
 - screenshots reais do **Zentra** e **Spazio Gestão** tratadas para portfólio;
+- apresentações **mobile adaptadas** para Zentra e Spazio na seção Dispositivos e nas galerias;
 - capas próprias dos cases usando as interfaces reais;
 - galeria com visão geral + recortes reais de áreas importantes;
 - **tour visual em vídeo** para cada projeto, criado somente a partir das capturas reais;
@@ -57,6 +58,7 @@ public/projects/zentra/
   dashboard-detail.webp
   operations-detail.webp
   tour.mp4
+  mobile-adapted.webp
 
 public/projects/spazio/
   cover.webp
@@ -64,6 +66,7 @@ public/projects/spazio/
   dashboard-detail.webp
   operations-detail.webp
   tour.mp4
+  mobile-adapted.webp
 ```
 
 Quando houver novas telas reais, adicione-as à galeria em `src/data/portfolio.ts`.
