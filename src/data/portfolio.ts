@@ -49,6 +49,7 @@ export type Project = {
   cover: ProjectGalleryItem;
   mobilePresentation: ProjectGalleryItem;
   tourVideo?: string;
+  realVideo?: string;
   demoUrl?: string;
   metrics: ProjectMetric[];
   number: string;
@@ -76,6 +77,7 @@ export const projects: Project[] = [
     cover: { src: "/projects/zentra/cover.webp", alt: "Zentra apresentado em um frame de portfólio com captura real do dashboard", label: "Capa do case", width: 1600, height: 1000 },
     mobilePresentation: { src: "/projects/zentra/mobile-adapted.webp", alt: "Conceito de adaptação mobile do dashboard Zentra em um smartphone", label: "Adaptação mobile", width: 941, height: 1672 },
     tourVideo: "/projects/zentra/tour.mp4",
+    realVideo: safeHttpsUrl(process.env.NEXT_PUBLIC_ZENTRA_REAL_VIDEO_URL),
     demoUrl: safeHttpsUrl(process.env.NEXT_PUBLIC_ZENTRA_DEMO_URL),
     metrics: [],
     number: "01",
@@ -180,6 +182,7 @@ export const projects: Project[] = [
     cover: { src: "/projects/spazio/cover.webp", alt: "Spazio Gestão apresentado em um frame de portfólio com captura real da interface", label: "Capa do case", width: 1600, height: 1000 },
     mobilePresentation: { src: "/projects/spazio/mobile-adapted.webp", alt: "Conceito de adaptação mobile do Spazio Gestão em um smartphone", label: "Adaptação mobile", width: 941, height: 1672 },
     tourVideo: "/projects/spazio/tour.mp4",
+    realVideo: safeHttpsUrl(process.env.NEXT_PUBLIC_SPAZIO_REAL_VIDEO_URL),
     demoUrl: safeHttpsUrl(process.env.NEXT_PUBLIC_SPAZIO_DEMO_URL),
     metrics: [],
     number: "02",

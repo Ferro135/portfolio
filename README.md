@@ -1,75 +1,162 @@
-# NEXORA — Portfolio V5.4
+# NEXORA — Portfolio V5.5
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## Destaques da V5.4
+## O que a V5.5 adiciona
 
-- screenshots reais do **Zentra** e **Spazio Gestão** tratadas para portfólio;
-- apresentações **mobile adaptadas** para Zentra e Spazio na seção Dispositivos e nas galerias;
-- capas próprias dos cases usando as interfaces reais;
-- galeria com visão geral + recortes reais de áreas importantes;
-- **tour visual em vídeo** para cada projeto, criado somente a partir das capturas reais;
-- infraestrutura para botão **Abrir demo**, exibido apenas se uma URL pública for configurada;
-- suporte a **email profissional** por variável de ambiente;
-- infraestrutura para **métricas reais**, que permanece oculta enquanto não houver números validados;
-- auditoria automática de Home, Contato, Zentra e Spazio com **Lighthouse** no GitHub Actions;
-- Open Graph dos cases usando a capa real do projeto;
-- Vercel Analytics e Speed Insights preservados, mas carregados somente após consentimento;
-- todas as melhorias da V5.2.1 continuam presentes.
+### Conversão
+- página `/servicos` completa;
+- catálogo de Sites, SaaS, Dashboards, Sistemas Administrativos, Painéis Internos e Automações;
+- briefing em **4 etapas**;
+- seleção de recursos do projeto;
+- revisão da mensagem antes do WhatsApp;
+- preenchimento inicial do tipo de projeto quando o usuário vem de `/servicos`.
 
-## Transparência dos cases
+### Credibilidade
+- suporte a gravações reais dos projetos por variável de ambiente;
+- fallback transparente para tours baseados em screenshots reais;
+- estrutura para métricas reais e depoimentos autorizados;
+- cases Zentra e Spazio mantidos como estudos de caso editoriais.
 
-A NEXORA não inventa telas, números, depoimentos ou demos para preencher o portfólio.
+### SEO e compartilhamento
+- JSON-LD de `Organization` e `WebSite`;
+- JSON-LD de `Service` na página de serviços;
+- FAQ estruturado na Home;
+- `SoftwareApplication` nos cases;
+- Open Graph próprio para Zentra e Spazio;
+- sitemap ampliado;
+- palavras-chave comerciais refinadas.
 
-Os vídeos `tour.mp4` são **tours visuais baseados em screenshots reais**. Eles não são apresentados como gravações de uma demo interativa.
+### Monitoramento e qualidade
+- `/api/health`;
+- workflow de uptime por hora;
+- Lighthouse em Home, Contato, Serviços, Sobre e cases;
+- Playwright para testar 320, 375, 390, 430, 768, 1024 e 1440 px;
+- relatório de responsividade salvo como artifact no GitHub Actions.
 
-As métricas de negócio ficam em `metrics: []` dentro de cada projeto. A seção só aparece depois que valores reais forem adicionados.
+### Experiência
+- barra discreta de progresso de leitura;
+- movimento sutil no Hero;
+- respeito a `prefers-reduced-motion`;
+- manutenção de todos os refinamentos visuais da V5.3.5.
 
-## Configuração opcional na Vercel
+## Segurança
 
-Use estas variáveis somente quando tiver os dados correspondentes:
+A V5.5 preserva todo o hardening da V5.4:
+
+- Content Security Policy;
+- HSTS;
+- anti-clickjacking;
+- `nosniff`;
+- COOP / CORP;
+- `Permissions-Policy`;
+- `poweredByHeader: false`;
+- source maps públicos de produção desativados;
+- sistema de consentimento de cookies;
+- Analytics e Speed Insights só após consentimento;
+- Dependabot;
+- CodeQL;
+- `npm audit`;
+- CI automático read-only;
+- `SECURITY.md`;
+- `/.well-known/security.txt`;
+- runbook de DDoS/Firewall para Vercel.
+
+Consulte:
+
+```text
+SECURITY.md
+SECURITY-VERCEL.md
+SECURITY-CHECKLIST.md
+GITHUB-SECURITY-SETUP.md
+```
+
+## Variáveis opcionais na Vercel
 
 ```env
 NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_CONTACT_EMAIL=
 NEXT_PUBLIC_ZENTRA_DEMO_URL=
 NEXT_PUBLIC_SPAZIO_DEMO_URL=
+NEXT_PUBLIC_ZENTRA_REAL_VIDEO_URL=
+NEXT_PUBLIC_SPAZIO_REAL_VIDEO_URL=
 ```
 
-- `NEXT_PUBLIC_SITE_URL`: domínio canônico próprio, se quiser fixar um;
-- `NEXT_PUBLIC_CONTACT_EMAIL`: email profissional que aparecerá no contato;
-- `NEXT_PUBLIC_ZENTRA_DEMO_URL`: demo pública do Zentra;
-- `NEXT_PUBLIC_SPAZIO_DEMO_URL`: demo pública do Spazio.
+Nunca coloque segredos em variáveis `NEXT_PUBLIC_*`.
 
-Se as URLs de demo ficarem vazias, o case explica que o ambiente é privado em vez de mostrar um botão quebrado.
+## Vídeos reais
+
+Quando existir uma gravação MP4 real e segura do sistema, configure:
+
+```env
+NEXT_PUBLIC_ZENTRA_REAL_VIDEO_URL=https://...
+NEXT_PUBLIC_SPAZIO_REAL_VIDEO_URL=https://...
+```
+
+Se estiver vazio, o site continua usando o tour editorial atual e informa claramente que ele é baseado em screenshots.
+
+## Métricas reais
+
+Cada projeto tem:
+
+```ts
+metrics: []
+```
+
+Adicione somente números confirmados. A seção permanece invisível enquanto a lista estiver vazia.
 
 ## Depoimentos
 
-`src/data/portfolio.ts` contém a lista `testimonials`, mantida vazia até existir autorização de um cliente real.
+A lista `testimonials` permanece vazia até haver autorização real de um cliente. Não há depoimentos fictícios.
 
-## Screenshots
+## Uptime
 
-Assets principais:
+No GitHub:
+
+`Settings -> Secrets and variables -> Actions -> Variables`
+
+Crie:
 
 ```text
-public/projects/zentra/
-  cover.webp
-  overview.webp
-  dashboard-detail.webp
-  operations-detail.webp
-  tour.mp4
-  mobile-adapted.webp
-
-public/projects/spazio/
-  cover.webp
-  overview.webp
-  dashboard-detail.webp
-  operations-detail.webp
-  tour.mp4
-  mobile-adapted.webp
+PRODUCTION_URL=https://seu-dominio.com
 ```
 
-Quando houver novas telas reais, adicione-as à galeria em `src/data/portfolio.ts`.
+O workflow `Uptime` verificará a Home e `/api/health` a cada hora.
+
+## Responsividade automática
+
+O workflow `.github/workflows/responsive.yml` testa:
+
+```text
+320
+375
+390
+430
+768
+1024
+1440
+```
+
+Páginas:
+
+```text
+/
+/servicos
+/contato
+/sobre
+/projetos/zentra
+/projetos/spazio-gestao
+```
+
+## package-lock
+
+Este ambiente não conseguiu acessar o registry npm para gerar um lockfile confiável.
+
+Depois de subir a V5.5, execute uma vez:
+
+`GitHub -> Actions -> Gerar package-lock manualmente -> Run workflow`
+
+Depois disso o CI poderá usar `npm ci` com versões determinísticas.
 
 ## Rodar localmente
 
@@ -78,98 +165,21 @@ npm install
 npm run dev
 ```
 
-## Validar antes de publicar
+## Validar
 
 ```bash
-npm run check
+npm run typecheck
+npm run build
+npm run security:audit
 ```
 
-## Lighthouse automático
+Para os testes responsivos:
 
-O workflow `.github/workflows/lighthouse.yml`:
-
-- instala o projeto;
-- executa o build;
-- sobe a aplicação localmente;
-- testa `/`, `/contato`, `/projetos/zentra` e `/projetos/spazio-gestao`;
-- salva os relatórios como artifact no GitHub Actions;
-- alerta quando performance, acessibilidade, boas práticas ou SEO caem abaixo dos limites definidos.
-
-Os limites ficam em `scripts/check-lighthouse.mjs`.
-
-## Analytics
-
-Vercel Web Analytics e Speed Insights continuam integrados no layout. Para receber dados, habilite os recursos no painel do projeto na Vercel.
-
-## Domínio
-
-A URL canônica segue esta prioridade:
-
-1. `NEXT_PUBLIC_SITE_URL`;
-2. `VERCEL_PROJECT_PRODUCTION_URL`;
-3. `VERCEL_URL`;
-4. localhost.
-
-Assim o código acompanha o domínio de produção da Vercel sem ficar preso a URLs antigas.
-
-## Estrutura principal
-
-- `src/data/portfolio.ts` — projetos, contato, demos, métricas, FAQ, processo e depoimentos;
-- `src/components/ProjectCase.tsx` — página completa dos cases;
-- `src/components/ProjectMedia.tsx` — tour visual e acesso à demo;
-- `src/components/ProjectMetrics.tsx` — métricas reais quando existirem;
-- `src/components/ProjectGallery.tsx` — galeria/lightbox;
-- `src/app/contato` — briefing e canais de contato;
-- `.github/workflows/ci.yml` — TypeScript e build;
-- `.github/workflows/lighthouse.yml` — auditoria de qualidade web.
-
-
-## Security Hardening V5.4
-
-A V5.4 adiciona:
-
-- Content Security Policy;
-- headers de segurança adicionais;
-- `poweredByHeader: false`;
-- source maps de produção desativados;
-- sistema de consentimento de cookies;
-- páginas `/cookies` e `/privacidade`;
-- analytics condicionado ao consentimento;
-- limites no formulário de briefing;
-- validação HTTPS das URLs de demo;
-- Dependabot;
-- CodeQL;
-- `npm audit`;
-- workflows automáticos com permissão somente de leitura;
-- política `SECURITY.md`;
-- `/.well-known/security.txt`;
-- runbook de DDoS/Firewall para Vercel.
-
-Arquivos importantes:
-
-```text
-SECURITY.md
-SECURITY-VERCEL.md
-SECURITY-CHECKLIST.md
-GITHUB-SECURITY-SETUP.md
-.github/dependabot.yml
-.github/workflows/codeql.yml
-.github/workflows/security.yml
-.github/workflows/generate-lockfile.yml
+```bash
+npx playwright install chromium
+npm run test:responsive
 ```
 
-### DDoS
+## Checklist de lançamento
 
-O site não tenta bloquear ataques volumétricos dentro do Next.js. Isso seria tarde demais e poderia aumentar o custo da aplicação.
-
-A proteção volumétrica depende das **System Mitigations / Firewall da Vercel**. Consulte `SECURITY-VERCEL.md` para Attack Mode e resposta a incidentes.
-
-### package-lock
-
-Este ambiente não conseguiu acessar o registry npm para gerar um lockfile confiável.
-
-Depois do primeiro upload da V5.4, execute manualmente no GitHub Actions:
-
-`Gerar package-lock manualmente`
-
-O workflow gera e commita somente `package-lock.json`. Depois disso, os workflows automáticos continuam com permissões read-only.
+Consulte `LAUNCH-V5.5.md` para configurar domínio, email profissional, vídeos reais, demos públicas, métricas e uptime.

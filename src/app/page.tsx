@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { Header } from "@/components/Header";
 import { Testimonials } from "@/components/Testimonials";
+import { StructuredData } from "@/components/StructuredData";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -17,9 +18,24 @@ import {
 import { NexoraLogo } from "@/components/NexoraLogo";
 import { brand, capabilities, contact, faqs, processSteps, projects, technologyGroups } from "@/data/portfolio";
 
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
 export default function Home() {
   return (
     <main id="conteudo">
+      <StructuredData data={faqSchema} />
       <Header />
 
       <section className="hero-section" id="inicio">
@@ -223,6 +239,11 @@ export default function Home() {
                 <p>{capability.description}</p>
               </article>
             ))}
+          </div>
+          <div className="capabilities-footer">
+            <Link className="button button-secondary" href="/servicos">
+              Ver serviços em detalhe <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>

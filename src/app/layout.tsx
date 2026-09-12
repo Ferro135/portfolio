@@ -6,6 +6,9 @@ import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { ScrollRevealController } from "@/components/ScrollRevealController";
 import { CookieConsent } from "@/components/CookieConsent";
 import { ClientTelemetry } from "@/components/ClientTelemetry";
+import { PageScrollProgress } from "@/components/PageScrollProgress";
+import { StructuredData } from "@/components/StructuredData";
+import { contact } from "@/data/portfolio";
 import "./globals.css";
 
 const geist = Geist({
@@ -32,7 +35,11 @@ export const metadata: Metadata = {
   keywords: [
     "NEXORA",
     "desenvolvimento web",
-    "sistemas web",
+    "criação de sites",
+    "desenvolvimento de sistemas web",
+    "desenvolvimento SaaS",
+    "sistemas administrativos",
+    "automações web",
     "dashboards",
     "Next.js",
     "TypeScript",
@@ -65,6 +72,28 @@ export const metadata: Metadata = {
   },
 };
 
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "NEXORA",
+  url: siteUrl,
+  description:
+    "Desenvolvimento de sites, dashboards, sistemas web, SaaS e automações.",
+  sameAs: [contact.github],
+  ...(contact.email ? { email: contact.email } : {}),
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "NEXORA",
+  url: siteUrl,
+  inLanguage: "pt-BR",
+  description:
+    "Produtos digitais e sistemas web com foco em clareza, performance e uso real.",
+};
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -77,6 +106,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${geist.variable} ${geistMono.variable}`}>
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+        <StructuredData data={[organizationSchema, websiteSchema]} />
+        <PageScrollProgress />
         <ScrollRevealController />
         {children}
         <FloatingWhatsApp />

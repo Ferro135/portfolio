@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const isProduction = process.env.NODE_ENV === "production";
+const isVercel = process.env.VERCEL === "1";
 
 const contentSecurityPolicy = [
   "default-src 'self'",
@@ -12,11 +13,11 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "media-src 'self'",
+  "media-src 'self' https:",
   "connect-src 'self' https://vitals.vercel-insights.com https://*.vercel-insights.com",
   "worker-src 'self' blob:",
   "manifest-src 'self'",
-  ...(isProduction ? ["upgrade-insecure-requests"] : []),
+  ...(isProduction && isVercel ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [
