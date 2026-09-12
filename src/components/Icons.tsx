@@ -74,3 +74,67 @@ export function WhatsApp({ size = 18, ...props }: IconProps) {
     </svg>
   );
 }
+
+export function Grid({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" /><rect x="3" y="14" width="7" height="7" rx="1.5" /><rect x="14" y="14" width="7" height="7" rx="1.5" /></svg>;
+}
+
+export function Users({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" /><circle cx="9.5" cy="7" r="4" /><path d="M16 3.3a4 4 0 0 1 0 7.4" /><path d="M21 21v-2a4 4 0 0 0-3-3.87" /></svg>;
+}
+
+export function FileText({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" /><path d="M14 2v6h6" /><path d="M8 13h8" /><path d="M8 17h8" /></svg>;
+}
+
+export function Folder({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3Z" /></svg>;
+}
+
+export function MessageSquare({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z" /><path d="M8 9h8" /><path d="M8 13h5" /></svg>;
+}
+
+export function Calendar({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M3 10h18" /></svg>;
+}
+
+export function AlertTriangle({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="m12 3 10 18H2L12 3Z" /><path d="M12 9v5" /><path d="M12 18h.01" /></svg>;
+}
+
+export function Settings({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.1a1.7 1.7 0 0 0-1.4-1.66 1.7 1.7 0 0 0-1.48.5l-.06.06L3.8 16.94l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h-.1A1.7 1.7 0 0 0 4.56 8.2a1.7 1.7 0 0 0-.5-1.48L4 6.66 6.86 3.8l.06.06A1.7 1.7 0 0 0 8.8 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1a1.7 1.7 0 0 0 1.4 1.66 1.7 1.7 0 0 0 1.48-.5l.06-.06L20 7.06l-.06.06A1.7 1.7 0 0 0 19.4 9c.13.36.34.69.6 1 .3.28.68.46 1.1.5h.1v4h-.1a1.7 1.7 0 0 0-1.7.5Z" /></svg>;
+}
+
+export function Search({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>;
+}
+
+export function Command({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M18 9a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3Z" /></svg>;
+}
+
+export function Database({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" /><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" /></svg>;
+}
+
+export function Download({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M5 21h14" /></svg>;
+}
+
+export function LogOut({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M10 17l5-5-5-5" /><path d="M15 12H3" /><path d="M21 19V5a2 2 0 0 0-2-2h-6" /></svg>;
+}
+
+export function Copy({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>;
+}
+
+export function Lock({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>;
+}
+
+export function ExternalLink({ size = 18, ...props }: IconProps) {
+  return <svg {...base(size)} {...props}><path d="M15 3h6v6" /><path d="M10 14 21 3" /><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /></svg>;
+}

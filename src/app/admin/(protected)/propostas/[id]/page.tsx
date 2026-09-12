@@ -4,7 +4,72 @@ import { revalidatePath } from "next/cache";
 import { getRow, updateRow } from "@/lib/server/supabase";
 import type { Proposal } from "@/lib/server/business";
 import { siteUrl } from "@/lib/site";
+import { adminStatusLabel, formatAdminCurrency, formatAdminDate, proposalStatusOptions } from "@/lib/admin-ui";
+import { CopyTextButton } from "@/components/CopyTextButton";
+import { ExternalLink } from "@/components/Icons";
 
-export default async function ProposalDetail({params}:{params:Promise<{id:string}>}){ const {id}=await params; const p=await getRow<Proposal>('proposals',id); if(!p)notFound();
-async function update(formData:FormData){'use server'; await updateRow('proposals',id,{status:String(formData.get('status')||'draft'),terms:String(formData.get('terms')||'').slice(0,8000),updated_at:new Date().toISOString()}); revalidatePath(`/admin/propostas/${id}`);}
-const publicUrl=`${siteUrl}/proposta/${p.token}`; return <main className="admin-page"><Link className="admin-back" href="/admin/propostas">← Propostas</Link><div className="admin-page-heading"><div><span>Proposta</span><h1>{p.title}</h1></div><span className={`admin-status status-${p.status}`}>{p.status}</span></div><div className="admin-two-column"><section className="admin-panel"><h2>Resumo</h2><dl className="admin-details"><dt>Cliente</dt><dd>{p.client_name}</dd><dt>Empresa</dt><dd>{p.company||'-'}</dd><dt>Valor</dt><dd>{p.price_cents?new Intl.NumberFormat('pt-BR',{style:'currency',currency:p.currency}).format(p.price_cents/100):'-'}</dd><dt>Prazo</dt><dd>{p.deadline||'-'}</dd><dt>Validade</dt><dd>{p.valid_until||'-'}</dd><dt>Link público</dt><dd><a href={publicUrl} target="_blank" rel="noreferrer">{publicUrl}</a></dd></dl></section><section className="admin-panel"><h2>Status e termos</h2><form className="admin-form" action={update}><label>Status<select name="status" defaultValue={p.status}>{['draft','sent','accepted','rejected','expired'].map(s=><option key={s}>{s}</option>)}</select></label><label>Termos<textarea name="terms" defaultValue={p.terms||''} rows={10}/></label><button className="button button-primary">Salvar</button></form></section></div><section className="admin-panel"><h2>Escopo</h2><p className="admin-pre">{p.scope}</p><h3>Entregáveis</h3><ul>{p.deliverables.map(d=><li key={d}>{d}</li>)}</ul></section></main> }
+export default async function ProposalDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const proposal = await getRow<Proposal>("proposals", id);
+  if (!proposal) notFound();
+
+  async function update(formData: FormData) {
+    "use server";
+    await updateRow("proposals", id, {
+      status: String(formData.get("status") || "draft"),
+      terms: String(formData.get("terms") || "").slice(0, 8000),
+      updated_at: new Date().toISOString(),
+    });
+    revalidatePath(`/admin/propostas/${id}`);
+    revalidatePath("/admin/propostas");
+    revalidatePath("/admin");
+  }
+
+  const publicUrl = `${siteUrl}/proposta/${proposal.token}`;
+
+  return (
+    <main className="admin-page">
+      <Link className="admin-back" href="/admin/propostas">← Propostas</Link>
+      <div className="admin-page-heading">
+        <div><span>Proposta</span><h1>{proposal.title}</h1><p>{proposal.client_name}{proposal.company ? ` · ${proposal.company}` : ""}</p></div>
+        <span className={`admin-status status-${proposal.status}`}>{adminStatusLabel(proposal.status)}</span>
+      </div>
+
+      <section className="admin-proposal-sharebar">
+        <div><span>Link compartilhável</span><strong>{publicUrl}</strong></div>
+        <div><CopyTextButton value={publicUrl} label="Copiar link" /><a href={publicUrl} target="_blank" rel="noreferrer">Abrir <ExternalLink size={14} /></a></div>
+      </section>
+
+      <div className="admin-two-column">
+        <section className="admin-panel admin-panel-flush">
+          <div className="admin-panel-heading"><div><span>Comercial</span><h2>Resumo</h2></div></div>
+          <dl className="admin-details">
+            <dt>Cliente</dt><dd>{proposal.client_name}</dd>
+            <dt>Empresa</dt><dd>{proposal.company || "—"}</dd>
+            <dt>Valor</dt><dd><strong>{formatAdminCurrency(proposal.price_cents, proposal.currency)}</strong></dd>
+            <dt>Prazo</dt><dd>{proposal.deadline || "—"}</dd>
+            <dt>Validade</dt><dd>{proposal.valid_until ? formatAdminDate(proposal.valid_until) : "—"}</dd>
+            <dt>Criada</dt><dd>{formatAdminDate(proposal.created_at, true)}</dd>
+            <dt>Atualizada</dt><dd>{formatAdminDate(proposal.updated_at, true)}</dd>
+          </dl>
+        </section>
+
+        <section className="admin-panel admin-panel-flush">
+          <div className="admin-panel-heading"><div><span>Controle</span><h2>Status e termos</h2></div></div>
+          <form className="admin-form" action={update}>
+            <label>Status<select name="status" defaultValue={proposal.status}>{proposalStatusOptions.map((status) => <option value={status} key={status}>{adminStatusLabel(status)}</option>)}</select></label>
+            <label>Termos<textarea name="terms" defaultValue={proposal.terms || ""} rows={10} /></label>
+            <button className="button button-primary">Salvar alterações</button>
+          </form>
+        </section>
+      </div>
+
+      <section className="admin-panel">
+        <div className="admin-panel-heading"><div><span>Escopo</span><h2>O que está sendo proposto</h2></div></div>
+        <p className="admin-pre">{proposal.scope}</p>
+        <h3>Entregáveis</h3>
+        <ul className="admin-deliverable-list">{proposal.deliverables.map((item) => <li key={item}>{item}</li>)}</ul>
+      </section>
+    </main>
+  );
+}

@@ -1,8 +1,8 @@
-# NEXORA — Portfolio V5.6
+# NEXORA — Portfolio V5.5
 
 Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
-## O que a V5.6 adiciona
+## O que a V5.5 adiciona
 
 ### Conversão
 - página `/servicos` completa;
@@ -42,7 +42,7 @@ Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next
 
 ## Segurança
 
-A V5.6 preserva todo o hardening da V5.4 e acrescenta rate limit persistente no backend, login administrativo com scrypt, sessão HttpOnly assinada e payload limits:
+A V5.5 preserva todo o hardening da V5.4:
 
 - Content Security Policy;
 - HSTS;
@@ -239,3 +239,16 @@ LEAD_NOTIFY_EMAIL=seu-email@dominio.com
 ## Observação importante
 
 O `SUPABASE_SERVICE_ROLE_KEY`, a senha do admin, tokens e chaves privadas **nunca** devem usar o prefixo `NEXT_PUBLIC_`.
+
+## V5.7 — Admin Control Center
+
+O painel administrativo ganhou uma camada de produtividade e segurança:
+
+- `Ctrl/⌘ + Alt + N` abre o admin a partir do site público;
+- `Ctrl/⌘ + K` abre a paleta de comandos dentro do painel;
+- sessão administrativa é bloqueada após 30 minutos sem atividade;
+- dashboard operacional com prioridades, KPIs e atividade recente;
+- filtros e busca em leads, propostas, agenda, CMS e erros;
+- `/admin/configuracao` mostra o estado das integrações sem revelar segredos.
+
+O atalho de teclado **não é um mecanismo de segurança**. A rota continua protegida pela autenticação administrativa e cookies HttpOnly assinados.

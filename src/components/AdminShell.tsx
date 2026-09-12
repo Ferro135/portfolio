@@ -2,16 +2,11 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { clearAdminSession } from "@/lib/server/admin-auth";
 import { redirect } from "next/navigation";
-
-const links = [
-  ["/admin", "Visão geral"],
-  ["/admin/leads", "Leads"],
-  ["/admin/propostas", "Propostas"],
-  ["/admin/projetos", "Projetos"],
-  ["/admin/depoimentos", "Depoimentos"],
-  ["/admin/agendamentos", "Agendamentos"],
-  ["/admin/erros", "Erros"],
-];
+import { AdminNavigation } from "@/components/AdminNavigation";
+import { AdminCommandPalette } from "@/components/AdminCommandPalette";
+import { AdminSessionGuard } from "@/components/AdminSessionGuard";
+import { Download, ExternalLink, Lock, LogOut } from "@/components/Icons";
+import { NexoraLogo } from "@/components/NexoraLogo";
 
 export function AdminShell({ children }: { children: ReactNode }) {
   async function logout() {
@@ -20,18 +15,56 @@ export function AdminShell({ children }: { children: ReactNode }) {
     redirect("/admin/login");
   }
 
+  const environment = process.env.VERCEL_ENV || (process.env.NODE_ENV === "production" ? "production" : "local");
+
   return (
     <div className="admin-app">
+      <AdminSessionGuard />
       <aside className="admin-sidebar">
-        <Link className="admin-brand" href="/admin">NEXORA <span>Admin</span></Link>
-        <nav>{links.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}</nav>
+        <Link className="admin-brand" href="/admin" aria-label="NEXORA Admin">
+          <NexoraLogo className="admin-brand-logo" />
+          <span>Control</span>
+        </Link>
+
+        <div className="admin-environment-badge">
+          <i />
+          <span>{environment}</span>
+        </div>
+
+        <AdminNavigation />
+
         <div className="admin-sidebar-footer">
-          <a href="/api/admin/export">Exportar backup JSON</a>
-          <Link href="/" target="_blank">Abrir site</Link>
-          <form action={logout}><button type="submit">Sair</button></form>
+          <a href="/api/admin/export">
+            <Download size={15} />
+            <span>Exportar backup</span>
+          </a>
+          <Link href="/" target="_blank">
+            <ExternalLink size={15} />
+            <span>Abrir site</span>
+          </Link>
+          <form action={logout}>
+            <button type="submit">
+              <LogOut size={15} />
+              <span>Sair</span>
+            </button>
+          </form>
         </div>
       </aside>
-      <div className="admin-main">{children}</div>
+
+      <div className="admin-main">
+        <header className="admin-topbar">
+          <div className="admin-topbar-title">
+            <Lock size={14} />
+            <span>Central privada NEXORA</span>
+            <small>Sessão bloqueia após 30 min sem atividade</small>
+          </div>
+          <div className="admin-topbar-actions">
+            <span className="admin-global-shortcut"><kbd>Ctrl/⌘</kbd><b>+</b><kbd>Alt</kbd><b>+</b><kbd>N</kbd></span>
+            <AdminCommandPalette />
+          </div>
+        </header>
+        {children}
+      </div>
     </div>
   );
 }
