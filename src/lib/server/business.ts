@@ -1,4 +1,4 @@
-import { dbRequest, insertRow, listRows, supabaseConfigured, updateRow } from "@/lib/server/supabase";
+import { dbRequest, deleteRow, insertRow, listRows, supabaseConfigured, updateRow } from "@/lib/server/supabase";
 
 export type Lead = {
   id: string;
@@ -154,4 +154,8 @@ export async function listPublicCmsProjects() {
 
 export async function listPublicTestimonials() {
   try { return await listTestimonials(false); } catch (error) { console.error("public testimonials", error); return [] as CmsTestimonial[]; }
+}
+
+export async function deleteLead(id: string) {
+  return deleteRow("leads", id);
 }

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { createProposal, getLead, markLeadProposalSent } from "@/lib/server/business";
+import { createProposal, deleteLead, getLead, markLeadProposalSent } from "@/lib/server/business";
 import { updateRow } from "@/lib/server/supabase";
 import { adminStatusLabel, ageInDays, formatAdminDate, leadStatusOptions } from "@/lib/admin-ui";
-import { Mail, WhatsApp } from "@/components/Icons";
+import { Mail, Trash, WhatsApp } from "@/components/Icons";
+import { ConfirmSubmitButton } from "@/components/ConfirmSubmitButton";
+import { requireAdmin } from "@/lib/server/admin-auth";
 
 export default async function LeadDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -19,6 +21,16 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
     revalidatePath(`/admin/leads/${id}`);
     revalidatePath("/admin/leads");
     revalidatePath("/admin");
+  }
+
+  async function deleteCurrentLead() {
+    "use server";
+    await requireAdmin();
+    await deleteLead(id);
+    revalidatePath("/admin/leads");
+    revalidatePath("/admin/propostas");
+    revalidatePath("/admin");
+    redirect("/admin/leads?deleted=1");
   }
 
   async function generateProposal(formData: FormData) {
@@ -102,6 +114,32 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
           <label className="admin-span-2">Termos<textarea name="terms" rows={5} placeholder="Pagamento, revisões, condições..." /></label>
           <button className="button button-primary admin-span-2">Criar proposta compartilhável</button>
         </form>
+      </section>
+
+      <section className="admin-panel admin-danger-zone">
+        <div className="admin-panel-heading">
+          <div>
+            <span>Zona de risco</span>
+            <h2>Excluir lead do CRM</h2>
+          </div>
+        </div>
+        <div className="admin-danger-content">
+          <div>
+            <strong>Exclusão permanente</strong>
+            <p>
+              Remove este lead, status, briefing e notas internas do CRM. Propostas já
+              criadas permanecem salvas no painel comercial, mas deixam de apontar para este lead.
+            </p>
+          </div>
+          <form action={deleteCurrentLead}>
+            <ConfirmSubmitButton
+              className="button admin-danger-button"
+              message={`Excluir permanentemente ${lead.name}? Esta ação não pode ser desfeita.`}
+            >
+              <Trash size={16} /> Excluir lead
+            </ConfirmSubmitButton>
+          </form>
+        </div>
       </section>
     </main>
   );

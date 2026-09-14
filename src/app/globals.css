@@ -3603,3 +3603,110 @@ select:focus {
     transition: none !important;
   }
 }
+
+
+/* ALUNERI 2.1.1 — exclusão segura de leads/CRM */
+.admin-table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.admin-table-actions form {
+  margin: 0;
+}
+
+.admin-delete-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(248,113,113,.15);
+  border-radius: 9px;
+  background: rgba(127,29,29,.055);
+  color: #A66A74;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.admin-delete-icon:hover {
+  color: #FF8A98;
+  border-color: rgba(248,113,113,.30);
+  background: rgba(127,29,29,.14);
+  transform: translateY(-1px);
+}
+
+.admin-success-banner {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(66,230,173,.18);
+  border-radius: 12px;
+  background: rgba(19,112,83,.08);
+  color: #8DEAC8;
+  font-size: 11px;
+}
+
+.admin-danger-zone {
+  margin-top: 18px;
+  border-color: rgba(248,113,113,.14);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(160,45,65,.055), transparent 30%),
+    rgba(9,15,28,.62);
+}
+
+.admin-danger-zone .admin-panel-heading > div > span {
+  color: #9D6670;
+}
+
+.admin-danger-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 20px 22px 24px;
+}
+
+.admin-danger-content > div {
+  max-width: 680px;
+}
+
+.admin-danger-content strong {
+  color: #E9DCE0;
+  font-size: 12px;
+}
+
+.admin-danger-content p {
+  margin: 7px 0 0;
+  color: #7E899B;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.admin-danger-button {
+  min-width: 152px;
+  border-color: rgba(248,113,113,.22);
+  background: rgba(127,29,29,.12);
+  color: #FFA0AA;
+}
+
+.admin-danger-button:hover {
+  border-color: rgba(248,113,113,.36);
+  background: rgba(153,27,27,.19);
+}
+
+@media (max-width: 720px) {
+  .admin-danger-content {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-danger-button {
+    width: 100%;
+  }
+
+  .admin-table-actions {
+    justify-content: flex-start;
+  }
+}
