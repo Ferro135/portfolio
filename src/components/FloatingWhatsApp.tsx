@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { WhatsApp } from "@/components/Icons";
 import { contact } from "@/data/portfolio";
+import {
+  CONSENT_EVENT,
+  type ConsentLevel,
+  readClientConsent,
+} from "@/lib/consent";
 
 export function FloatingWhatsApp() {
   const [visible, setVisible] = useState(false);
+  const [consentResolved, setConsentResolved] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -16,7 +22,24 @@ export function FloatingWhatsApp() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (!contact.whatsapp || pathname === "/contato") return null;
+  useEffect(() => {
+    setConsentResolved(readClientConsent() !== null);
+
+    const onConsent = (event: Event) => {
+      const level = (event as CustomEvent<ConsentLevel>).detail;
+      setConsentResolved(Boolean(level));
+    };
+
+    window.addEventListener(CONSENT_EVENT, onConsent);
+    return () => window.removeEventListener(CONSENT_EVENT, onConsent);
+  }, []);
+
+  const hiddenRoutes =
+    pathname === "/contato" ||
+    pathname === "/en/contact" ||
+    pathname.startsWith("/admin");
+
+  if (!contact.whatsapp || hiddenRoutes || !consentResolved) return null;
 
   return (
     <a

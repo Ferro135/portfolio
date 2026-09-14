@@ -71,7 +71,8 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/brand/aluneri-mark-master.png",
+    apple: "/brand/aluneri-mark-master.png",
   },
 };
 

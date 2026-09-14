@@ -1,6 +1,19 @@
-# ALUNERI — Portfolio 2.0
+# ALUNERI — Portfolio 2.1
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
+
+
+## Destaques da V2.1
+
+- logo oficial da ALUNERI integrada no Header, Footer e Admin;
+- navegação com estado ativo e Header adaptativo ao scroll;
+- menu mobile redesenhado;
+- refinamento visual dos projetos, processo e contato;
+- faixa de especialidades no Hero;
+- agendamento integrado ao fluxo principal;
+- Admin com status real do Supabase e relógio discreto;
+- WhatsApp flutuante compatível com o consentimento de cookies;
+- otimizações de renderização e acessibilidade.
 
 ## O que a V5.5 adiciona
 

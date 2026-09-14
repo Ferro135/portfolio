@@ -7,6 +7,7 @@ import { AdminCommandPalette } from "@/components/AdminCommandPalette";
 import { AdminSessionGuard } from "@/components/AdminSessionGuard";
 import { Download, ExternalLink, Lock, LogOut } from "@/components/Icons";
 import { AluneriLogo } from "@/components/AluneriLogo";
+import { AdminClock } from "@/components/AdminClock";
 
 export function AdminShell({ children }: { children: ReactNode }) {
   async function logout() {
@@ -22,7 +23,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       <AdminSessionGuard />
       <aside className="admin-sidebar">
         <Link className="admin-brand" href="/admin" aria-label="ALUNERI Admin">
-          <AluneriLogo className="admin-brand-logo" />
+          <AluneriLogo className="admin-brand-logo" priority />
           <span>Control</span>
         </Link>
 
@@ -59,6 +60,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
             <small>Sessão bloqueia após 30 min sem atividade</small>
           </div>
           <div className="admin-topbar-actions">
+            <AdminClock />
             <span className="admin-global-shortcut"><kbd>Ctrl/⌘</kbd><b>+</b><kbd>Alt</kbd><b>+</b><kbd>A</kbd></span>
             <AdminCommandPalette />
           </div>

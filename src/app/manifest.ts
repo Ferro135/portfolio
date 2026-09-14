@@ -12,9 +12,9 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "pt-BR",
     icons: [
       {
-        src: "/favicon.svg",
-        sizes: "any",
-        type: "image/svg+xml",
+        src: "/brand/aluneri-mark-master.png",
+        sizes: "545x387",
+        type: "image/png",
       },
     ],
   };

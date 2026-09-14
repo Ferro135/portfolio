@@ -7,7 +7,7 @@ import {
   listProposals,
   listTestimonials,
 } from "@/lib/server/business";
-import { supabaseConfigured } from "@/lib/server/supabase";
+import { checkSupabaseHealth, supabaseConfigured } from "@/lib/server/supabase";
 import {
   adminStatusLabel,
   ageInDays,
@@ -18,13 +18,14 @@ import {
 import { AlertTriangle, ArrowRight, Calendar, Check, FileText, Folder, Users } from "@/components/Icons";
 
 export default async function AdminDashboard() {
-  const [leads, proposals, projects, testimonials, appointments, errors] = await Promise.all([
+  const [leads, proposals, projects, testimonials, appointments, errors, database] = await Promise.all([
     listLeads(),
     listProposals(),
     listCmsProjects(true),
     listTestimonials(true),
     listAppointments(),
     listErrors(),
+    checkSupabaseHealth(),
   ]);
 
   const newLeads = leads.filter((lead) => lead.status === "new");
@@ -84,9 +85,9 @@ export default async function AdminDashboard() {
           <h1>Visão geral</h1>
           <p>Prioridades comerciais, conteúdo e saúde do sistema em uma única leitura.</p>
         </div>
-        <div className={`admin-database-pill ${supabaseConfigured() ? "connected" : "offline"}`}>
+        <div className={`admin-database-pill ${database.reachable ? "connected" : "offline"}`} title={database.detail}>
           <i />
-          {supabaseConfigured() ? "Banco conectado" : "Modo demonstração"}
+          {database.reachable ? "Banco online" : supabaseConfigured() ? "Banco indisponível" : "Modo demonstração"}
         </div>
       </div>
 

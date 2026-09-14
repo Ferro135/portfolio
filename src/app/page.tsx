@@ -76,6 +76,9 @@ export default function Home() {
               <span><Check /> Sistemas completos</span>
               <span><Check /> Deploy e evolução</span>
             </div>
+            <Link className="hero-inline-link" href="/agendar">
+              Prefere conversar primeiro? <strong>Agendar uma conversa</strong> <ArrowRight size={14} />
+            </Link>
           </div>
 
           <div className="hero-visual reveal-up reveal-delay-1">
@@ -135,6 +138,18 @@ export default function Home() {
             <div><strong className="stat-text">Web & Sistemas</strong><b>Produto de ponta a ponta</b><small>Interface, dados, integrações e publicação</small></div>
           </div>
         </div>
+
+        <div className="shell studio-strip reveal-up reveal-delay-2" aria-label="Especialidades ALUNERI">
+          <span>Sites</span>
+          <i />
+          <span>SaaS</span>
+          <i />
+          <span>Dashboards</span>
+          <i />
+          <span>Sistemas administrativos</span>
+          <i />
+          <span>Automações</span>
+        </div>
       </section>
 
       <section className="section projects-section" id="projetos" data-reveal>
@@ -190,6 +205,7 @@ export default function Home() {
             </div>
             <p>Menos etapas burocráticas, mais clareza sobre o que estamos resolvendo e por que cada decisão existe.</p>
           </div>
+
           <div className="process-grid">
             {processSteps.map((step) => (
               <article key={step.number} data-reveal>
@@ -305,6 +321,9 @@ export default function Home() {
             <div className="contact-links">
               <Link className="contact-primary" href="/contato">
                 <span><Spark /></span><div><small>Orçamento</small><strong>Preencher briefing do projeto</strong></div><ArrowUpRight className="contact-arrow" />
+              </Link>
+              <Link className="contact-secondary" href="/agendar">
+                <span><Monitor /></span><div><small>Conversa</small><strong>Agendar uma reunião</strong></div><ArrowUpRight className="contact-arrow" />
               </Link>
               {contact.whatsapp && (
                 <a className="contact-secondary" href={contact.whatsapp} target="_blank" rel="noreferrer">
