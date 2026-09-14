@@ -19,7 +19,8 @@ export default async function AdminConfigurationPage() {
   const emailConfigured = Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
   const notifyConfigured = Boolean(process.env.LEAD_NOTIFY_EMAIL);
   const aiConfigured = Boolean(process.env.OPENAI_API_KEY);
-  const aiModel = process.env.OPENAI_MODEL || "gpt-5.6-luna";
+  const aiModel = process.env.OPENAI_MODEL || "gpt-5.6-sol";
+  const aiReasoning = process.env.OPENAI_REASONING_EFFORT || "medium";
   const rateLimitConfigured = Boolean(process.env.RATE_LIMIT_SALT || process.env.ADMIN_SESSION_SECRET);
   const customSiteUrl = Boolean(process.env.NEXT_PUBLIC_SITE_URL);
   const environment = process.env.VERCEL_ENV || (process.env.NODE_ENV === "production" ? "production" : "local");
@@ -81,7 +82,7 @@ export default async function AdminConfigurationPage() {
             />
             <StatusRow
               label="Modelo"
-              detail={aiConfigured ? aiModel : "Fallback local permanece disponível"}
+              detail={aiConfigured ? `${aiModel} · reasoning ${aiReasoning}` : "Fallback local permanece disponível"}
               ok={aiConfigured}
             />
             <StatusRow

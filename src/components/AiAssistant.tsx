@@ -33,18 +33,28 @@ type LeadForm = {
   website: string;
 };
 
+type AssistantApiResult = {
+  ok?: boolean;
+  reply?: string;
+  suggestions?: string[];
+  readyForBrief?: boolean;
+  projectType?: string;
+  missingInfo?: string[];
+  error?: string;
+};
+
 const ptPrompts = [
-  "Quero criar um sistema",
-  "Como funciona o orçamento?",
-  "Ver projetos parecidos",
-  "Quais serviços vocês fazem?",
+  "Tenho uma ideia e quero organizar o MVP",
+  "Quais funções meu sistema realmente precisa?",
+  "Qual projeto da ALUNERI mais se parece com a minha ideia?",
+  "Quero melhorar um sistema que já existe",
 ];
 
 const enPrompts = [
-  "I want to build a system",
-  "How does pricing work?",
-  "Show me similar projects",
-  "What services do you offer?",
+  "I have an idea and want to define the MVP",
+  "Which features does my system actually need?",
+  "Which ALUNERI project is closest to my idea?",
+  "I want to improve an existing system",
 ];
 
 const projectTypes = [
@@ -76,13 +86,17 @@ export function AiAssistant() {
       id: "welcome",
       role: "assistant",
       content: isEn
-        ? "Hi! I'm ALUNERI's assistant. I can explain our services, show relevant projects and help structure your idea."
-        : "Olá! Sou o assistente da ALUNERI. Posso explicar nossos serviços, mostrar projetos relevantes e ajudar a estruturar sua ideia.",
+        ? "Hi! Tell me what you want to build—even if the idea is still rough. I can help define the MVP, suggest features, compare technical approaches and use ALUNERI cases as references."
+        : "Olá! Me conte o que você quer construir — mesmo que a ideia ainda esteja incompleta. Eu posso organizar o MVP, sugerir funcionalidades, comparar caminhos técnicos e usar os cases da ALUNERI como referência.",
     },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [readyForBrief, setReadyForBrief] = useState(false);
+  const [missingInfo, setMissingInfo] = useState<string[]>([]);
+  const [detectedProjectType, setDetectedProjectType] = useState("Sistema web");
   const [briefOpen, setBriefOpen] = useState(false);
   const [brief, setBrief] = useState("");
   const [briefLoading, setBriefLoading] = useState(false);
@@ -143,8 +157,8 @@ export function AiAssistant() {
           id: "welcome",
           role: "assistant",
           content: isEn
-            ? "Hi! I'm ALUNERI's assistant. I can explain our services, show relevant projects and help structure your idea."
-            : "Olá! Sou o assistente da ALUNERI. Posso explicar nossos serviços, mostrar projetos relevantes e ajudar a estruturar sua ideia.",
+            ? "Hi! Tell me what you want to build—even if the idea is still rough. I can help define the MVP, suggest features, compare technical approaches and use ALUNERI cases as references."
+            : "Olá! Me conte o que você quer construir — mesmo que a ideia ainda esteja incompleta. Eu posso organizar o MVP, sugerir funcionalidades, comparar caminhos técnicos e usar os cases da ALUNERI como referência.",
         },
       ];
     });
@@ -193,16 +207,13 @@ export function AiAssistant() {
         body: JSON.stringify({
           locale: isEn ? "en" : "pt",
           mode: "chat",
+          pagePath: pathname,
           messages: next
             .filter((message) => message.id !== "welcome")
             .map(({ role, content }) => ({ role, content })),
         }),
       });
-      const data = (await response.json()) as {
-        ok?: boolean;
-        reply?: string;
-        error?: string;
-      };
+      const data = (await response.json()) as AssistantApiResult;
 
       if (!response.ok || !data.ok || !data.reply) {
         throw new Error(data.error || "Assistant unavailable");
@@ -216,6 +227,16 @@ export function AiAssistant() {
           content: data.reply!,
         },
       ]);
+      setSuggestions(Array.isArray(data.suggestions) ? data.suggestions.slice(0, 3) : []);
+      setReadyForBrief(Boolean(data.readyForBrief));
+      setMissingInfo(Array.isArray(data.missingInfo) ? data.missingInfo.slice(0, 5) : []);
+      if (data.projectType && projectTypes.includes(data.projectType)) {
+        setDetectedProjectType(data.projectType);
+        setLeadForm((current) => ({
+          ...current,
+          projectType: data.projectType!,
+        }));
+      }
     } catch (cause) {
       const message =
         cause instanceof Error ? cause.message : "Assistant unavailable";
@@ -242,18 +263,20 @@ export function AiAssistant() {
         body: JSON.stringify({
           locale: isEn ? "en" : "pt",
           mode: "brief",
+          pagePath: pathname,
           messages: conversation,
         }),
       });
-      const data = (await response.json()) as {
-        ok?: boolean;
-        reply?: string;
-        error?: string;
-      };
+      const data = (await response.json()) as AssistantApiResult;
       if (!response.ok || !data.ok || !data.reply) {
         throw new Error(data.error || "Brief unavailable");
       }
       setBrief(data.reply);
+      if (data.projectType && projectTypes.includes(data.projectType)) {
+        setDetectedProjectType(data.projectType);
+        setLeadForm((current) => ({ ...current, projectType: data.projectType! }));
+      }
+      setMissingInfo(Array.isArray(data.missingInfo) ? data.missingInfo.slice(0, 5) : []);
       setBriefOpen(true);
     } catch (cause) {
       setError(
@@ -391,7 +414,7 @@ export function AiAssistant() {
               <ul>
                 <li>{isEn ? "Do not send passwords, card data or sensitive documents." : "Não envie senhas, dados de cartão ou documentos sensíveis."}</li>
                 <li>{isEn ? "Prices and deadlines require human confirmation." : "Preços e prazos exigem confirmação humana."}</li>
-                <li>{isEn ? "The assistant only uses public ALUNERI information." : "O assistente usa somente informações públicas da ALUNERI."}</li>
+                <li>{isEn ? "Claims about ALUNERI are grounded in public ALUNERI information." : "Afirmações sobre a ALUNERI são baseadas apenas em informações públicas da ALUNERI."}</li>
               </ul>
               <div className="ai-assistant-notice-actions">
                 <button type="button" className="button button-primary" onClick={acceptNotice}>
@@ -529,28 +552,41 @@ export function AiAssistant() {
                 {error && !briefOpen && <p className="ai-assistant-error">{error}</p>}
               </div>
 
-              {userMessageCount === 0 && (
-                <div className="ai-quick-prompts">
-                  {prompts.map((prompt) => (
-                    <button type="button" key={prompt} onClick={() => send(prompt)}>
-                      {prompt}
-                    </button>
-                  ))}
+              <div className="ai-quick-prompts">
+                {(suggestions.length ? suggestions : prompts).map((prompt) => (
+                  <button type="button" key={prompt} onClick={() => void send(prompt)}>
+                    {prompt}
+                  </button>
+                ))}
+                {userMessageCount === 0 && (
                   <Link href={isEn ? "/en/contact" : "/contato"}>
                     {isEn ? "Talk to a person" : "Falar com uma pessoa"} <ArrowRight size={12} />
                   </Link>
+                )}
+              </div>
+
+              {userMessageCount >= 1 && (
+                <div className={`ai-brief-cta ${readyForBrief ? "is-ready" : ""}`}>
+                  <div>
+                    <Sparkles size={14} />
+                    <span>
+                      {readyForBrief
+                        ? (isEn ? `I already understand this as: ${detectedProjectType}` : `Já entendi seu projeto como: ${detectedProjectType}`)
+                        : (isEn ? "I'm still refining the project context." : "Ainda estou refinando o contexto do projeto.")}
+                    </span>
+                  </div>
+                  <button type="button" onClick={prepareBrief} disabled={briefLoading || !userMessageCount}>
+                    {briefLoading
+                      ? (isEn ? "Preparing…" : "Preparando…")
+                      : (isEn ? "Create brief" : "Gerar briefing")}
+                  </button>
                 </div>
               )}
 
-              {userMessageCount >= 2 && (
-                <div className="ai-brief-cta">
-                  <div>
-                    <Sparkles size={14} />
-                    <span>{isEn ? "Already have enough context?" : "Já temos contexto suficiente?"}</span>
-                  </div>
-                  <button type="button" onClick={prepareBrief} disabled={briefLoading}>
-                    {briefLoading ? (isEn ? "Preparing…" : "Preparando…") : (isEn ? "Turn into a brief" : "Transformar em briefing")}
-                  </button>
+              {missingInfo.length > 0 && !readyForBrief && (
+                <div className="ai-missing-context">
+                  <strong>{isEn ? "Useful details to clarify" : "Detalhes que ajudariam"}</strong>
+                  <span>{missingInfo.slice(0, 2).join(" • ")}</span>
                 </div>
               )}
 
@@ -566,7 +602,7 @@ export function AiAssistant() {
                   value={input}
                   maxLength={1200}
                   onChange={(event) => setInput(event.target.value)}
-                  placeholder={isEn ? "Ask about a project…" : "Pergunte sobre um projeto…"}
+                  placeholder={isEn ? "Describe the idea or ask a question…" : "Descreva a ideia ou faça uma pergunta…"}
                   aria-label={isEn ? "Message to ALUNERI assistant" : "Mensagem para o assistente ALUNERI"}
                 />
                 <button type="submit" disabled={!input.trim() || loading} aria-label={isEn ? "Send" : "Enviar"}>

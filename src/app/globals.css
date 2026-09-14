@@ -4361,3 +4361,280 @@ select:focus {
     transition: none !important;
   }
 }
+
+
+/* ========================================================================== */
+/* ALUNERI 2.2.1 — AI readability upgrade                                    */
+/* ========================================================================== */
+
+.ai-assistant-panel {
+  width: min(455px, calc(100vw - 30px));
+}
+
+.ai-assistant-header {
+  min-height: 72px;
+  padding: 13px 15px;
+}
+
+.ai-assistant-mark {
+  width: 42px;
+  height: 42px;
+}
+
+.ai-assistant-identity strong {
+  font-size: 13px;
+  letter-spacing: .07em;
+}
+
+.ai-assistant-identity small {
+  font-size: 9.5px;
+}
+
+.ai-assistant-close {
+  width: 39px;
+  height: 39px;
+}
+
+.ai-assistant-notice {
+  padding: 29px 27px 26px;
+}
+
+.ai-assistant-notice h2,
+.ai-brief-heading h2,
+.ai-lead-success h2 {
+  font-size: 24px;
+  line-height: 1.18;
+}
+
+.ai-assistant-notice > p,
+.ai-brief-heading > p,
+.ai-lead-success > p {
+  font-size: 12px;
+  line-height: 1.72;
+}
+
+.ai-assistant-notice li {
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+
+.ai-assistant-notice-actions > a {
+  font-size: 10px;
+}
+
+.ai-assistant-messages {
+  gap: 13px;
+  padding: 20px 18px;
+}
+
+.ai-message {
+  gap: 9px;
+}
+
+.ai-message > div {
+  max-width: 86%;
+  padding: 12px 14px;
+  border-radius: 15px;
+  font-size: 12.5px;
+  line-height: 1.62;
+}
+
+.ai-message-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+}
+
+.ai-typing {
+  min-width: 58px;
+  min-height: 38px;
+}
+
+.ai-typing i {
+  width: 5px;
+  height: 5px;
+}
+
+.ai-quick-prompts {
+  gap: 7px;
+  padding: 0 18px 14px;
+}
+
+.ai-quick-prompts button,
+.ai-quick-prompts a {
+  min-height: 35px;
+  padding: 0 11px;
+  font-size: 10px;
+}
+
+.ai-brief-cta {
+  margin: 0 18px 13px;
+  padding: 11px 12px;
+}
+
+.ai-brief-cta > div {
+  font-size: 9.5px;
+}
+
+.ai-brief-cta button {
+  font-size: 9.5px;
+}
+
+.ai-assistant-composer {
+  grid-template-columns: 1fr 42px;
+  gap: 8px;
+  padding: 12px 14px 10px;
+}
+
+.ai-assistant-composer input {
+  height: 43px;
+  padding: 0 13px;
+  font-size: 12px;
+}
+
+.ai-assistant-composer button {
+  width: 42px;
+  height: 42px;
+}
+
+.ai-assistant-footer {
+  padding: 1px 15px 11px;
+  font-size: 8.5px;
+}
+
+.ai-brief-view {
+  padding: 23px 21px 20px;
+}
+
+.ai-brief-heading > button {
+  font-size: 10px;
+}
+
+.ai-brief-summary {
+  margin: 18px 0;
+  padding: 15px 16px;
+  font-size: 11px;
+  line-height: 1.68;
+}
+
+.ai-lead-form {
+  gap: 13px;
+}
+
+.ai-lead-form label > span {
+  font-size: 9.5px;
+}
+
+.ai-lead-form input,
+.ai-lead-form select {
+  height: 42px;
+  padding: 0 12px;
+  font-size: 11px;
+}
+
+.ai-privacy-check span {
+  font-size: 9.5px !important;
+  line-height: 1.6;
+}
+
+.ai-assistant-error {
+  font-size: 10.5px;
+}
+
+.ai-assistant-launcher {
+  min-height: 56px;
+  padding: 8px 15px 8px 8px;
+}
+
+.ai-launcher-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.ai-assistant-launcher small {
+  font-size: 9px;
+}
+
+.ai-assistant-launcher strong {
+  font-size: 12.5px;
+}
+
+@media (max-width: 620px) {
+  .ai-assistant-panel {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+  }
+
+  .ai-assistant {
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .ai-message > div {
+    max-width: 88%;
+    font-size: 12px;
+  }
+
+  .ai-assistant-notice h2,
+  .ai-brief-heading h2,
+  .ai-lead-success h2 {
+    font-size: 22px;
+  }
+
+  .ai-assistant-messages {
+    padding-inline: 14px;
+  }
+
+  .ai-assistant-composer {
+    padding-inline: 10px;
+  }
+}
+
+
+/* ALUNERI 2.2.2 — inteligência e contexto do assistente */
+.ai-brief-cta.is-ready {
+  border-color: rgba(66,230,173,.18);
+  background:
+    linear-gradient(90deg, rgba(30,120,91,.09), rgba(77,124,255,.04));
+}
+
+.ai-brief-cta.is-ready svg {
+  color: #60E7B8;
+}
+
+.ai-brief-cta.is-ready button {
+  color: #9AE9CD;
+}
+
+.ai-missing-context {
+  display: grid;
+  gap: 4px;
+  margin: -3px 18px 12px;
+  padding: 9px 11px;
+  border-left: 2px solid rgba(77,124,255,.34);
+  background: rgba(77,124,255,.035);
+}
+
+.ai-missing-context strong {
+  color: #7F94B2;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.ai-missing-context span {
+  color: #697D98;
+  font-size: 8.5px;
+  line-height: 1.5;
+}
+
+.ai-quick-prompts {
+  max-height: 92px;
+  overflow-y: auto;
+}
+
+@media (max-width: 620px) {
+  .ai-missing-context {
+    margin-inline: 14px;
+  }
+}

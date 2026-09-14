@@ -24,6 +24,10 @@ export async function POST(request: Request) {
     const body = await request.json();
     const mode = body.mode === "brief" ? "brief" : "chat";
     const locale = body.locale === "en" ? "en" : "pt";
+    const pagePath =
+      typeof body.pagePath === "string"
+        ? body.pagePath.trim().slice(0, 240)
+        : "/";
 
     const rawMessages = Array.isArray(body.messages) ? body.messages : [];
     const messages: AssistantMessage[] = rawMessages
@@ -65,8 +69,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const reply = await answerWithAssistant(messages, locale, mode);
-    return NextResponse.json({ ok: true, reply });
+    const result = await answerWithAssistant(messages, locale, mode, pagePath);
+    return NextResponse.json({ ok: true, ...result });
   } catch (error) {
     console.error("assistant route", error);
     return NextResponse.json(

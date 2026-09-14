@@ -1,4 +1,4 @@
-# ALUNERI — Portfolio 2.2
+# ALUNERI — Portfolio 2.2.2
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
@@ -311,3 +311,14 @@ A versão 2.0.2 consolida a identidade visual da ALUNERI com a paleta Aurora Pri
 - rodapé global com atalhos para as páginas legais e preferências de cookies.
 
 A identidade visual está documentada em `BRAND-ALUNERI.md`.
+
+## Assistente ALUNERI — configuração recomendada
+
+Para melhor qualidade:
+
+```env
+OPENAI_MODEL=gpt-5.6-sol
+OPENAI_REASONING_EFFORT=medium
+```
+
+Se custo/latência forem mais importantes, `gpt-5.6-terra` ou `gpt-5.6-luna` podem ser configurados manualmente.

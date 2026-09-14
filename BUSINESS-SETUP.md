@@ -109,7 +109,8 @@ Para ativar respostas geradas por IA no Assistente ALUNERI, adicione na Vercel:
 
 ```env
 OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-5.6-luna
+OPENAI_MODEL=gpt-5.6-sol
+OPENAI_REASONING_EFFORT=medium
 ```
 
 A chave é utilizada apenas em `/api/assistant` no servidor.
