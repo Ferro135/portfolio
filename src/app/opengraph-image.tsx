@@ -14,8 +14,8 @@ export default function Image() {
           display: "flex",
           position: "relative",
           overflow: "hidden",
-          background: "#0B0A10",
-          color: "#F7F2EA",
+          background: "#070B12",
+          color: "#F5F7FB",
           fontFamily: "Arial, Helvetica, sans-serif",
           padding: "76px 82px",
         }}
@@ -26,7 +26,7 @@ export default function Image() {
             width: 520,
             height: 520,
             borderRadius: 999,
-            background: "rgba(255, 177, 90, .28)",
+            background: "rgba(125, 211, 252, .28)",
             opacity: 0.5,
             right: -90,
             top: -120,
@@ -38,7 +38,7 @@ export default function Image() {
             width: 430,
             height: 430,
             borderRadius: 999,
-            background: "rgba(139, 124, 255, .22)",
+            background: "rgba(167, 139, 250, .22)",
             opacity: 0.45,
             left: 230,
             bottom: -260,
@@ -54,7 +54,7 @@ export default function Image() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "#FFB15A",
+                background: "#7DD3FC",
                 fontWeight: 900,
                 fontSize: 34,
               }}
@@ -65,7 +65,7 @@ export default function Image() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 940 }}>
-            <div style={{ fontSize: 17, textTransform: "uppercase", letterSpacing: 7, color: "#FFB15A", fontWeight: 700 }}>
+            <div style={{ fontSize: 17, textTransform: "uppercase", letterSpacing: 7, color: "#7DD3FC", fontWeight: 700 }}>
               Produtos Digitais & Sistemas
             </div>
             <div style={{ fontSize: 72, lineHeight: 1.03, fontWeight: 800, letterSpacing: -4, marginTop: 24 }}>
@@ -73,10 +73,10 @@ export default function Image() {
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "#A9A1B5", fontSize: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "#94A3B8", fontSize: 20 }}>
             <div>Sites · Dashboards · Sistemas Web</div>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 9, height: 9, borderRadius: 999, background: "#FF6F91" }} />
+              <div style={{ width: 9, height: 9, borderRadius: 999, background: "#5EEAD4" }} />
               Aceitando novos projetos
             </div>
           </div>

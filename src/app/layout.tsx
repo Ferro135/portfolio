@@ -100,7 +100,7 @@ const websiteSchema = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B0A10",
+  themeColor: "#070B12",
   colorScheme: "dark",
 };
 

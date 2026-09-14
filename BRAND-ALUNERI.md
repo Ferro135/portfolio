@@ -1,42 +1,20 @@
-# ALUNERI — Brand Guide 2.0
+# ALUNERI — Identidade visual
 
-## Posicionamento
-**ALUNERI — Produtos Digitais & Sistemas**
-
-Pronúncia sugerida: **a-lu-né-ri**.
-
-A identidade equilibra tecnologia e sofisticação sem cair no azul SaaS genérico. A base escura cria contraste para três cores de marca: âmbar, coral e violeta.
+## Conceito
+ALUNERI usa a identidade **Aurora Ice**: profunda, tecnológica e elegante, inspirada em luz fria sobre um céu noturno.
 
 ## Paleta
+- Background: `#070B12`
+- Panel: `#101824`
+- Ice Blue: `#7DD3FC`
+- Aqua: `#5EEAD4`
+- Lavender: `#A78BFA`
+- Text: `#F5F7FB`
+- Muted: `#94A3B8`
 
-| Uso | Cor |
-| --- | --- |
-| Background | `#0B0A10` |
-| Painel | `#15131B` |
-| Âmbar principal | `#FFB15A` |
-| Coral | `#FF6F91` |
-| Violeta | `#8B7CFF` |
-| Dourado suave | `#FFD08A` |
-| Texto | `#F7F2EA` |
-| Texto secundário | `#A9A1B5` |
-| Bordas | `#2A2533` |
-
-Gradiente principal:
-
+## Gradiente principal
 ```css
-linear-gradient(135deg, #FFB15A, #FF6F91, #8B7CFF)
+linear-gradient(100deg, #D8F5FF, #7DD3FC, #5EEAD4, #A78BFA)
 ```
 
-## Símbolo
-O símbolo é um **A geométrico** com um ponto de luz central, representando construção, clareza e produto digital.
-
-Assets:
-- `public/brand/aluneri-logo.svg`
-- `public/brand/aluneri-mark.svg`
-- `public/favicon.svg`
-
-## Uso
-- Fundo preferencial: `#0B0A10`
-- Não aplicar sombras pesadas no wordmark.
-- Manter contraste alto e bastante espaço em torno do símbolo.
-- Para CTAs, usar o gradiente principal com texto escuro.
+A paleta anterior em âmbar/coral foi removida.

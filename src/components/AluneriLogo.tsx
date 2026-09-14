@@ -14,9 +14,9 @@ export function AluneriLogo({ compact = false, ...props }: AluneriLogoProps) {
     >
       <defs>
         <linearGradient id="aluneri-gradient" x1="6" y1="42" x2="43" y2="6" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FFB15A" />
-          <stop offset="0.48" stopColor="#FF6F91" />
-          <stop offset="1" stopColor="#8B7CFF" />
+          <stop stopColor="#7DD3FC" />
+          <stop offset="0.48" stopColor="#5EEAD4" />
+          <stop offset="1" stopColor="#A78BFA" />
         </linearGradient>
       </defs>
       <path

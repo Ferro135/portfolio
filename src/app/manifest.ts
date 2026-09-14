@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Sites, dashboards e sistemas web modernos.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0B0A10",
-    theme_color: "#0B0A10",
+    background_color: "#070B12",
+    theme_color: "#070B12",
     lang: "pt-BR",
     icons: [
       {
