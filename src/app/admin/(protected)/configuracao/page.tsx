@@ -2,7 +2,7 @@ import Link from "next/link";
 import { adminAuthConfigured } from "@/lib/server/admin-auth";
 import { checkSupabaseHealth, supabaseConfigured } from "@/lib/server/supabase";
 import { siteUrl } from "@/lib/site";
-import { Check, Database, ExternalLink, Lock, Mail, Settings } from "@/components/Icons";
+import { Check, Database, ExternalLink, Lock, Mail, Settings, Sparkles } from "@/components/Icons";
 
 function StatusRow({ label, detail, ok }: { label: string; detail: string; ok: boolean }) {
   return (
@@ -18,6 +18,8 @@ export default async function AdminConfigurationPage() {
   const database = await checkSupabaseHealth();
   const emailConfigured = Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
   const notifyConfigured = Boolean(process.env.LEAD_NOTIFY_EMAIL);
+  const aiConfigured = Boolean(process.env.OPENAI_API_KEY);
+  const aiModel = process.env.OPENAI_MODEL || "gpt-5.6-luna";
   const rateLimitConfigured = Boolean(process.env.RATE_LIMIT_SALT || process.env.ADMIN_SESSION_SECRET);
   const customSiteUrl = Boolean(process.env.NEXT_PUBLIC_SITE_URL);
   const environment = process.env.VERCEL_ENV || (process.env.NODE_ENV === "production" ? "production" : "local");
@@ -70,6 +72,27 @@ export default async function AdminConfigurationPage() {
         </section>
 
         <section className="admin-panel admin-panel-flush">
+          <div className="admin-panel-heading"><div><span>Atendimento</span><h2>Assistente de IA</h2></div><Sparkles size={18} /></div>
+          <div className="admin-config-list">
+            <StatusRow
+              label="OpenAI API"
+              detail={aiConfigured ? "Chave privada encontrada no servidor" : "OPENAI_API_KEY ainda não configurada"}
+              ok={aiConfigured}
+            />
+            <StatusRow
+              label="Modelo"
+              detail={aiConfigured ? aiModel : "Fallback local permanece disponível"}
+              ok={aiConfigured}
+            />
+            <StatusRow
+              label="Integração com CRM"
+              detail="Briefings confirmados entram como leads com origem Assistente ALUNERI"
+              ok={database.reachable}
+            />
+          </div>
+        </section>
+
+        <section className="admin-panel admin-panel-flush">
           <div className="admin-panel-heading"><div><span>Produção</span><h2>Site e domínio</h2></div><ExternalLink size={18} /></div>
           <div className="admin-config-list">
             <StatusRow label="URL canônica manual" detail={customSiteUrl ? siteUrl : `Fallback atual: ${siteUrl}`} ok={customSiteUrl} />
@@ -87,6 +110,7 @@ export default async function AdminConfigurationPage() {
         <div className="admin-security-grid">
           <div><strong>SUPABASE_SERVICE_ROLE_KEY / SUPABASE_SECRET_KEY</strong><p>Somente no ambiente server-side da Vercel.</p></div>
           <div><strong>RESEND_API_KEY</strong><p>Nunca use prefixo NEXT_PUBLIC_.</p></div>
+          <div><strong>OPENAI_API_KEY</strong><p>Usada apenas pela rota server-side do Assistente ALUNERI.</p></div>
           <div><strong>ADMIN_SESSION_SECRET</strong><p>Mantenha aleatório, longo e fora do GitHub.</p></div>
           <div><strong>Senhas</strong><p>O painel armazena hash scrypt, não a senha em texto puro.</p></div>
         </div>

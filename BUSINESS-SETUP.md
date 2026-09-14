@@ -102,3 +102,16 @@ SUPABASE_SECRET_KEY=...
 Use apenas uma. Nunca use `NEXT_PUBLIC_` para uma chave secreta.
 
 A URL já possui fallback server-side para este projeto compartilhado; `SUPABASE_URL` continua recomendada na Vercel para deixar a configuração explícita. A chave secreta continua obrigatória.
+
+## Assistente de IA
+
+Para ativar respostas geradas por IA no Assistente ALUNERI, adicione na Vercel:
+
+```env
+OPENAI_API_KEY=...
+OPENAI_MODEL=gpt-5.6-luna
+```
+
+A chave é utilizada apenas em `/api/assistant` no servidor.
+
+Sem `OPENAI_API_KEY`, o componente continua funcionando em modo básico com respostas locais para dúvidas comuns. Conversas não são persistidas pela ALUNERI; somente o briefing confirmado pelo visitante entra no CRM.

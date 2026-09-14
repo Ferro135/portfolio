@@ -38,6 +38,7 @@ export function SiteFooter({ locale = "pt" }: { locale?: "pt" | "en" }) {
         <div className="footer-column footer-contact-column">
           <strong>{en ? "Contact" : "Contato"}</strong>
           <Link href={en ? "/en/contact" : "/contato"}>{en ? "Start a project" : "Solicitar orçamento"}</Link>
+          <Link href={en ? "/en#assistant" : "/#assistant"}>{en ? "Ask ALUNERI" : "Pergunte à ALUNERI"}</Link>
           <Link href={en ? "/en/schedule" : "/agendar"}>{en ? "Schedule a conversation" : "Agendar conversa"}</Link>
           {contact.whatsapp && <a href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp size={14} /> WhatsApp</a>}
           <a href={contact.github} target="_blank" rel="noreferrer"><Github size={14} /> GitHub</a>

@@ -8,6 +8,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { ClientTelemetry } from "@/components/ClientTelemetry";
 import { ClientErrorMonitor } from "@/components/ClientErrorMonitor";
 import { GlobalAdminShortcut } from "@/components/GlobalAdminShortcut";
+import { AiAssistant } from "@/components/AiAssistant";
 import { PageScrollProgress } from "@/components/PageScrollProgress";
 import { StructuredData } from "@/components/StructuredData";
 import { contact } from "@/data/portfolio";
@@ -115,6 +116,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <ScrollRevealController />
         {children}
         <FloatingWhatsApp />
+        <AiAssistant />
         <CookieConsent />
         <ClientTelemetry />
         <ClientErrorMonitor />

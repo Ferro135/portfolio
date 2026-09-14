@@ -1,6 +1,30 @@
-# ALUNERI — Portfolio 2.1
+# ALUNERI — Portfolio 2.2
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
+
+## Destaques da V2.2
+
+- Assistente de IA público focado em pré-atendimento;
+- base de conhecimento formada por serviços, FAQ e cases reais;
+- qualificação conversacional de projetos;
+- geração de briefing a partir da conversa;
+- envio do briefing para o CRM após confirmação do visitante;
+- handoff para WhatsApp;
+- rate limit e regras contra acesso a informações privadas;
+- fallback local quando a API de IA estiver indisponível;
+- suporte PT/EN;
+- painel Admin mostra o status da integração de IA.
+
+### Ativar a IA
+
+Na Vercel, configure:
+
+```env
+OPENAI_API_KEY=
+OPENAI_MODEL=gpt-5.6-luna
+```
+
+`OPENAI_API_KEY` é server-only e nunca deve usar o prefixo `NEXT_PUBLIC_`.
 
 
 ## Destaques da V2.1
