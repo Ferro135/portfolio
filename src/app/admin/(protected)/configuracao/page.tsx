@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { adminAuthConfigured } from "@/lib/server/admin-auth";
-import { supabaseConfigured } from "@/lib/server/supabase";
+import { checkSupabaseHealth, supabaseConfigured } from "@/lib/server/supabase";
 import { siteUrl } from "@/lib/site";
 import { Check, Database, ExternalLink, Lock, Mail, Settings } from "@/components/Icons";
 
@@ -14,7 +14,8 @@ function StatusRow({ label, detail, ok }: { label: string; detail: string; ok: b
   );
 }
 
-export default function AdminConfigurationPage() {
+export default async function AdminConfigurationPage() {
+  const database = await checkSupabaseHealth();
   const emailConfigured = Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
   const notifyConfigured = Boolean(process.env.LEAD_NOTIFY_EMAIL);
   const rateLimitConfigured = Boolean(process.env.RATE_LIMIT_SALT || process.env.ADMIN_SESSION_SECRET);
@@ -41,8 +42,21 @@ export default function AdminConfigurationPage() {
         <section className="admin-panel admin-panel-flush">
           <div className="admin-panel-heading"><div><span>Dados</span><h2>Supabase</h2></div><Database size={18} /></div>
           <div className="admin-config-list">
-            <StatusRow label="Banco persistente" detail="Leads, propostas, CMS, agenda e erros" ok={supabaseConfigured()} />
-            <StatusRow label="Storage de mídia" detail="Usa o mesmo projeto Supabase quando configurado" ok={supabaseConfigured()} />
+            <StatusRow
+              label="Banco persistente"
+              detail={database.reachable ? "Leads, propostas, CMS, agenda e erros" : database.detail}
+              ok={database.reachable}
+            />
+            <StatusRow
+              label="Credencial Supabase"
+              detail={supabaseConfigured() ? "Variável privada encontrada no servidor" : "SUPABASE_SECRET_KEY / SERVICE_ROLE ausente"}
+              ok={supabaseConfigured()}
+            />
+            <StatusRow
+              label="Storage de mídia"
+              detail={database.reachable ? "Bucket ALUNERI disponível via backend" : "Depende da conexão com o banco"}
+              ok={database.reachable}
+            />
           </div>
           <p className="admin-config-help">Se estiver pendente, execute <code>supabase/schema.sql</code> e <code>supabase/storage.sql</code> e configure as variáveis privadas na Vercel.</p>
         </section>

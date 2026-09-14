@@ -94,13 +94,45 @@ export async function dbRequest<T>(path: string, options: QueryOptions = {}): Pr
 
 export async function listRows<T>(table: string, query = "select=*&order=created_at.desc") {
   if (!supabaseConfigured()) return [] as T[];
-  return dbRequest<T[]>(`${table}?${query}`, { cache: "no-store" });
+
+  try {
+    return await dbRequest<T[]>(`${table}?${query}`, { cache: "no-store" });
+  } catch (error) {
+    console.error(`Supabase list failed: ${table}`, error);
+    return [] as T[];
+  }
 }
 
 export async function getRow<T>(table: string, id: string) {
   if (!supabaseConfigured()) return null;
-  const rows = await dbRequest<T[]>(`${table}?id=eq.${encodeURIComponent(id)}&select=*&limit=1`, { cache: "no-store" });
-  return rows[0] ?? null;
+
+  try {
+    const rows = await dbRequest<T[]>(
+      `${table}?id=eq.${encodeURIComponent(id)}&select=*&limit=1`,
+      { cache: "no-store" },
+    );
+    return rows[0] ?? null;
+  } catch (error) {
+    console.error(`Supabase get failed: ${table}`, error);
+    return null;
+  }
+}
+
+export async function checkSupabaseHealth() {
+  if (!supabaseConfigured()) {
+    return { configured: false, reachable: false, detail: "Variáveis não configuradas" };
+  }
+
+  try {
+    await dbRequest<Array<{ id: string }>>("leads?select=id&limit=1", {
+      cache: "no-store",
+    });
+    return { configured: true, reachable: true, detail: "Conexão ativa" };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Falha desconhecida";
+    console.error("Supabase health check failed", error);
+    return { configured: true, reachable: false, detail: message.slice(0, 140) };
+  }
 }
 
 export async function insertRow<T>(table: string, body: unknown) {
