@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactBriefForm } from "@/components/ContactBriefForm";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowLeft, Github, Mail, WhatsApp } from "@/components/Icons";
 import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand, contact, faqs } from "@/data/portfolio";
@@ -85,14 +86,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      <footer>
-        <div className="shell footer-inner">
-          <Link className="footer-brand" href="/"><AluneriLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
-          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
-          <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

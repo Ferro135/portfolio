@@ -1,5 +1,6 @@
 export const CONSENT_COOKIE = "aluneri_cookie_consent";
 export const CONSENT_EVENT = "aluneri:consent-changed";
+export const CONSENT_OPEN_EVENT = "aluneri:open-cookie-settings";
 export const CONSENT_VERSION = "v1";
 
 export type ConsentLevel = "essential" | "analytics";

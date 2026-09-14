@@ -6,13 +6,13 @@
 Pronúncia sugerida: **a-lu-né-ri**.
 
 ## Paleta
-- Fundo: `#070B12`
-- Painel: `#101824`
+- Fundo: `#050914`
+- Painel: `#0D1627`
 - Âmbar: `#7DD3FC`
 - Coral: `#5EEAD4`
 - Violeta: `#A78BFA`
-- Texto: `#F5F7FB`
-- Muted: `#94A3B8`
+- Texto: `#F3F8FF`
+- Muted: `#A9A1B5`
 - Bordas: `#2A2533`
 
 Gradiente principal: `linear-gradient(135deg, #7DD3FC, #5EEAD4, #A78BFA)`.

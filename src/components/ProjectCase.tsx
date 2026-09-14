@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { ProjectHotspots } from "@/components/ProjectHotspots";
 import { DeviceShowcase } from "@/components/DeviceShowcase";
@@ -210,14 +211,7 @@ export function ProjectCase({ project }: { project: Project }) {
           </div>
         </div>
       </section>
-
-      <footer>
-        <div className="shell footer-inner">
-          <Link className="footer-brand" href="/#inicio"><AluneriLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
-          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
-          <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

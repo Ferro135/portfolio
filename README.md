@@ -259,3 +259,18 @@ O atalho de teclado **não é um mecanismo de segurança**. A rota continua prot
 ## Banco compartilhado isolado
 
 Nesta configuração, a ALUNERI usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `aluneri_` e o bucket é `aluneri-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.
+
+## ALUNERI 2.0.2 — Logo, Aurora Prism & Privacy
+
+A versão 2.0.2 consolida a identidade visual da ALUNERI com a paleta Aurora Prism e adiciona uma camada pública de privacidade mais completa:
+
+- novo logotipo vetorial com monograma em fita luminosa;
+- paleta azul-noite, ice blue, aqua e lavanda;
+- banner de consentimento de cookies;
+- analytics carregado somente após consentimento;
+- central de preferências acessível a qualquer momento;
+- Política de Cookies e Política de Privacidade em português e inglês;
+- Termos de Uso revisados;
+- rodapé global com atalhos para as páginas legais e preferências de cookies.
+
+A identidade visual está documentada em `BRAND-ALUNERI.md`.

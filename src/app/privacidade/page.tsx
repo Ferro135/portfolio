@@ -1,6 +1,59 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { contact } from "@/data/portfolio";
-export const metadata:Metadata={title:"Privacidade",description:"Práticas de privacidade da ALUNERI.",alternates:{canonical:"/privacidade"}};
-export default function PrivacyPage(){return <main id="conteudo"><Header/><section className="inner-page-hero legal-hero"><div className="shell"><Link className="case-back" href="/">← Voltar ao portfólio</Link><div className="inner-page-copy"><span className="eyebrow">Privacidade</span><h1>Privacidade por padrão.</h1><p>A ALUNERI coleta apenas os dados necessários para responder pedidos comerciais, operar o site e identificar falhas técnicas.</p></div></div></section><section className="section legal-section"><div className="shell legal-grid"><article><h2>Briefing e leads</h2><p>Quando você envia o briefing, nome, contato, empresa, tipo de projeto, recursos, prazo, orçamento e contexto podem ser registrados no CRM da ALUNERI para responder e acompanhar a conversa comercial.</p></article><article><h2>Agendamento</h2><p>Solicitações de conversa podem registrar nome, contato, data e período preferidos, fuso horário e observações. O envio não confirma automaticamente a reunião.</p></article><article><h2>Analytics opcional</h2><p>Vercel Analytics e Speed Insights só são carregados após consentimento para analytics. A preferência pode ser alterada a qualquer momento pelo controle de cookies.</p></article><article><h2>Logs técnicos</h2><p>Erros do navegador podem ser registrados com mensagem técnica, rota e user agent para manutenção. O monitoramento é limitado e não deve incluir o conteúdo digitado nos formulários.</p></article><article><h2>Finalidade e retenção</h2><p>Os dados comerciais são usados para contato, orçamento, proposta e acompanhamento do projeto. Registros sem necessidade operacional podem ser arquivados ou removidos. Você pode solicitar exclusão pelo WhatsApp{contact.email?<> ou pelo email <a href={`mailto:${contact.email}`}>{contact.email}</a></>:null}.</p></article><article><h2>Terceiros</h2><p>WhatsApp, GitHub, Vercel, Supabase, serviço de email e eventuais demos possuem políticas próprias. Chaves privadas do backend não são enviadas ao navegador.</p></article><article><h2>Segurança</h2><p>O site aplica HTTPS, HSTS, Content Security Policy, limites de requisição, cookies HttpOnly na administração, análise de dependências e outras proteções descritas na documentação do projeto.</p></article><article><h2>Seus controles</h2><p>Você pode rejeitar analytics, alterar cookies e pedir correção ou remoção de informações fornecidas à ALUNERI. Consulte também <Link href="/cookies">Cookies</Link> e <Link href="/termos">Termos</Link>.</p></article></div></section></main>}
+
+export const metadata: Metadata = {
+  title: "Política de Privacidade",
+  description: "Como a ALUNERI trata dados pessoais em formulários, CRM, analytics e operação do site.",
+  alternates: { canonical: "/privacidade", languages: { "pt-BR": "/privacidade", en: "/en/privacy" } },
+};
+
+export default function PrivacyPage() {
+  return (
+    <main id="conteudo">
+      <Header />
+      <section className="inner-page-hero legal-hero">
+        <div className="shell">
+          <Link className="case-back" href="/">← Voltar ao portfólio</Link>
+          <div className="inner-page-copy">
+            <span className="eyebrow">Política de Privacidade</span>
+            <h1>Privacidade faz parte da arquitetura.</h1>
+            <p>A ALUNERI coleta apenas o que é necessário para responder pedidos, manter a operação e melhorar o produto com consentimento.</p>
+            <span className="legal-updated">Última atualização: 14 de setembro de 2026</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="section legal-section">
+        <div className="shell legal-content">
+          <div className="legal-summary-card">
+            <span className="eyebrow">Em poucas palavras</span>
+            <h2>Dados comerciais para conversar. Dados técnicos para manter. Analytics só com consentimento.</h2>
+            <p>A ALUNERI não vende seus dados e não publica informações enviadas em briefings. As integrações de backend utilizam credenciais privadas que não são entregues ao navegador.</p>
+          </div>
+
+          <div className="legal-grid">
+            <article><h2>Dados do briefing</h2><p>Nome, contato, empresa, tipo de projeto, recursos, orçamento, prazo e contexto podem ser registrados no CRM para responder, preparar orçamento e acompanhar a oportunidade comercial.</p></article>
+            <article><h2>Solicitações de reunião</h2><p>Nome, contato, data, período, fuso horário e observações podem ser registrados para organizar uma conversa. O envio de preferência não significa confirmação automática.</p></article>
+            <article><h2>Propostas</h2><p>Informações necessárias para elaborar e disponibilizar propostas comerciais podem ser vinculadas ao lead correspondente no ambiente administrativo.</p></article>
+            <article><h2>Analytics opcional</h2><p>Vercel Analytics e Speed Insights somente são carregados depois que você autoriza a categoria de analytics nas preferências de cookies.</p></article>
+            <article><h2>Logs técnicos</h2><p>Falhas do navegador podem registrar mensagem técnica, rota e user agent para diagnóstico. O sistema não foi desenhado para gravar o conteúdo digitado nos formulários nesses logs.</p></article>
+            <article><h2>Infraestrutura</h2><p>O site pode utilizar Vercel para hospedagem e telemetria autorizada, Supabase para dados operacionais, serviços de email e provedores de comunicação como WhatsApp.</p></article>
+            <article><h2>Retenção</h2><p>Dados comerciais são mantidos enquanto forem úteis para atendimento, histórico operacional, proposta ou projeto. Registros que deixem de ter finalidade podem ser arquivados ou removidos.</p></article>
+            <article><h2>Segurança</h2><p>São aplicadas HTTPS, HSTS, CSP, rate limit, controles de acesso administrativo, cookies HttpOnly de sessão, auditoria de dependências e isolamento das credenciais secretas.</p></article>
+            <article><h2>Seus controles</h2><p>Você pode rejeitar analytics e alterar cookies a qualquer momento. Também pode solicitar correção ou exclusão de dados fornecidos à ALUNERI pelos canais de contato disponíveis.</p></article>
+            <article><h2>Contato sobre privacidade</h2><p>Use o WhatsApp{contact.email ? <> ou o email <a href={`mailto:${contact.email}`}>{contact.email}</a></> : null} para solicitações relacionadas aos seus dados.</p></article>
+          </div>
+
+          <div className="legal-callout">
+            <strong>Controle de consentimento</strong>
+            <p>Leia também a <Link href="/cookies">Política de Cookies</Link> e os <Link href="/termos">Termos de Uso</Link>.</p>
+          </div>
+        </div>
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}

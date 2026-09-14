@@ -1,20 +1,22 @@
-# ALUNERI — Identidade visual
+# ALUNERI — Aurora Prism Identity
 
-## Conceito
-ALUNERI usa a identidade **Aurora Ice**: profunda, tecnológica e elegante, inspirada em luz fria sobre um céu noturno.
+## Direção
+A identidade ALUNERI combina um **azul-noite profundo** com luz fria em cyan, aqua e lavanda. O símbolo é um “A” em forma de fita luminosa, inspirado em movimento, clareza e construção digital.
 
 ## Paleta
-- Background: `#070B12`
-- Panel: `#101824`
-- Ice Blue: `#7DD3FC`
+- Night: `#050914`
+- Panel: `#0D1627`
+- Deep blue: `#123A8C`
+- Ice blue: `#7DD3FC`
 - Aqua: `#5EEAD4`
 - Lavender: `#A78BFA`
-- Text: `#F5F7FB`
-- Muted: `#94A3B8`
+- Primary text: `#F3F8FF`
+- Muted: `#8FA2B8`
 
 ## Gradiente principal
 ```css
-linear-gradient(100deg, #D8F5FF, #7DD3FC, #5EEAD4, #A78BFA)
+linear-gradient(110deg, #E8FAFF 0%, #7DD3FC 36%, #5EEAD4 65%, #A78BFA 100%)
 ```
 
-A paleta anterior em âmbar/coral foi removida.
+## Logo
+O logotipo usa um monograma “A” em fita, uma órbita discreta e um pequeno brilho/estrela. A versão vetorial é usada na interface; o conceito premium gerado também fica disponível em `public/brand/aluneri-logo-premium.png`.

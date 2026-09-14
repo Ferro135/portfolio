@@ -14,8 +14,8 @@ export default function Image() {
           display: "flex",
           position: "relative",
           overflow: "hidden",
-          background: "#070B12",
-          color: "#F5F7FB",
+          background: "#050914",
+          color: "#F3F8FF",
           fontFamily: "Arial, Helvetica, sans-serif",
           padding: "76px 82px",
         }}
@@ -73,7 +73,7 @@ export default function Image() {
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "#94A3B8", fontSize: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "#A9A1B5", fontSize: 20 }}>
             <div>Sites · Dashboards · Sistemas Web</div>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ width: 9, height: 9, borderRadius: 999, background: "#5EEAD4" }} />
