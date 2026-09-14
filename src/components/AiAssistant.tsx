@@ -40,6 +40,8 @@ type AssistantApiResult = {
   readyForBrief?: boolean;
   projectType?: string;
   missingInfo?: string[];
+  engine?: "openai" | "local";
+  model?: string;
   error?: string;
 };
 
@@ -71,6 +73,23 @@ function id() {
   return Math.random().toString(36).slice(2);
 }
 
+function comparableMessage(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("pt-BR")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isSameMessage(left: string, right: string) {
+  const a = comparableMessage(left);
+  const b = comparableMessage(right);
+  if (!a || !b) return false;
+  return a === b || (a.length > 100 && b.length > 100 && (a.includes(b) || b.includes(a)));
+}
+
 export function AiAssistant() {
   const pathname = usePathname();
   const isEn = pathname.startsWith("/en");
@@ -93,6 +112,8 @@ export function AiAssistant() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [engine, setEngine] = useState<"unknown" | "openai" | "local">("unknown");
+  const [activeModel, setActiveModel] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [readyForBrief, setReadyForBrief] = useState(false);
   const [missingInfo, setMissingInfo] = useState<string[]>([]);
@@ -112,6 +133,10 @@ export function AiAssistant() {
   });
   const listRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const sendLockRef = useRef(false);
+  const activeRequestRef = useRef<AbortController | null>(null);
+  const requestSequenceRef = useRef(0);
+  const lastSubmitRef = useRef({ content: "", at: 0 });
 
   const prompts = isEn ? enPrompts : ptPrompts;
 
@@ -176,6 +201,46 @@ export function AiAssistant() {
     (message) => message.role === "user",
   ).length;
 
+  useEffect(() => {
+    return () => activeRequestRef.current?.abort();
+  }, []);
+
+  const resetConversation = () => {
+    activeRequestRef.current?.abort();
+    activeRequestRef.current = null;
+    sendLockRef.current = false;
+    requestSequenceRef.current += 1;
+    setLoading(false);
+    setError("");
+    setSuggestions([]);
+    setReadyForBrief(false);
+    setMissingInfo([]);
+    setDetectedProjectType("Sistema web");
+    setBrief("");
+    setBriefOpen(false);
+    setLeadSent(false);
+    setLeadForm({
+      name: "",
+      email: "",
+      phone: "",
+      projectType: "Sistema web",
+      privacy: false,
+      website: "",
+    });
+    lastSubmitRef.current = { content: "", at: 0 };
+    setEngine("unknown");
+    setActiveModel("");
+    setMessages([
+      {
+        id: "welcome",
+        role: "assistant",
+        content: isEn
+          ? "Hi! Tell me what you want to build—even if the idea is still rough. I can help define the MVP, suggest features, compare technical approaches and use ALUNERI cases as references."
+          : "Olá! Me conte o que você quer construir — mesmo que a ideia ainda esteja incompleta. Eu posso organizar o MVP, sugerir funcionalidades, comparar caminhos técnicos e usar os cases da ALUNERI como referência.",
+      },
+    ]);
+  };
+
   const acceptNotice = () => {
     setNoticeAccepted(true);
     try {
@@ -185,11 +250,27 @@ export function AiAssistant() {
 
   const send = async (value?: string) => {
     const content = (value ?? input).trim().slice(0, 1200);
-    if (!content || loading) return;
+    if (!content || sendLockRef.current) return;
+
+    const now = Date.now();
+    if (
+      comparableMessage(lastSubmitRef.current.content) === comparableMessage(content) &&
+      now - lastSubmitRef.current.at < 1800
+    ) {
+      return;
+    }
+
+    lastSubmitRef.current = { content, at: now };
+    sendLockRef.current = true;
+    const sequence = ++requestSequenceRef.current;
+    const controller = new AbortController();
+    activeRequestRef.current?.abort();
+    activeRequestRef.current = controller;
 
     setError("");
     setInput("");
     setBriefOpen(false);
+    setSuggestions([]);
 
     const userMessage: Message = {
       id: id(),
@@ -204,10 +285,12 @@ export function AiAssistant() {
       const response = await fetch("/api/assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           locale: isEn ? "en" : "pt",
           mode: "chat",
           pagePath: pathname,
+          requestId: `${Date.now()}-${sequence}`,
           messages: next
             .filter((message) => message.id !== "welcome")
             .map(({ role, content }) => ({ role, content })),
@@ -215,8 +298,23 @@ export function AiAssistant() {
       });
       const data = (await response.json()) as AssistantApiResult;
 
+      if (sequence !== requestSequenceRef.current) return;
+
       if (!response.ok || !data.ok || !data.reply) {
         throw new Error(data.error || "Assistant unavailable");
+      }
+
+      const previousAssistant = [...next]
+        .reverse()
+        .find((message) => message.role === "assistant" && message.id !== "welcome");
+
+      if (previousAssistant && isSameMessage(previousAssistant.content, data.reply)) {
+        setError(
+          isEn
+            ? "I blocked a duplicated answer. Send one more detail and I’ll continue from there."
+            : "Bloqueei uma resposta duplicada. Envie mais um detalhe e eu continuo dali.",
+        );
+        return;
       }
 
       setMessages((current) => [
@@ -227,6 +325,8 @@ export function AiAssistant() {
           content: data.reply!,
         },
       ]);
+      setEngine(data.engine === "local" ? "local" : "openai");
+      setActiveModel(data.model || "");
       setSuggestions(Array.isArray(data.suggestions) ? data.suggestions.slice(0, 3) : []);
       setReadyForBrief(Boolean(data.readyForBrief));
       setMissingInfo(Array.isArray(data.missingInfo) ? data.missingInfo.slice(0, 5) : []);
@@ -238,6 +338,7 @@ export function AiAssistant() {
         }));
       }
     } catch (cause) {
+      if (cause instanceof DOMException && cause.name === "AbortError") return;
       const message =
         cause instanceof Error ? cause.message : "Assistant unavailable";
       setError(
@@ -247,12 +348,16 @@ export function AiAssistant() {
             : "O assistente está temporariamente indisponível."),
       );
     } finally {
-      setLoading(false);
+      if (sequence === requestSequenceRef.current) {
+        setLoading(false);
+        sendLockRef.current = false;
+        if (activeRequestRef.current === controller) activeRequestRef.current = null;
+      }
     }
   };
 
   const prepareBrief = async () => {
-    if (!userMessageCount || briefLoading) return;
+    if (!userMessageCount || briefLoading || sendLockRef.current) return;
     setBriefLoading(true);
     setError("");
 
@@ -272,6 +377,8 @@ export function AiAssistant() {
         throw new Error(data.error || "Brief unavailable");
       }
       setBrief(data.reply);
+      setEngine(data.engine === "local" ? "local" : "openai");
+      setActiveModel(data.model || "");
       if (data.projectType && projectTypes.includes(data.projectType)) {
         setDetectedProjectType(data.projectType);
         setLeadForm((current) => ({ ...current, projectType: data.projectType! }));
@@ -388,18 +495,27 @@ export function AiAssistant() {
                 <strong>ALUNERI</strong>
                 <small>
                   <i aria-hidden="true" />
-                  {isEn ? "AI pre-sales assistant" : "Assistente de pré-atendimento"}
+                  {engine === "local"
+                    ? (isEn ? "Essential mode" : "Modo essencial")
+                    : (isEn ? "AI product consultant" : "Consultor de produto com IA")}
                 </small>
               </div>
             </div>
-            <button
+            <div className="ai-assistant-header-actions">
+              {userMessageCount > 0 && (
+                <button type="button" className="ai-assistant-reset" onClick={resetConversation}>
+                  {isEn ? "New" : "Nova"}
+                </button>
+              )}
+              <button
               type="button"
               className="ai-assistant-close"
               onClick={() => setOpen(false)}
               aria-label={isEn ? "Close assistant" : "Fechar assistente"}
             >
               <Close size={18} />
-            </button>
+              </button>
+            </div>
           </header>
 
           {!noticeAccepted ? (
@@ -554,7 +670,7 @@ export function AiAssistant() {
 
               <div className="ai-quick-prompts">
                 {(suggestions.length ? suggestions : prompts).map((prompt) => (
-                  <button type="button" key={prompt} onClick={() => void send(prompt)}>
+                  <button type="button" key={prompt} onClick={() => void send(prompt)} disabled={loading}>
                     {prompt}
                   </button>
                 ))}
@@ -611,7 +727,13 @@ export function AiAssistant() {
               </form>
 
               <div className="ai-assistant-footer">
-                <span>{isEn ? "AI can make mistakes." : "A IA pode cometer erros."}</span>
+                <span>
+                  {engine === "local"
+                    ? (isEn ? "Essential mode · limited answers" : "Modo essencial · respostas limitadas")
+                    : activeModel
+                      ? `${activeModel} · ${isEn ? "AI can make mistakes" : "a IA pode cometer erros"}`
+                      : (isEn ? "AI can make mistakes." : "A IA pode cometer erros.")}
+                </span>
                 <Link href={isEn ? "/en/privacy" : "/privacidade"}>
                   {isEn ? "Privacy" : "Privacidade"}
                 </Link>

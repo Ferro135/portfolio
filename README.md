@@ -1,4 +1,4 @@
-# ALUNERI — Portfolio 2.2.2
+# ALUNERI — Portfolio 2.2.3
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
@@ -322,3 +322,12 @@ OPENAI_REASONING_EFFORT=medium
 ```
 
 Se custo/latência forem mais importantes, `gpt-5.6-terra` ou `gpt-5.6-luna` podem ser configurados manualmente.
+
+## Assistente 2.2.3 — Anti-flood
+
+- bloqueio imediato de envios duplicados;
+- respostas fora de ordem são ignoradas;
+- detecção de resposta repetida no cliente e no servidor;
+- segunda geração automática quando o modelo repete a mensagem anterior;
+- modo local com progressão de perguntas em vez de resposta genérica repetida;
+- botão **Nova** para reiniciar o contexto da conversa.

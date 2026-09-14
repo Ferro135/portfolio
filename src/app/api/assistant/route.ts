@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
     const rawMessages = Array.isArray(body.messages) ? body.messages : [];
     const messages: AssistantMessage[] = rawMessages
-      .slice(-10)
+      .slice(-14)
       .map((message: unknown) => {
         if (!message || typeof message !== "object") return null;
         const item = message as { role?: unknown; content?: unknown };
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
     const limit = await checkRateLimit(
       request,
-      mode === "brief" ? "ai_brief" : "ai_chat",
+      mode === "brief" ? "ai_brief_v223" : "ai_chat_v223",
       mode === "brief" ? 6 : 24,
       60 * 60 * 1000,
     );
@@ -73,12 +73,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, ...result });
   } catch (error) {
     console.error("assistant route", error);
+    const unavailable =
+      error instanceof Error && error.message === "AI_PROVIDER_UNAVAILABLE";
     return NextResponse.json(
       {
         ok: false,
-        error: "O assistente está temporariamente indisponível.",
+        error: unavailable
+          ? "A IA avançada não conseguiu responder agora. Tente novamente em alguns segundos."
+          : "O assistente está temporariamente indisponível.",
       },
-      { status: 500 },
+      { status: unavailable ? 502 : 500 },
     );
   }
 }

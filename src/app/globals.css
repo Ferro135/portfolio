@@ -4638,3 +4638,46 @@ select:focus {
     margin-inline: 14px;
   }
 }
+
+/* ALUNERI 2.2.3 — anti-flood e controles do assistente */
+.ai-assistant-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ai-assistant-reset {
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid rgba(133,162,221,.10);
+  border-radius: 9px;
+  background: rgba(255,255,255,.025);
+  color: #7f92ad;
+  font: 650 8.5px var(--font-geist-sans);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.ai-assistant-reset:hover {
+  border-color: rgba(77,124,255,.20);
+  background: rgba(77,124,255,.07);
+  color: #c6d4e8;
+}
+
+.ai-quick-prompts button:disabled {
+  opacity: .42;
+  cursor: wait;
+  pointer-events: none;
+}
+
+.ai-assistant-composer button:disabled,
+.ai-brief-cta button:disabled {
+  cursor: wait;
+}
+
+@media (max-width: 620px) {
+  .ai-assistant-reset {
+    min-height: 32px;
+    padding-inline: 9px;
+  }
+}
