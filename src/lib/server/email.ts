@@ -22,15 +22,15 @@ export async function notifyNewLead(lead: { name: string; email?: string; compan
   if (notify) {
     await sendEmail({
       to: notify,
-      subject: `Novo lead NEXORA — ${lead.name}`,
+      subject: `Novo lead ALUNERI — ${lead.name}`,
       html: `<h2>Novo lead</h2><p><strong>Nome:</strong> ${escapeHtml(lead.name)}</p><p><strong>Empresa:</strong> ${escapeHtml(lead.company || "-")}</p><p><strong>Tipo:</strong> ${escapeHtml(lead.project_type)}</p><p>${escapeHtml(lead.details || "")}</p>`,
     });
   }
   if (lead.email) {
     await sendEmail({
       to: lead.email,
-      subject: "Recebemos seu briefing — NEXORA",
-      html: `<p>Olá, ${escapeHtml(lead.name)}.</p><p>Recebemos seu briefing na NEXORA. Vamos usar essas informações como contexto para a conversa e entraremos em contato pelo canal informado.</p><p>Obrigado!</p>`,
+      subject: "Recebemos seu briefing — ALUNERI",
+      html: `<p>Olá, ${escapeHtml(lead.name)}.</p><p>Recebemos seu briefing na ALUNERI. Vamos usar essas informações como contexto para a conversa e entraremos em contato pelo canal informado.</p><p>Obrigado!</p>`,
     });
   }
 }

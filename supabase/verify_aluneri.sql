@@ -1,4 +1,3 @@
--- Legacy filename kept for compatibility with older uploads. Active brand/schema: ALUNERI.
 select table_name
 from information_schema.tables
 where table_schema = 'public' and table_name like 'aluneri_%'

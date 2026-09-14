@@ -1,4 +1,4 @@
-# NEXORA Portfolio V5.3.4
+# ALUNERI Portfolio V5.3.4
 
 ## Ajustes visuais nos cases
 - Reorganização da galeria dos projetos para evitar imagens grandes demais

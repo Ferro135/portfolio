@@ -1,5 +1,5 @@
-export const CONSENT_COOKIE = "nexora_cookie_consent";
-export const CONSENT_EVENT = "nexora:consent-changed";
+export const CONSENT_COOKIE = "aluneri_cookie_consent";
+export const CONSENT_EVENT = "aluneri:consent-changed";
 export const CONSENT_VERSION = "v1";
 
 export type ConsentLevel = "essential" | "analytics";

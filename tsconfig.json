@@ -37,7 +37,7 @@
   ],
   "exclude": [
     "node_modules",
-    "NEXORA-Portfolio-*",
+    "ALUNERI-Portfolio-*",
     "portfolio-web",
     "dist",
     "out"

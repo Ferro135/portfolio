@@ -1,7 +1,7 @@
-# NEXORA Portfolio V5.7 — Admin Control Center
+# ALUNERI Portfolio V5.7 — Admin Control Center
 
 ## Acesso rápido
-- Atalho global `Ctrl/⌘ + Alt + N` abre `/admin` em qualquer página
+- Atalho global `Ctrl/⌘ + Alt + A` abre `/admin` em qualquer página
 - O atalho é apenas conveniência: autenticação por senha continua obrigatória
 - `Ctrl/⌘ + K` dentro do painel abre uma paleta de navegação rápida
 

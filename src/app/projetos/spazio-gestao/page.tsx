@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `/projetos/${project.slug}`,
-    title: "Spazio Gestão — Projeto NEXORA",
+    title: "Spazio Gestão — Projeto ALUNERI",
     description: project.description,
-    images: [{ url: "/og/spazio.png", width: 1200, height: 630, alt: "Spazio Gestão — Projeto NEXORA" }],
+    images: [{ url: "/og/spazio.png", width: 1200, height: 630, alt: "Spazio Gestão — Projeto ALUNERI" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Spazio Gestão — Projeto NEXORA",
+    title: "Spazio Gestão — Projeto ALUNERI",
     description: project.description,
     images: ["/og/spazio.png"],
   },
@@ -35,7 +35,7 @@ const projectSchema = {
   operatingSystem: "Web",
   creator: {
     "@type": "Organization",
-    name: "NEXORA",
+    name: "ALUNERI",
     url: siteUrl,
   },
 };

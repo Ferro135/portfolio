@@ -1,7 +1,7 @@
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values (
-  'nexora-portfolio-media',
-  'nexora-portfolio-media',
+  'aluneri-portfolio-media',
+  'aluneri-portfolio-media',
   true,
   1048576,
   array['image/png','image/jpeg','image/webp','image/avif']

@@ -1,6 +1,6 @@
-# NEXORA — Portfolio V5.5
+# ALUNERI — Portfolio 2.0
 
-Portfólio da **NEXORA — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
+Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
 ## O que a V5.5 adiciona
 
@@ -234,7 +234,7 @@ Mais detalhes em `BUSINESS-SETUP.md` e `BACKUP-RECOVERY.md`.
 
 ```env
 RESEND_API_KEY=
-EMAIL_FROM=NEXORA <contato@seudominio.com>
+EMAIL_FROM=ALUNERI <contato@seudominio.com>
 LEAD_NOTIFY_EMAIL=seu-email@dominio.com
 ```
 
@@ -246,7 +246,7 @@ O `SUPABASE_SERVICE_ROLE_KEY`/`SUPABASE_SECRET_KEY`, a senha do admin, tokens e 
 
 O painel administrativo ganhou uma camada de produtividade e segurança:
 
-- `Ctrl/⌘ + Alt + N` abre o admin a partir do site público;
+- `Ctrl/⌘ + Alt + A` abre o admin a partir do site público;
 - `Ctrl/⌘ + K` abre a paleta de comandos dentro do painel;
 - sessão administrativa é bloqueada após 30 minutos sem atividade;
 - dashboard operacional com prioridades, KPIs e atividade recente;
@@ -258,4 +258,4 @@ O atalho de teclado **não é um mecanismo de segurança**. A rota continua prot
 
 ## Banco compartilhado isolado
 
-Nesta configuração, a NEXORA usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `nexora_` e o bucket é `nexora-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.
+Nesta configuração, a ALUNERI usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `aluneri_` e o bucket é `aluneri-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.

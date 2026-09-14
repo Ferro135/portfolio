@@ -23,7 +23,7 @@ export default async function AdminLoginPage({
 
     const password = String(formData.get("password") || "");
     const requestHeaders = await headers();
-    const rateRequest = new Request("https://nexora.local/admin-login", { headers: requestHeaders });
+    const rateRequest = new Request("https://aluneri.local/admin-login", { headers: requestHeaders });
     const limited = await checkRateLimit(rateRequest, "admin_login", 8, 15 * 60 * 1000);
 
     if (!limited.allowed) redirect("/admin/login?error=rate");
@@ -39,7 +39,7 @@ export default async function AdminLoginPage({
         <div className="admin-login-intro">
           <span className="admin-login-lock"><Lock size={18} /></span>
           <span className="eyebrow">Acesso privado</span>
-          <h1>Central administrativa<br />da NEXORA.</h1>
+          <h1>Central administrativa<br />da ALUNERI.</h1>
           <p>CRM, propostas, conteúdo, agendamentos e observabilidade em um único ambiente.</p>
           <div className="admin-login-security-list">
             <span><i /> Cookie HttpOnly assinado</span>
@@ -50,7 +50,7 @@ export default async function AdminLoginPage({
 
         <form className="admin-login-card" action={login}>
           <div className="admin-login-card-heading">
-            <span>NEXORA CONTROL</span>
+            <span>ALUNERI CONTROL</span>
             <h2>Entrar no painel</h2>
             <p>Use a senha administrativa configurada na Vercel.</p>
           </div>
@@ -74,7 +74,7 @@ export default async function AdminLoginPage({
           <div className="admin-login-shortcut">
             <Command size={14} />
             <span>Atalho global:</span>
-            <kbd>Ctrl/⌘ + Alt + N</kbd>
+            <kbd>Ctrl/⌘ + Alt + A</kbd>
           </div>
 
           <a href="/">← Voltar ao site público</a>

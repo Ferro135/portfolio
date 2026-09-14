@@ -1,4 +1,4 @@
-# NEXORA V5.6.1 — Hotfix
+# ALUNERI V5.6.1 — Hotfix
 
 - Corrige o estado do formulário de agendamento.
 - Adiciona `privacy: false` ao estado inicial do `ScheduleForm`.

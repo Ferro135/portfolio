@@ -10,7 +10,7 @@ export function GlobalAdminShortcut() {
 
     const onKeyDown = (event: KeyboardEvent) => {
       const modifier = event.ctrlKey || event.metaKey;
-      if (!modifier || !event.altKey || event.key.toLowerCase() !== "n") return;
+      if (!modifier || !event.altKey || event.key.toLowerCase() !== "a") return;
 
       event.preventDefault();
       event.stopPropagation();

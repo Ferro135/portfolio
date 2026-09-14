@@ -1,4 +1,4 @@
-# NEXORA Portfolio V5.3.2
+# ALUNERI Portfolio V5.3.2
 
 ## Melhorias visuais
 - Redução visual das imagens na seção de projetos

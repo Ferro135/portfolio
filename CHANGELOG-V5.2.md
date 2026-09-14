@@ -1,4 +1,4 @@
-# NEXORA V5.2 — checklist
+# ALUNERI V5.2 — checklist
 
 ## Conversão e apresentação
 
@@ -43,7 +43,7 @@
 
 ## Observação
 
-O tema escuro foi mantido como identidade visual principal da NEXORA. A sugestão anterior de modo claro/escuro era condicional e não foi forçada na V5.2 porque o dark atual é parte forte da identidade e as capturas dos produtos também seguem essa direção visual.
+O tema escuro foi mantido como identidade visual principal da ALUNERI. A sugestão anterior de modo claro/escuro era condicional e não foi forçada na V5.2 porque o dark atual é parte forte da identidade e as capturas dos produtos também seguem essa direção visual.
 
 
 ## V5.2.1 — correção de navegação

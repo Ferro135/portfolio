@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NEXORA — Produtos Digitais & Sistemas",
-    short_name: "NEXORA",
+    name: "ALUNERI — Produtos Digitais & Sistemas",
+    short_name: "ALUNERI",
     description: "Sites, dashboards e sistemas web modernos.",
     start_url: "/",
     display: "standalone",
-    background_color: "#050914",
-    theme_color: "#050914",
+    background_color: "#0B0A10",
+    theme_color: "#0B0A10",
     lang: "pt-BR",
     icons: [
       {

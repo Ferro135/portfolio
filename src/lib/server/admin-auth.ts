@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { redirect } from "next/navigation";
 
-const COOKIE_NAME = "nexora_admin_session";
+const COOKIE_NAME = "aluneri_admin_session";
 const SESSION_SECONDS = 60 * 60 * 8;
 
 function sessionSecret() { return process.env.ADMIN_SESSION_SECRET || ""; }

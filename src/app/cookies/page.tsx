@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Política de Cookies",
-  description: "Como a NEXORA usa cookies essenciais e ferramentas opcionais de analytics.",
+  description: "Como a ALUNERI usa cookies essenciais e ferramentas opcionais de analytics.",
 };
 
 export default function CookiesPage() {
@@ -18,7 +18,7 @@ export default function CookiesPage() {
             <span className="eyebrow">Privacidade</span>
             <h1>Política de Cookies</h1>
             <p>
-              A NEXORA usa o mínimo necessário. Analytics e medição de desempenho
+              A ALUNERI usa o mínimo necessário. Analytics e medição de desempenho
               ficam desativados até você autorizar.
             </p>
           </div>
@@ -30,7 +30,7 @@ export default function CookiesPage() {
           <article>
             <h2>Cookie essencial</h2>
             <p>
-              O cookie <code>nexora_cookie_consent</code> guarda sua preferência de
+              O cookie <code>aluneri_cookie_consent</code> guarda sua preferência de
               privacidade por até 180 dias. Ele usa <strong>SameSite=Lax</strong>,
               caminho global e <strong>Secure</strong> quando o site está em HTTPS.
             </p>

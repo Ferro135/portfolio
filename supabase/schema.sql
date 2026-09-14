@@ -1,6 +1,6 @@
 create extension if not exists pgcrypto;
 
-create table if not exists public.nexora_leads (
+create table if not exists public.aluneri_leads (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   company text,
@@ -19,9 +19,9 @@ create table if not exists public.nexora_leads (
   updated_at timestamptz not null default now()
 );
 
-create table if not exists public.nexora_proposals (
+create table if not exists public.aluneri_proposals (
   id uuid primary key default gen_random_uuid(),
-  lead_id uuid references public.nexora_leads(id) on delete set null,
+  lead_id uuid references public.aluneri_leads(id) on delete set null,
   token uuid not null default gen_random_uuid() unique,
   title text not null,
   client_name text not null,
@@ -38,7 +38,7 @@ create table if not exists public.nexora_proposals (
   updated_at timestamptz not null default now()
 );
 
-create table if not exists public.nexora_cms_projects (
+create table if not exists public.aluneri_cms_projects (
   id uuid primary key default gen_random_uuid(),
   slug text not null unique,
   title text not null,
@@ -62,7 +62,7 @@ create table if not exists public.nexora_cms_projects (
   updated_at timestamptz not null default now()
 );
 
-create table if not exists public.nexora_testimonials (
+create table if not exists public.aluneri_testimonials (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   role text,
@@ -72,7 +72,7 @@ create table if not exists public.nexora_testimonials (
   created_at timestamptz not null default now()
 );
 
-create table if not exists public.nexora_appointments (
+create table if not exists public.aluneri_appointments (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   email text,
@@ -86,7 +86,7 @@ create table if not exists public.nexora_appointments (
   created_at timestamptz not null default now()
 );
 
-create table if not exists public.nexora_error_events (
+create table if not exists public.aluneri_error_events (
   id uuid primary key default gen_random_uuid(),
   message text not null,
   stack text,
@@ -95,24 +95,24 @@ create table if not exists public.nexora_error_events (
   created_at timestamptz not null default now()
 );
 
-create table if not exists public.nexora_rate_events (
+create table if not exists public.aluneri_rate_events (
   id bigserial primary key,
   action text not null,
   key_hash text not null,
   created_at timestamptz not null default now()
 );
 
-create index if not exists nexora_leads_status_created_idx on public.nexora_leads(status, created_at desc);
-create index if not exists nexora_leads_ip_hash_created_idx on public.nexora_leads(ip_hash, created_at desc);
-create index if not exists nexora_rate_events_key_idx on public.nexora_rate_events(action, key_hash, created_at desc);
-create index if not exists nexora_appointments_status_date_idx on public.nexora_appointments(status, preferred_date);
+create index if not exists aluneri_leads_status_created_idx on public.aluneri_leads(status, created_at desc);
+create index if not exists aluneri_leads_ip_hash_created_idx on public.aluneri_leads(ip_hash, created_at desc);
+create index if not exists aluneri_rate_events_key_idx on public.aluneri_rate_events(action, key_hash, created_at desc);
+create index if not exists aluneri_appointments_status_date_idx on public.aluneri_appointments(status, preferred_date);
 
-alter table public.nexora_leads enable row level security;
-alter table public.nexora_proposals enable row level security;
-alter table public.nexora_cms_projects enable row level security;
-alter table public.nexora_testimonials enable row level security;
-alter table public.nexora_appointments enable row level security;
-alter table public.nexora_error_events enable row level security;
-alter table public.nexora_rate_events enable row level security;
+alter table public.aluneri_leads enable row level security;
+alter table public.aluneri_proposals enable row level security;
+alter table public.aluneri_cms_projects enable row level security;
+alter table public.aluneri_testimonials enable row level security;
+alter table public.aluneri_appointments enable row level security;
+alter table public.aluneri_error_events enable row level security;
+alter table public.aluneri_rate_events enable row level security;
 
 -- Sem policies públicas: toda escrita/leitura administrativa passa pelo backend com service_role.

@@ -1,4 +1,4 @@
-# Ativação da NEXORA V5.6 Business
+# Ativação da ALUNERI V5.6 Business
 
 A V5.6 foi feita para continuar publicando o portfólio mesmo sem backend. Para ativar o CRM e as automações:
 
@@ -40,7 +40,7 @@ A implementação suporta a API do Resend sem expor a chave no navegador:
 
 ```env
 RESEND_API_KEY=...
-EMAIL_FROM=NEXORA <contato@seu-dominio.com>
+EMAIL_FROM=ALUNERI <contato@seu-dominio.com>
 LEAD_NOTIFY_EMAIL=seu-email-interno@dominio.com
 ```
 
@@ -66,12 +66,12 @@ Siga `GITHUB-SECURITY-SETUP.md` e `SECURITY-CHECKLIST.md`.
 
 ## Banco compartilhado isolado
 
-Nesta configuração, a NEXORA usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `nexora_` e o bucket é `nexora-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.
+Nesta configuração, a ALUNERI usa o projeto Supabase geral existente, mas todas as tabelas são prefixadas com `aluneri_` e o bucket é `aluneri-portfolio-media`, evitando colisão com outros sistemas no mesmo projeto.
 
 
 ## Configuração atual — Supabase compartilhado
 
-A NEXORA deve usar o projeto Supabase geral existente, sem tocar nas tabelas dos outros sistemas.
+A ALUNERI deve usar o projeto Supabase geral existente, sem tocar nas tabelas dos outros sistemas.
 
 URL do projeto:
 
@@ -79,12 +79,12 @@ URL do projeto:
 SUPABASE_URL=https://pzwtoksbbfvgsnwunzri.supabase.co
 ```
 
-As tabelas da NEXORA usam prefixo `nexora_` e o bucket usa `nexora-portfolio-media`.
+As tabelas da ALUNERI usam prefixo `aluneri_` e o bucket usa `aluneri-portfolio-media`.
 
 No Supabase SQL Editor, execute **uma vez**:
 
 ```text
-supabase/nexora_shared_project.sql
+supabase/aluneri_shared_project.sql
 ```
 
 Depois configure na Vercel **uma** destas chaves server-side:

@@ -1,4 +1,3 @@
--- Legacy filename kept for compatibility with older uploads. Active brand/schema: ALUNERI.
 create extension if not exists pgcrypto;
 
 create table if not exists public.aluneri_leads (

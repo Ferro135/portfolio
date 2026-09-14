@@ -1,7 +1,7 @@
 import { safeHttpsUrl } from "@/lib/security";
 
 export const brand = {
-  name: "NEXORA",
+  name: "ALUNERI",
   tagline: "Produtos Digitais & Sistemas",
   description:
     "Sites, dashboards e sistemas web modernos, desenvolvidos com foco em experiência, performance e soluções funcionais.",
@@ -9,7 +9,7 @@ export const brand = {
 };
 
 const whatsappMessage = encodeURIComponent(
-  "Olá! Vi o portfólio da NEXORA e gostaria de conversar sobre um projeto.",
+  "Olá! Vi o portfólio da ALUNERI e gostaria de conversar sobre um projeto.",
 );
 
 export const contact = {
@@ -318,7 +318,7 @@ export const capabilities = [
 
 export const faqs = [
   {
-    question: "A NEXORA desenvolve sistemas do zero?",
+    question: "A ALUNERI desenvolve sistemas do zero?",
     answer: "Sim. O projeto pode começar apenas com o problema e os objetivos. A partir disso, estruturamos fluxos, interface, desenvolvimento e publicação.",
   },
   {
@@ -334,7 +334,7 @@ export const faqs = [
     answer: "Depende do escopo. Um site institucional e um sistema com autenticação, banco de dados e regras de negócio têm necessidades diferentes. O prazo é definido após entender o projeto.",
   },
   {
-    question: "A NEXORA trabalha com manutenção e evolução?",
+    question: "A ALUNERI trabalha com manutenção e evolução?",
     answer: "Sim. Produtos digitais raramente terminam na primeira publicação. A estrutura é pensada para receber correções, melhorias e novas funcionalidades.",
   },
   {
@@ -350,7 +350,7 @@ export type Testimonial = {
   project?: string;
 };
 
-// Mantido vazio de propósito: a NEXORA não publica depoimentos fictícios.
+// Mantido vazio de propósito: a ALUNERI não publica depoimentos fictícios.
 // Quando houver autorização de um cliente real, basta adicionar aqui.
 export const testimonials: Testimonial[] = [];
 

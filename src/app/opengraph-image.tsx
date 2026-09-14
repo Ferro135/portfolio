@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "NEXORA — Produtos Digitais & Sistemas";
+export const alt = "ALUNERI — Produtos Digitais & Sistemas";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -14,8 +14,8 @@ export default function Image() {
           display: "flex",
           position: "relative",
           overflow: "hidden",
-          background: "#050914",
-          color: "#f6f8ff",
+          background: "#0B0A10",
+          color: "#F7F2EA",
           fontFamily: "Arial, Helvetica, sans-serif",
           padding: "76px 82px",
         }}
@@ -26,7 +26,7 @@ export default function Image() {
             width: 520,
             height: 520,
             borderRadius: 999,
-            background: "rgba(79, 105, 255, .32)",
+            background: "rgba(255, 177, 90, .28)",
             opacity: 0.5,
             right: -90,
             top: -120,
@@ -38,7 +38,7 @@ export default function Image() {
             width: 430,
             height: 430,
             borderRadius: 999,
-            background: "rgba(151, 80, 255, .25)",
+            background: "rgba(139, 124, 255, .22)",
             opacity: 0.45,
             left: 230,
             bottom: -260,
@@ -54,18 +54,18 @@ export default function Image() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: "#5F7CFF",
+                background: "#FFB15A",
                 fontWeight: 900,
                 fontSize: 34,
               }}
             >
-              N
+              A
             </div>
-            <div style={{ fontSize: 29, fontWeight: 800, letterSpacing: 7 }}>NEXORA</div>
+            <div style={{ fontSize: 29, fontWeight: 800, letterSpacing: 7 }}>ALUNERI</div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 940 }}>
-            <div style={{ fontSize: 17, textTransform: "uppercase", letterSpacing: 7, color: "#8fa6dc", fontWeight: 700 }}>
+            <div style={{ fontSize: 17, textTransform: "uppercase", letterSpacing: 7, color: "#FFB15A", fontWeight: 700 }}>
               Produtos Digitais & Sistemas
             </div>
             <div style={{ fontSize: 72, lineHeight: 1.03, fontWeight: 800, letterSpacing: -4, marginTop: 24 }}>
@@ -73,10 +73,10 @@ export default function Image() {
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "#8796b3", fontSize: 20 }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", color: "#A9A1B5", fontSize: 20 }}>
             <div>Sites · Dashboards · Sistemas Web</div>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 9, height: 9, borderRadius: 999, background: "#4de4d2" }} />
+              <div style={{ width: 9, height: 9, borderRadius: 999, background: "#FF6F91" }} />
               Aceitando novos projetos
             </div>
           </div>

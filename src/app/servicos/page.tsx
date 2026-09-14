@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { ArrowLeft, ArrowRight, Check, Github, WhatsApp } from "@/components/Icons";
 import { StructuredData } from "@/components/StructuredData";
-import { NexoraLogo } from "@/components/NexoraLogo";
+import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand, contact } from "@/data/portfolio";
 import { serviceProcess, services } from "@/data/services";
 import { siteUrl } from "@/lib/site";
@@ -11,10 +11,10 @@ import { siteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Serviços de desenvolvimento web",
   description:
-    "Sites, SaaS, dashboards, sistemas administrativos, painéis internos e automações desenvolvidos pela NEXORA.",
+    "Sites, SaaS, dashboards, sistemas administrativos, painéis internos e automações desenvolvidos pela ALUNERI.",
   alternates: { canonical: "/servicos" },
   openGraph: {
-    title: "Serviços — NEXORA",
+    title: "Serviços — ALUNERI",
     description:
       "Desenvolvimento de sites, dashboards, SaaS, sistemas web e automações.",
     url: "/servicos",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Serviços NEXORA",
+  name: "Serviços ALUNERI",
   itemListElement: services.map((service, index) => ({
     "@type": "ListItem",
     position: index + 1,
@@ -35,7 +35,7 @@ const serviceSchema = {
       description: service.description,
       provider: {
         "@type": "Organization",
-        name: "NEXORA",
+        name: "ALUNERI",
         url: siteUrl,
       },
       url: `${siteUrl}/servicos#${service.id}`,
@@ -159,10 +159,10 @@ export default function ServicesPage() {
       <footer>
         <div className="shell footer-inner">
           <Link className="footer-brand" href="/">
-            <NexoraLogo className="footer-logo" />
+            <AluneriLogo className="footer-logo" />
             <span>{brand.tagline}</span>
           </Link>
-          <span>© 2026 NEXORA. Produtos digitais feitos para funcionar.</span>
+          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
           <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135">
             <Github />
           </a>

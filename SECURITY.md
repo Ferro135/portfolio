@@ -1,4 +1,4 @@
-# Política de Segurança — NEXORA
+# Política de Segurança — ALUNERI
 
 ## Como reportar uma vulnerabilidade
 

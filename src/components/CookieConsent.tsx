@@ -63,7 +63,7 @@ export function CookieConsent() {
             <span className="eyebrow">Privacidade</span>
             <strong>Você escolhe o que podemos medir.</strong>
             <p>
-              A NEXORA usa um cookie essencial para guardar sua preferência.
+              A ALUNERI usa um cookie essencial para guardar sua preferência.
               Analytics e Speed Insights só são carregados se você autorizar.
             </p>
             <div className="cookie-policy-links">

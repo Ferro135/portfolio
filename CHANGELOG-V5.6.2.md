@@ -1,4 +1,4 @@
-# NEXORA V5.6.2 — Build Hotfix
+# ALUNERI V5.6.2 — Build Hotfix
 
 - Remove testes Playwright do `tsconfig.json` usado pelo build de produção.
 - Mantém os testes no workflow dedicado de Playwright.

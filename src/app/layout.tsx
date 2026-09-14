@@ -28,14 +28,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "NEXORA — Produtos Digitais & Sistemas",
-    template: "%s | NEXORA",
+    default: "ALUNERI — Produtos Digitais & Sistemas",
+    template: "%s | ALUNERI",
   },
   description:
     "Sites, dashboards e sistemas web modernos, desenvolvidos com foco em experiência, performance e soluções funcionais.",
-  applicationName: "NEXORA",
+  applicationName: "ALUNERI",
   keywords: [
-    "NEXORA",
+    "ALUNERI",
     "desenvolvimento web",
     "criação de sites",
     "desenvolvimento de sistemas web",
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
     "TypeScript",
     "Tailwind CSS",
   ],
-  authors: [{ name: "NEXORA" }],
-  creator: "NEXORA",
+  authors: [{ name: "ALUNERI" }],
+  creator: "ALUNERI",
   alternates: {
     canonical: "/",
     languages: { "pt-BR": "/", en: "/en" },
@@ -56,16 +56,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    siteName: "NEXORA",
+    siteName: "ALUNERI",
     url: "/",
-    title: "NEXORA — Produtos Digitais & Sistemas",
+    title: "ALUNERI — Produtos Digitais & Sistemas",
     description:
       "Transformamos ideias em sites, dashboards e sistemas web modernos, claros e funcionais.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "NEXORA — Produtos Digitais & Sistemas" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "ALUNERI — Produtos Digitais & Sistemas" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NEXORA — Produtos Digitais & Sistemas",
+    title: "ALUNERI — Produtos Digitais & Sistemas",
     description:
       "Sites, dashboards e sistemas web modernos, desenvolvidos com foco em experiência e performance.",
     images: ["/opengraph-image"],
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "NEXORA",
+  name: "ALUNERI",
   url: siteUrl,
   description:
     "Desenvolvimento de sites, dashboards, sistemas web, SaaS e automações.",
@@ -90,7 +90,7 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "NEXORA",
+  name: "ALUNERI",
   url: siteUrl,
   inLanguage: "pt-BR",
   description:
@@ -100,7 +100,7 @@ const websiteSchema = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#050914",
+  themeColor: "#0B0A10",
   colorScheme: "dark",
 };
 

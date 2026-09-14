@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { ArrowLeft, ArrowRight, Check, Code, Github, Layers, Monitor, Spark } from "@/components/Icons";
-import { NexoraLogo } from "@/components/NexoraLogo";
+import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand, capabilities, contact, processSteps } from "@/data/portfolio";
 
 export const metadata: Metadata = {
   title: "Sobre",
-  description: "Conheça a NEXORA, uma identidade de desenvolvimento focada em produtos digitais claros, funcionais e preparados para evoluir.",
+  description: "Conheça a ALUNERI, uma identidade de desenvolvimento focada em produtos digitais claros, funcionais e preparados para evoluir.",
   alternates: { canonical: "/sobre" },
   openGraph: {
-    title: "Sobre a NEXORA",
+    title: "Sobre a ALUNERI",
     description: "Produtos digitais construídos com clareza, usabilidade e estrutura técnica preparada para evoluir.",
     url: "/sobre",
   },
@@ -26,10 +26,10 @@ export default function AboutPage() {
         <div className="shell relative">
           <Link className="case-back" href="/"><ArrowLeft /> Voltar ao portfólio</Link>
           <div className="inner-page-copy">
-            <span className="eyebrow">Sobre a NEXORA</span>
+            <span className="eyebrow">Sobre a ALUNERI</span>
             <h1>Produtos digitais<br />com menos ruído.</h1>
             <p>
-              A NEXORA existe para transformar necessidades reais em interfaces e sistemas que façam sentido para quem usa,
+              A ALUNERI existe para transformar necessidades reais em interfaces e sistemas que façam sentido para quem usa,
               sem separar design, usabilidade e engenharia como problemas diferentes.
             </p>
           </div>
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <h2>O objetivo não é entregar mais telas. É resolver melhor.</h2>
           </div>
           <div className="about-story-copy">
-            <p>Um produto digital pode ser bonito e ainda ser confuso. Pode ter muitos recursos e ainda atrapalhar a rotina. Por isso, a NEXORA começa pelo problema e pelo contexto antes de decidir tecnologia ou estética.</p>
+            <p>Um produto digital pode ser bonito e ainda ser confuso. Pode ter muitos recursos e ainda atrapalhar a rotina. Por isso, a ALUNERI começa pelo problema e pelo contexto antes de decidir tecnologia ou estética.</p>
             <p>O trabalho busca reduzir passos desnecessários, organizar informações, dar clareza às ações e construir uma base que possa continuar evoluindo depois da primeira publicação.</p>
           </div>
         </div>
@@ -88,8 +88,8 @@ export default function AboutPage() {
 
       <footer>
         <div className="shell footer-inner">
-          <Link className="footer-brand" href="/"><NexoraLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
-          <span>© 2026 NEXORA. Produtos digitais feitos para funcionar.</span>
+          <Link className="footer-brand" href="/"><AluneriLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
+          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
           <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
         </div>
       </footer>

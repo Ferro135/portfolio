@@ -3,15 +3,15 @@ import Link from "next/link";
 import { ContactBriefForm } from "@/components/ContactBriefForm";
 import { Header } from "@/components/Header";
 import { ArrowLeft, Github, Mail, WhatsApp } from "@/components/Icons";
-import { NexoraLogo } from "@/components/NexoraLogo";
+import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand, contact, faqs } from "@/data/portfolio";
 
 export const metadata: Metadata = {
   title: "Contato & orçamento",
-  description: "Envie um briefing para a NEXORA e comece uma conversa sobre seu próximo site, dashboard, sistema web ou automação.",
+  description: "Envie um briefing para a ALUNERI e comece uma conversa sobre seu próximo site, dashboard, sistema web ou automação.",
   alternates: { canonical: "/contato" },
   openGraph: {
-    title: "Contato & orçamento — NEXORA",
+    title: "Contato & orçamento — ALUNERI",
     description: "Preencha um briefing rápido e envie pelo WhatsApp para começar seu próximo projeto digital.",
     url: "/contato",
   },
@@ -88,8 +88,8 @@ export default function ContactPage() {
 
       <footer>
         <div className="shell footer-inner">
-          <Link className="footer-brand" href="/"><NexoraLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
-          <span>© 2026 NEXORA. Produtos digitais feitos para funcionar.</span>
+          <Link className="footer-brand" href="/"><AluneriLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
+          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
           <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
         </div>
       </footer>

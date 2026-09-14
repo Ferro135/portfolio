@@ -15,7 +15,7 @@ import {
   Spark,
   WhatsApp,
 } from "@/components/Icons";
-import { NexoraLogo } from "@/components/NexoraLogo";
+import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand, capabilities, contact, faqs, processSteps, projects, technologyGroups } from "@/data/portfolio";
 
 
@@ -83,11 +83,11 @@ export default function Home() {
             <div className="visual-window visual-window-main">
               <div className="window-topbar">
                 <div><i /><i /><i /></div>
-                <span>nexora.system</span>
+                <span>aluneri.system</span>
               </div>
               <div className="window-content">
                 <aside>
-                  <NexoraLogo compact className="mini-nexora-mark" />
+                  <AluneriLogo compact className="mini-aluneri-mark" />
                   <span className="mini-line long" />
                   <span className="mini-line" />
                   <span className="mini-line short" />
@@ -204,13 +204,13 @@ export default function Home() {
       <section className="section philosophy-section" id="sobre" data-reveal>
         <div className="shell philosophy-grid">
           <div className="philosophy-heading">
-            <span className="eyebrow">Sobre a NEXORA</span>
+            <span className="eyebrow">Sobre a ALUNERI</span>
             <h2>Menos ruído.<br />Mais produto.</h2>
-            <Link className="case-link about-link" href="/sobre">Conhecer a NEXORA <ArrowRight size={15} /></Link>
+            <Link className="case-link about-link" href="/sobre">Conhecer a ALUNERI <ArrowRight size={15} /></Link>
           </div>
           <div className="philosophy-copy">
             <p>
-              A NEXORA cria produtos digitais focados em transformar processos complexos em experiências
+              A ALUNERI cria produtos digitais focados em transformar processos complexos em experiências
               simples, modernas e funcionais. Design, usabilidade e estrutura técnica trabalham juntos
               para que cada produto seja fácil de usar hoje e preparado para evoluir amanhã.
             </p>
@@ -325,8 +325,8 @@ export default function Home() {
 
       <footer>
         <div className="shell footer-inner">
-          <Link className="footer-brand" href="/#inicio"><NexoraLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
-          <span>© 2026 NEXORA. Produtos digitais feitos para funcionar.</span>
+          <Link className="footer-brand" href="/#inicio"><AluneriLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
+          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
           <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
         </div>
       </footer>

@@ -1,4 +1,4 @@
-# NEXORA V5.7.2 — Supabase TypeScript Hotfix
+# ALUNERI V5.7.2 — Supabase TypeScript Hotfix
 
 - Corrige a tipagem dos headers usados pelo `fetch()` no backend Supabase.
 - `authHeaders()` agora retorna explicitamente `Record<string, string>`.

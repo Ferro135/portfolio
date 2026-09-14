@@ -1,6 +1,6 @@
 {
-  "name": "nexora-portfolio",
-  "version": "1.7.2",
+  "name": "aluneri-portfolio",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -1,4 +1,4 @@
-# NEXORA V5.5 — Checklist de lançamento
+# ALUNERI V5.5 — Checklist de lançamento
 
 A V5.5 implementa toda a estrutura de conversão, SEO, monitoramento e auditoria. Alguns itens precisam de valores reais para aparecerem de forma correta.
 

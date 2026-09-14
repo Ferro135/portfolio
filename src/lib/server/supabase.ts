@@ -2,22 +2,23 @@ import { randomUUID } from "node:crypto";
 
 const DEFAULT_SUPABASE_URL = "https://pzwtoksbbfvgsnwunzri.supabase.co";
 
-const TABLE_ALIASES: Record<string, string> = {
-  leads: "nexora_leads",
-  proposals: "nexora_proposals",
-  cms_projects: "nexora_cms_projects",
-  testimonials: "nexora_testimonials",
-  appointments: "nexora_appointments",
-  error_events: "nexora_error_events",
-  rate_events: "nexora_rate_events",
+const TABLE_ALIASES: Record<string, [string, string?]> = {
+  leads: ["aluneri_leads", "nexora_leads"],
+  proposals: ["aluneri_proposals", "nexora_proposals"],
+  cms_projects: ["aluneri_cms_projects", "nexora_cms_projects"],
+  testimonials: ["aluneri_testimonials", "nexora_testimonials"],
+  appointments: ["aluneri_appointments", "nexora_appointments"],
+  error_events: ["aluneri_error_events", "nexora_error_events"],
+  rate_events: ["aluneri_rate_events", "nexora_rate_events"],
 };
 
-const STORAGE_BUCKET = "nexora-portfolio-media";
+const STORAGE_BUCKETS = ["aluneri-portfolio-media", "nexora-portfolio-media"] as const;
 
-function scopedPath(path: string) {
+function scopedPaths(path: string) {
   const [head, ...rest] = path.split("?");
-  const mapped = TABLE_ALIASES[head] || head;
-  return rest.length ? `${mapped}?${rest.join("?")}` : mapped;
+  const mapped = TABLE_ALIASES[head];
+  const names = mapped ? mapped.filter((name): name is string => Boolean(name)) : [head];
+  return names.map((name) => rest.length ? `${name}?${rest.join("?")}` : name);
 }
 
 type QueryOptions = {
@@ -60,27 +61,35 @@ export async function dbRequest<T>(path: string, options: QueryOptions = {}): Pr
   const cfg = config();
   if (!cfg) throw new Error("Supabase não configurado");
 
-  const response = await fetch(`${cfg.url}/rest/v1/${scopedPath(path)}`, {
-    method: options.method || "GET",
-    headers: {
-      ...authHeaders(cfg.key),
-      "Content-Type": "application/json",
-      ...(options.prefer ? { Prefer: options.prefer } : {}),
-    },
-    body: options.body === undefined ? undefined : JSON.stringify(options.body),
-    cache: options.cache,
-    ...(options.revalidate !== undefined ? { next: { revalidate: options.revalidate } } : {}),
-  });
+  const candidates = scopedPaths(path);
+  let lastError = "";
 
-  if (!response.ok) {
-    const detail = await response.text();
-    throw new Error(`Supabase ${response.status}: ${detail.slice(0, 500)}`);
+  for (const candidate of candidates) {
+    const response = await fetch(`${cfg.url}/rest/v1/${candidate}`, {
+      method: options.method || "GET",
+      headers: {
+        ...authHeaders(cfg.key),
+        "Content-Type": "application/json",
+        ...(options.prefer ? { Prefer: options.prefer } : {}),
+      },
+      body: options.body === undefined ? undefined : JSON.stringify(options.body),
+      cache: options.cache,
+      ...(options.revalidate !== undefined ? { next: { revalidate: options.revalidate } } : {}),
+    });
+
+    if (!response.ok) {
+      lastError = await response.text();
+      if (response.status === 404 && candidate !== candidates[candidates.length - 1]) continue;
+      throw new Error(`Supabase ${response.status}: ${lastError.slice(0, 500)}`);
+    }
+
+    if (response.status === 204) return undefined as T;
+    const text = await response.text();
+    if (!text) return undefined as T;
+    return JSON.parse(text) as T;
   }
 
-  if (response.status === 204) return undefined as T;
-  const text = await response.text();
-  if (!text) return undefined as T;
-  return JSON.parse(text) as T;
+  throw new Error(`Supabase: ${lastError || "recurso não encontrado"}`);
 }
 
 export async function listRows<T>(table: string, query = "select=*&order=created_at.desc") {
@@ -131,17 +140,22 @@ export async function uploadPublicAsset(file: File, folder: string) {
   const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : file.type === "image/avif" ? "avif" : "jpg";
   const safeFolder = folder.replace(/[^a-z0-9/_-]/gi, "-").slice(0, 120);
   const objectPath = `${safeFolder}/${Date.now()}-${randomUUID()}.${ext}`;
-  const response = await fetch(`${cfg.url}/storage/v1/object/${STORAGE_BUCKET}/${objectPath}`, {
-    method: "POST",
-    headers: {
-      ...authHeaders(cfg.key),
-      "Content-Type": file.type,
-      "x-upsert": "false",
-      "Cache-Control": "3600",
-    },
-    body: Buffer.from(await file.arrayBuffer()),
-    cache: "no-store",
-  });
-  if (!response.ok) throw new Error(`Falha no upload: ${(await response.text()).slice(0, 300)}`);
-  return `${cfg.url}/storage/v1/object/public/${STORAGE_BUCKET}/${objectPath}`;
+  let lastDetail = "";
+  for (const bucket of STORAGE_BUCKETS) {
+    const response = await fetch(`${cfg.url}/storage/v1/object/${bucket}/${objectPath}`, {
+      method: "POST",
+      headers: {
+        ...authHeaders(cfg.key),
+        "Content-Type": file.type,
+        "x-upsert": "false",
+        "Cache-Control": "3600",
+      },
+      body: Buffer.from(await file.arrayBuffer()),
+      cache: "no-store",
+    });
+    if (response.ok) return `${cfg.url}/storage/v1/object/public/${bucket}/${objectPath}`;
+    lastDetail = await response.text();
+    if (response.status !== 404) break;
+  }
+  throw new Error(`Falha no upload: ${lastDetail.slice(0, 300)}`);
 }

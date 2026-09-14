@@ -7,7 +7,7 @@ import { DeviceShowcase } from "@/components/DeviceShowcase";
 import { ProjectMedia } from "@/components/ProjectMedia";
 import { ProjectMetrics } from "@/components/ProjectMetrics";
 import { ArrowLeft, ArrowRight, Check, Github, WhatsApp } from "@/components/Icons";
-import { NexoraLogo } from "@/components/NexoraLogo";
+import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand, contact, type Project } from "@/data/portfolio";
 
 export function ProjectCase({ project }: { project: Project }) {
@@ -202,7 +202,7 @@ export function ProjectCase({ project }: { project: Project }) {
       <section className="case-next-section" data-reveal>
         <div className="shell">
           <div className="case-next-card">
-            <div><span className="eyebrow">NEXORA</span><h2>Um bom sistema começa com um problema bem entendido.</h2><p>Veja o outro case ou envie um briefing para conversar sobre um novo projeto.</p></div>
+            <div><span className="eyebrow">ALUNERI</span><h2>Um bom sistema começa com um problema bem entendido.</h2><p>Veja o outro case ou envie um briefing para conversar sobre um novo projeto.</p></div>
             <div className="case-next-actions">
               <Link className="button button-primary" href="/contato">Solicitar orçamento <ArrowRight /></Link>
               <a className="button button-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer"><WhatsApp /> WhatsApp</a>
@@ -213,8 +213,8 @@ export function ProjectCase({ project }: { project: Project }) {
 
       <footer>
         <div className="shell footer-inner">
-          <Link className="footer-brand" href="/#inicio"><NexoraLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
-          <span>© 2026 NEXORA. Produtos digitais feitos para funcionar.</span>
+          <Link className="footer-brand" href="/#inicio"><AluneriLogo className="footer-logo" /><span>{brand.tagline}</span></Link>
+          <span>© 2026 ALUNERI. Produtos digitais feitos para funcionar.</span>
           <a className="footer-github" href={contact.github} target="_blank" rel="noreferrer" aria-label="GitHub Ferro135"><Github /></a>
         </div>
       </footer>

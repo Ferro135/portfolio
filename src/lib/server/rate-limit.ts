@@ -9,7 +9,7 @@ function requestIp(request: Request) {
 }
 
 function hashedKey(request: Request, action: string) {
-  const salt = process.env.RATE_LIMIT_SALT || process.env.ADMIN_SESSION_SECRET || "nexora";
+  const salt = process.env.RATE_LIMIT_SALT || process.env.ADMIN_SESSION_SECRET || "aluneri";
   return createHash("sha256").update(`${salt}:${action}:${requestIp(request)}`).digest("hex");
 }
 

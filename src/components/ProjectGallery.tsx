@@ -132,7 +132,7 @@ export function ProjectGallery({ items, title }: { items: ProjectGalleryItem[]; 
               </button>
             </div>
 
-            <div className="relative min-h-0 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-nexora-bg shadow-2xl">
+            <div className="relative min-h-0 flex-1 overflow-hidden rounded-2xl border border-white/10 bg-aluneri-bg shadow-2xl">
               <Image
                 src={items[active].src}
                 alt={items[active].alt}

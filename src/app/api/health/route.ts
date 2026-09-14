@@ -4,7 +4,7 @@ export function GET() {
   return Response.json(
     {
       status: "ok",
-      service: "nexora-portfolio",
+      service: "aluneri-portfolio",
     },
     {
       headers: {

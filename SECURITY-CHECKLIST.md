@@ -1,4 +1,4 @@
-# Checklist de segurança da NEXORA
+# Checklist de segurança da ALUNERI
 
 ## Código
 - [x] CSP

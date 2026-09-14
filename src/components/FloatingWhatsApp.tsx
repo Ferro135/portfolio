@@ -23,7 +23,7 @@ export function FloatingWhatsApp() {
       href={contact.whatsapp}
       target="_blank"
       rel="noreferrer"
-      aria-label="Falar com a NEXORA no WhatsApp"
+      aria-label="Falar com a ALUNERI no WhatsApp"
       className={`floating-whatsapp ${visible ? "is-visible" : ""}`}
     >
       <span className="floating-whatsapp-icon"><WhatsApp size={21} /></span>

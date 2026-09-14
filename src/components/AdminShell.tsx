@@ -6,7 +6,7 @@ import { AdminNavigation } from "@/components/AdminNavigation";
 import { AdminCommandPalette } from "@/components/AdminCommandPalette";
 import { AdminSessionGuard } from "@/components/AdminSessionGuard";
 import { Download, ExternalLink, Lock, LogOut } from "@/components/Icons";
-import { NexoraLogo } from "@/components/NexoraLogo";
+import { AluneriLogo } from "@/components/AluneriLogo";
 
 export function AdminShell({ children }: { children: ReactNode }) {
   async function logout() {
@@ -21,8 +21,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
     <div className="admin-app">
       <AdminSessionGuard />
       <aside className="admin-sidebar">
-        <Link className="admin-brand" href="/admin" aria-label="NEXORA Admin">
-          <NexoraLogo className="admin-brand-logo" />
+        <Link className="admin-brand" href="/admin" aria-label="ALUNERI Admin">
+          <AluneriLogo className="admin-brand-logo" />
           <span>Control</span>
         </Link>
 
@@ -55,11 +55,11 @@ export function AdminShell({ children }: { children: ReactNode }) {
         <header className="admin-topbar">
           <div className="admin-topbar-title">
             <Lock size={14} />
-            <span>Central privada NEXORA</span>
+            <span>Central privada ALUNERI</span>
             <small>Sessão bloqueia após 30 min sem atividade</small>
           </div>
           <div className="admin-topbar-actions">
-            <span className="admin-global-shortcut"><kbd>Ctrl/⌘</kbd><b>+</b><kbd>Alt</kbd><b>+</b><kbd>N</kbd></span>
+            <span className="admin-global-shortcut"><kbd>Ctrl/⌘</kbd><b>+</b><kbd>Alt</kbd><b>+</b><kbd>A</kbd></span>
             <AdminCommandPalette />
           </div>
         </header>

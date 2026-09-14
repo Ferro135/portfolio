@@ -1,4 +1,4 @@
-# NEXORA Portfolio V5.6 — Business & Production
+# ALUNERI Portfolio V5.6 — Business & Production
 
 ## CRM e leads
 - briefing salvo via `/api/leads` quando Supabase está configurado
