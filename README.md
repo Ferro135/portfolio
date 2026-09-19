@@ -2,6 +2,18 @@
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
+## Destaques da V2.7
+
+- identidade visual Spectrum com ciano, azul, roxo, verde e âmbar;
+- Hero mais rico sem ficar carregado;
+- case real em showcase premium;
+- projetos com desafio e solução visíveis;
+- serviços, processo e stack diferenciados visualmente;
+- CTA final multicolorido;
+- Admin com cores semânticas para CRM, propostas, agenda, conteúdo e sistema;
+- dashboard reorganizado com métricas, pipeline, prioridades e atividade recente;
+- nenhuma alteração de banco de dados.
+
 ## Destaques da V2.6
 
 - detalhes visuais premium sem voltar ao excesso de cards;

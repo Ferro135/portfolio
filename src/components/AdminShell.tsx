@@ -21,7 +21,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
     (process.env.NODE_ENV === "production" ? "production" : "local");
 
   return (
-    <div className="admin-app admin-v250">
+    <div className="admin-app admin-v250 admin-v270">
       <AdminSessionGuard />
 
       <aside className="admin-sidebar admin-v250-sidebar">
@@ -34,7 +34,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           <div className="admin-v250-environment">
             <i />
             <span>{environment}</span>
-            <small>v2.5.0</small>
+            <small>v2.7.0</small>
           </div>
 
           <AdminNavigation />
@@ -61,8 +61,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
       <div className="admin-main">
         <header className="admin-topbar admin-v250-topbar">
           <div className="admin-v250-topbar-copy">
-            <strong>Painel administrativo</strong>
-            <small>Operação, comercial e conteúdo</small>
+            <strong>ALUNERI Workspace</strong>
+            <small>Comercial, operação, conteúdo e sistema</small>
           </div>
 
           <div className="admin-topbar-actions">
