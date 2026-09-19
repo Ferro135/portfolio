@@ -79,17 +79,24 @@ export default async function AdminDashboard() {
 
   return (
     <main className="admin-page admin-dashboard-page">
-      <div className="admin-page-heading admin-dashboard-heading">
-        <div>
-          <span>Operação</span>
-          <h1>Visão geral</h1>
-          <p>Prioridades comerciais, conteúdo e saúde do sistema em uma única leitura.</p>
+      <section className="admin-v241-dashboard-hero">
+        <div className="admin-page-heading admin-dashboard-heading">
+          <div>
+            <span>Control Center</span>
+            <h1>Visão geral</h1>
+            <p>Prioridades comerciais, conteúdo e saúde do sistema em uma única leitura.</p>
+          </div>
+          <div className={`admin-database-pill ${database.reachable ? "connected" : "offline"}`} title={database.detail}>
+            <i />
+            {database.reachable ? "Banco online" : supabaseConfigured() ? "Banco indisponível" : "Modo demonstração"}
+          </div>
         </div>
-        <div className={`admin-database-pill ${database.reachable ? "connected" : "offline"}`} title={database.detail}>
-          <i />
-          {database.reachable ? "Banco online" : supabaseConfigured() ? "Banco indisponível" : "Modo demonstração"}
+        <div className="admin-v241-quick-actions">
+          <Link href="/admin/leads"><Users size={15} /><span><small>CRM</small><strong>Ver leads</strong></span><ArrowRight size={14} /></Link>
+          <Link href="/admin/propostas"><FileText size={15} /><span><small>Comercial</small><strong>Propostas</strong></span><ArrowRight size={14} /></Link>
+          <Link href="/admin/agendamentos"><Calendar size={15} /><span><small>Agenda</small><strong>Reuniões</strong></span><ArrowRight size={14} /></Link>
         </div>
-      </div>
+      </section>
 
       {!supabaseConfigured() && (
         <div className="admin-alert">
@@ -99,21 +106,25 @@ export default async function AdminDashboard() {
 
       <section className="admin-kpi-grid" aria-label="Indicadores principais">
         <article>
+          <div className="admin-v241-kpi-icon"><Users size={16} /></div>
           <span>Leads ativos</span>
           <strong>{activeLeads.length}</strong>
           <small>{newLeads.length} novos</small>
         </article>
         <article>
+          <div className="admin-v241-kpi-icon"><FileText size={16} /></div>
           <span>Propostas abertas</span>
           <strong>{openProposals.length}</strong>
           <small>{proposals.length} no histórico</small>
         </article>
         <article>
+          <div className="admin-v241-kpi-icon"><Check size={16} /></div>
           <span>Valor aceito</span>
           <strong className="admin-kpi-money">{formatAdminCurrency(acceptedValue)}</strong>
           <small>Somente propostas aceitas</small>
         </article>
         <article>
+          <div className="admin-v241-kpi-icon"><Folder size={16} /></div>
           <span>Conteúdo publicado</span>
           <strong>{publishedProjects + publishedTestimonials}</strong>
           <small>{publishedProjects} projetos · {publishedTestimonials} depoimentos</small>

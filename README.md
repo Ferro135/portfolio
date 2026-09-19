@@ -2,6 +2,16 @@
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
+## Destaques da V2.4
+
+- redesign visual da Home sem alterar conteúdo ou funcionalidades;
+- hierarquia tipográfica e espaçamento unificados;
+- cards, botões, seções e páginas internas com uma linguagem única;
+- Header e Footer refinados;
+- Admin redesenhado para leitura mais rápida e operação mais confortável;
+- tabelas, filtros, KPIs, formulários e navegação administrativa reorganizados;
+- melhorias específicas de responsividade no site e no painel.
+
 ## Destaques da V2.2
 
 - Assistente de IA público focado em pré-atendimento;
@@ -331,3 +341,21 @@ Se custo/latência forem mais importantes, `gpt-5.6-terra` ou `gpt-5.6-luna` pod
 - segunda geração automática quando o modelo repete a mensagem anterior;
 - modo local com progressão de perguntas em vez de resposta genérica repetida;
 - botão **Nova** para reiniciar o contexto da conversa.
+
+## Assistente ALUNERI V2.3
+
+A versão 2.3 adiciona memória estruturada de projeto. A conversa recente e o contexto extraído permanecem apenas no `sessionStorage` da aba para manter continuidade entre páginas e reloads. O CRM só recebe dados quando o visitante gera, revisa e envia o briefing.
+
+Configuração recomendada:
+
+```env
+OPENAI_MODEL=gpt-5.6-sol
+OPENAI_REASONING_EFFORT=auto
+```
+
+`auto` usa mais raciocínio em arquitetura, integrações e geração de briefing e menos em perguntas simples.
+
+
+## V2.4.1 — Structural Redesign
+
+A V2.4.1 troca o refinamento apenas visual por mudanças estruturais reais na Home e no Admin, usando classes isoladas `v241-*` e `admin-v241` para garantir que a cascata antiga não esconda o novo design.

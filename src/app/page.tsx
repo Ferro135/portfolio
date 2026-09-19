@@ -35,11 +35,11 @@ const faqSchema = {
 
 export default function Home() {
   return (
-    <main id="conteudo">
+    <main id="conteudo" className="v241-home">
       <StructuredData data={faqSchema} />
       <Header />
 
-      <section className="hero-section" id="inicio">
+      <section className="hero-section v241-hero" id="inicio">
         <div className="hero-orb hero-orb-one" />
         <div className="hero-orb hero-orb-two" />
         <div className="shell hero-grid">
@@ -121,6 +121,11 @@ export default function Home() {
               <span>DESENVOLVIMENTO</span>
               <span>EVOLUÇÃO</span>
             </div>
+            <div className="v241-hero-signals" aria-label="Destaques do estúdio">
+              <span><b>01</b><small>Produto</small></span>
+              <span><b>02</b><small>Experiência</small></span>
+              <span><b>03</b><small>Engenharia</small></span>
+            </div>
           </div>
         </div>
 
@@ -150,9 +155,18 @@ export default function Home() {
           <i />
           <span>Automações</span>
         </div>
+
+        <nav className="shell v241-section-nav reveal-up reveal-delay-2" aria-label="Explorar a página">
+          <span>Explorar</span>
+          <a href="#projetos"><b>01</b> Projetos</a>
+          <a href="#processo"><b>02</b> Processo</a>
+          <a href="#sobre"><b>03</b> Estúdio</a>
+          <a href="#tecnologias"><b>04</b> Tecnologia</a>
+          <a href="#contato"><b>05</b> Contato</a>
+        </nav>
       </section>
 
-      <section className="section projects-section" id="projetos" data-reveal>
+      <section className="section projects-section v241-section v241-projects" id="projetos" data-section="01" data-reveal>
         <div className="shell">
           <div className="section-heading">
             <div>
@@ -196,7 +210,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section process-section" id="processo" data-reveal>
+      <section className="section process-section v241-section v241-process" id="processo" data-section="02" data-reveal>
         <div className="shell">
           <div className="section-heading">
             <div>
@@ -218,7 +232,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section philosophy-section" id="sobre" data-reveal>
+      <section className="section philosophy-section v241-section v241-philosophy" id="sobre" data-section="03" data-reveal>
         <div className="shell philosophy-grid">
           <div className="philosophy-heading">
             <span className="eyebrow">Sobre a ALUNERI</span>
@@ -240,7 +254,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section capabilities-section" data-reveal>
+      <section className="section capabilities-section v241-section v241-capabilities" data-section="04" data-reveal>
         <div className="shell">
           <div className="section-heading compact-heading">
             <div>
@@ -266,7 +280,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section technologies-section" id="tecnologias" data-reveal>
+      <section className="section technologies-section v241-section v241-technologies" id="tecnologias" data-section="05" data-reveal>
         <div className="shell">
           <div className="section-heading tech-heading">
             <div><span className="eyebrow">Tecnologias</span><h2>Tecnologias</h2></div>
@@ -289,7 +303,7 @@ export default function Home() {
 
       <Testimonials />
 
-      <section className="section faq-section" id="faq" data-reveal>
+      <section className="section faq-section v241-section v241-faq" id="faq" data-section="06" data-reveal>
         <div className="shell faq-grid">
           <div className="faq-heading">
             <span className="eyebrow">Perguntas frequentes</span>
@@ -308,7 +322,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section contact-section" id="contato" data-reveal>
+      <section className="section contact-section v241-section v241-contact" id="contato" data-section="07" data-reveal>
         <div className="shell">
           <div className="contact-card">
             <div className="contact-orb" />

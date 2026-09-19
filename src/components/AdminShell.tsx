@@ -19,17 +19,18 @@ export function AdminShell({ children }: { children: ReactNode }) {
   const environment = process.env.VERCEL_ENV || (process.env.NODE_ENV === "production" ? "production" : "local");
 
   return (
-    <div className="admin-app">
+    <div className="admin-app admin-v241">
       <AdminSessionGuard />
       <aside className="admin-sidebar">
-        <Link className="admin-brand" href="/admin" aria-label="ALUNERI Admin">
+        <Link className="admin-brand admin-v241-brand" href="/admin" aria-label="ALUNERI Admin">
           <AluneriLogo className="admin-brand-logo" priority />
-          <span>Control</span>
+          <div className="admin-v241-brand-copy"><span>Control Center</span><small>Workspace privado</small></div>
         </Link>
 
         <div className="admin-environment-badge">
           <i />
           <span>{environment}</span>
+          <small>v2.4.1</small>
         </div>
 
         <AdminNavigation />
@@ -54,10 +55,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
 
       <div className="admin-main">
         <header className="admin-topbar">
-          <div className="admin-topbar-title">
-            <Lock size={14} />
-            <span>Central privada ALUNERI</span>
-            <small>Sessão bloqueia após 30 min sem atividade</small>
+          <div className="admin-topbar-title admin-v241-topbar-title">
+            <span className="admin-v241-lock"><Lock size={13} /></span>
+            <div><span>Central privada ALUNERI</span><small>Operação, comercial e conteúdo</small></div>
           </div>
           <div className="admin-topbar-actions">
             <AdminClock />
