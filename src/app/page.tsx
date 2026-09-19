@@ -37,8 +37,16 @@ const faqSchema = {
   })),
 };
 
+const processOutputs = [
+  "Problema + prioridades",
+  "Fluxos + direção visual",
+  "Produto funcional",
+  "Deploy + base de evolução",
+];
+
 export default function Home() {
   const featured = projects[0];
+  const technologyCount = technologyGroups.reduce((total, group) => total + group.items.length, 0);
 
   return (
     <main id="conteudo" className="v250-home">
@@ -79,6 +87,12 @@ export default function Home() {
               <span><Check size={14} /> Do design ao backend</span>
               <span><Check size={14} /> Deploy e evolução</span>
             </div>
+
+            <div className="v260-hero-meta" aria-label="Resumo do portfólio">
+              <div><strong>{projects.length}</strong><span>cases em destaque</span></div>
+              <div><strong>{capabilities.length}</strong><span>áreas de atuação</span></div>
+              <div><strong>{technologyCount}</strong><span>tecnologias listadas</span></div>
+            </div>
           </div>
 
           <Link
@@ -88,10 +102,10 @@ export default function Home() {
           >
             <div className="v250-featured-head">
               <div>
-                <span>Projeto em destaque</span>
+                <span className="v260-featured-label"><i /> Case real · Projeto em destaque</span>
                 <strong>{featured.title}</strong>
               </div>
-              <ArrowUpRight size={19} />
+              <span className="v260-featured-open">Abrir case <ArrowUpRight size={16} /></span>
             </div>
 
             <div className="v250-featured-visual">
@@ -99,8 +113,15 @@ export default function Home() {
             </div>
 
             <div className="v250-featured-foot">
-              <span>{featured.category}</span>
-              <div>
+              <div className="v260-featured-spec">
+                <span>Tipo</span>
+                <strong>{featured.category}</strong>
+              </div>
+              <div className="v260-featured-spec">
+                <span>Stack / operação</span>
+                <strong>{featured.technicalHighlights.slice(0, 2).join(" · ")}</strong>
+              </div>
+              <div className="v260-featured-tags">
                 {featured.tags.slice(0, 3).map((tag) => (
                   <i key={tag}>{tag}</i>
                 ))}
@@ -149,6 +170,17 @@ export default function Home() {
                   <span className="v250-project-eyebrow">{project.eyebrow}</span>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
+
+                  <div className="v260-project-insight">
+                    <div>
+                      <span>Desafio</span>
+                      <p>{project.challenge}</p>
+                    </div>
+                    <div>
+                      <span>Solução</span>
+                      <p>{project.solution}</p>
+                    </div>
+                  </div>
 
                   <div className="v250-project-facts">
                     <div>
@@ -232,6 +264,7 @@ export default function Home() {
                   <small>Etapa {index + 1}</small>
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
+                  <span className="v260-process-output">Entrega · {processOutputs[index]}</span>
                 </div>
               </article>
             ))}
@@ -257,6 +290,12 @@ export default function Home() {
               <div><strong>Simplicidade</strong><span>Menos passos e decisões mais claras.</span></div>
               <div><strong>Estrutura</strong><span>Base organizada para evoluir sem refazer tudo.</span></div>
               <div><strong>Uso real</strong><span>Prioridade para o que as pessoas realmente precisam fazer.</span></div>
+            </div>
+
+            <div className="v260-studio-details">
+              <span><i /> Design + desenvolvimento no mesmo fluxo</span>
+              <span><i /> Projetos preparados para desktop e mobile</span>
+              <span><i /> Entrega com deploy e continuidade</span>
             </div>
 
             <Link className="v250-text-link" href="/sobre">
@@ -328,7 +367,13 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="v250-contact-actions">
+            <div className="v260-contact-side">
+              <div className="v260-contact-note">
+                <span>Como começar</span>
+                <strong>Briefing → conversa → proposta</strong>
+                <small>Sem compromisso automático ao enviar sua ideia.</small>
+              </div>
+              <div className="v250-contact-actions">
               <Link href="/contato">
                 <span><Spark size={17} /></span>
                 <div><small>Projeto</small><strong>Preencher briefing</strong></div>
@@ -358,6 +403,7 @@ export default function Home() {
                 <div><small>GitHub</small><strong>Ferro135</strong></div>
                 <ArrowUpRight size={16} />
               </a>
+              </div>
             </div>
           </div>
         </div>

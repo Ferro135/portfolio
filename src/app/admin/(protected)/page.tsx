@@ -105,6 +105,8 @@ export default async function AdminDashboard() {
     "completed",
   ];
 
+  const attentionTotal = staleLeads.length + pendingAppointments.length + recentErrors.length;
+
   return (
     <main className="admin-page admin-v250-dashboard">
       <header className="admin-v250-page-head">
@@ -137,6 +139,29 @@ export default async function AdminDashboard() {
           </Link>
         </div>
       </header>
+
+      <section className="admin-v260-summary" aria-label="Resumo operacional">
+        <div>
+          <span>Hoje</span>
+          <strong>{newLeads.length} lead(s) novo(s)</strong>
+          <small>{staleLeads.length ? `${staleLeads.length} aguardando há mais de 2 dias` : "Nenhum lead atrasado"}</small>
+        </div>
+        <div>
+          <span>Agenda</span>
+          <strong>{pendingAppointments.length} solicitação(ões)</strong>
+          <small>Aguardando confirmação</small>
+        </div>
+        <div>
+          <span>Sistema</span>
+          <strong>{recentErrors.length ? `${recentErrors.length} erro(s) recente(s)` : "Operação estável"}</strong>
+          <small>Últimas 24 horas</small>
+        </div>
+        <div className={attentionTotal ? "attention" : "ok"}>
+          <span>Prioridade</span>
+          <strong>{attentionTotal ? `${attentionTotal} item(ns) pedem atenção` : "Nada crítico agora"}</strong>
+          <small>Resumo automático do painel</small>
+        </div>
+      </section>
 
       {!supabaseConfigured() && (
         <div className="admin-alert">
@@ -182,6 +207,15 @@ export default async function AdminDashboard() {
         </Link>
       </section>
 
+      <nav className="admin-v260-quick-actions" aria-label="Atalhos rápidos">
+        <span>Atalhos</span>
+        <Link href="/admin/leads">CRM <ArrowRight size={12} /></Link>
+        <Link href="/admin/propostas">Propostas <ArrowRight size={12} /></Link>
+        <Link href="/admin/agendamentos">Agenda <ArrowRight size={12} /></Link>
+        <Link href="/admin/projetos">Projetos <ArrowRight size={12} /></Link>
+        <Link href="/admin/configuracao">Configuração <ArrowRight size={12} /></Link>
+      </nav>
+
       <section className="admin-v250-primary-grid">
         <article className="admin-v250-panel admin-v250-pipeline-panel">
           <div className="admin-v250-panel-head">
@@ -205,7 +239,7 @@ export default async function AdminDashboard() {
                 <div key={status}>
                   <div>
                     <span>{adminStatusLabel(status)}</span>
-                    <strong>{count}</strong>
+                    <div className="admin-v260-pipeline-value"><small>{percentage}%</small><strong>{count}</strong></div>
                   </div>
                   <i><b style={{ width: `${percentage}%` }} /></i>
                 </div>
@@ -311,6 +345,25 @@ export default async function AdminDashboard() {
               </div>
             )}
           </div>
+        </article>
+      </section>
+
+      <section className="admin-v260-footer-grid">
+        <article className="admin-v260-health">
+          <div>
+            <span>Conteúdo</span>
+            <strong>{publishedProjects} projeto(s) publicado(s)</strong>
+          </div>
+          <p>{projects.length - publishedProjects} rascunho(s) · {publishedTestimonials} depoimento(s) publicado(s)</p>
+          <Link href="/admin/projetos">Gerenciar conteúdo <ArrowRight size={12} /></Link>
+        </article>
+        <article className="admin-v260-health">
+          <div>
+            <span>Operação</span>
+            <strong>{database.reachable ? "Banco e CRM disponíveis" : "Verificar infraestrutura"}</strong>
+          </div>
+          <p>{database.detail}</p>
+          <Link href="/admin/configuracao">Abrir diagnóstico <ArrowRight size={12} /></Link>
         </article>
       </section>
     </main>
