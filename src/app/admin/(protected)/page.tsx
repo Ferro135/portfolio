@@ -15,36 +15,57 @@ import {
   formatAdminDate,
   isWithinHours,
 } from "@/lib/admin-ui";
-import { AlertTriangle, ArrowRight, Calendar, Check, FileText, Folder, Users } from "@/components/Icons";
+import {
+  AlertTriangle,
+  ArrowRight,
+  Calendar,
+  Check,
+  FileText,
+  Folder,
+  Users,
+} from "@/components/Icons";
 
 export default async function AdminDashboard() {
-  const [leads, proposals, projects, testimonials, appointments, errors, database] = await Promise.all([
-    listLeads(),
-    listProposals(),
-    listCmsProjects(true),
-    listTestimonials(true),
-    listAppointments(),
-    listErrors(),
-    checkSupabaseHealth(),
-  ]);
+  const [leads, proposals, projects, testimonials, appointments, errors, database] =
+    await Promise.all([
+      listLeads(),
+      listProposals(),
+      listCmsProjects(true),
+      listTestimonials(true),
+      listAppointments(),
+      listErrors(),
+      checkSupabaseHealth(),
+    ]);
 
   const newLeads = leads.filter((lead) => lead.status === "new");
   const staleLeads = newLeads.filter((lead) => ageInDays(lead.created_at) >= 2);
-  const activeLeads = leads.filter((lead) => !["completed", "archived"].includes(lead.status));
-  const openProposals = proposals.filter((proposal) => ["draft", "sent"].includes(proposal.status));
+  const activeLeads = leads.filter(
+    (lead) => !["completed", "archived"].includes(lead.status),
+  );
+  const openProposals = proposals.filter((proposal) =>
+    ["draft", "sent"].includes(proposal.status),
+  );
   const acceptedValue = proposals
     .filter((proposal) => proposal.status === "accepted")
     .reduce((sum, proposal) => sum + (proposal.price_cents || 0), 0);
-  const pendingAppointments = appointments.filter((appointment) => appointment.status === "requested");
-  const recentErrors = errors.filter((error) => isWithinHours(error.created_at, 24));
+  const pendingAppointments = appointments.filter(
+    (appointment) => appointment.status === "requested",
+  );
+  const recentErrors = errors.filter((error) =>
+    isWithinHours(error.created_at, 24),
+  );
   const publishedProjects = projects.filter((project) => project.published).length;
-  const publishedTestimonials = testimonials.filter((testimonial) => testimonial.published).length;
+  const publishedTestimonials = testimonials.filter(
+    (testimonial) => testimonial.published,
+  ).length;
 
   const attention = [
     {
       label: "Leads novos",
       value: newLeads.length,
-      detail: staleLeads.length ? `${staleLeads.length} aguardando há 2+ dias` : "Nenhum atrasado",
+      detail: staleLeads.length
+        ? `${staleLeads.length} aguardando há 2+ dias`
+        : "Nenhum atrasado",
       href: "/admin/leads?status=new",
       icon: Users,
       tone: staleLeads.length ? "warning" : "default",
@@ -52,7 +73,7 @@ export default async function AdminDashboard() {
     {
       label: "Reuniões pendentes",
       value: pendingAppointments.length,
-      detail: "Solicitações aguardando confirmação",
+      detail: "Aguardando confirmação",
       href: "/admin/agendamentos?status=requested",
       icon: Calendar,
       tone: pendingAppointments.length ? "warning" : "default",
@@ -60,7 +81,7 @@ export default async function AdminDashboard() {
     {
       label: "Propostas abertas",
       value: openProposals.length,
-      detail: "Rascunhos e propostas enviadas",
+      detail: "Rascunhos e enviadas",
       href: "/admin/propostas",
       icon: FileText,
       tone: "default",
@@ -68,152 +89,230 @@ export default async function AdminDashboard() {
     {
       label: "Erros em 24h",
       value: recentErrors.length,
-      detail: recentErrors.length ? "Revisar observabilidade" : "Nenhum erro recente",
+      detail: recentErrors.length ? "Revisar observabilidade" : "Tudo normal",
       href: "/admin/erros",
       icon: AlertTriangle,
       tone: recentErrors.length ? "danger" : "success",
     },
   ] as const;
 
-  const pipeline = ["new", "contacted", "proposal_sent", "approved", "in_progress", "completed"];
+  const pipeline = [
+    "new",
+    "contacted",
+    "proposal_sent",
+    "approved",
+    "in_progress",
+    "completed",
+  ];
 
   return (
-    <main className="admin-page admin-dashboard-page">
-      <section className="admin-v241-dashboard-hero">
-        <div className="admin-page-heading admin-dashboard-heading">
-          <div>
-            <span>Control Center</span>
-            <h1>Visão geral</h1>
-            <p>Prioridades comerciais, conteúdo e saúde do sistema em uma única leitura.</p>
-          </div>
-          <div className={`admin-database-pill ${database.reachable ? "connected" : "offline"}`} title={database.detail}>
+    <main className="admin-page admin-v250-dashboard">
+      <header className="admin-v250-page-head">
+        <div>
+          <span>Visão geral</span>
+          <h1>Control Center</h1>
+          <p>
+            O que precisa de atenção hoje, sem misturar operação, conteúdo e
+            sistema na mesma leitura.
+          </p>
+        </div>
+
+        <div className="admin-v250-head-actions">
+          <div
+            className={`admin-v250-db ${database.reachable ? "online" : "offline"}`}
+            title={database.detail}
+          >
             <i />
-            {database.reachable ? "Banco online" : supabaseConfigured() ? "Banco indisponível" : "Modo demonstração"}
+            <span>
+              {database.reachable
+                ? "Banco online"
+                : supabaseConfigured()
+                  ? "Banco indisponível"
+                  : "Modo demonstração"}
+            </span>
           </div>
+
+          <Link href="/admin/leads">
+            Abrir CRM <ArrowRight size={14} />
+          </Link>
         </div>
-        <div className="admin-v241-quick-actions">
-          <Link href="/admin/leads"><Users size={15} /><span><small>CRM</small><strong>Ver leads</strong></span><ArrowRight size={14} /></Link>
-          <Link href="/admin/propostas"><FileText size={15} /><span><small>Comercial</small><strong>Propostas</strong></span><ArrowRight size={14} /></Link>
-          <Link href="/admin/agendamentos"><Calendar size={15} /><span><small>Agenda</small><strong>Reuniões</strong></span><ArrowRight size={14} /></Link>
-        </div>
-      </section>
+      </header>
 
       {!supabaseConfigured() && (
         <div className="admin-alert">
-          Execute <code>supabase/schema.sql</code> e configure <code>SUPABASE_URL</code> + <code>SUPABASE_SERVICE_ROLE_KEY / SUPABASE_SECRET_KEY</code> para ativar persistência.
+          Configure o Supabase para ativar a persistência do painel.
         </div>
       )}
 
-      <section className="admin-kpi-grid" aria-label="Indicadores principais">
-        <article>
-          <div className="admin-v241-kpi-icon"><Users size={16} /></div>
-          <span>Leads ativos</span>
-          <strong>{activeLeads.length}</strong>
-          <small>{newLeads.length} novos</small>
-        </article>
-        <article>
-          <div className="admin-v241-kpi-icon"><FileText size={16} /></div>
-          <span>Propostas abertas</span>
-          <strong>{openProposals.length}</strong>
-          <small>{proposals.length} no histórico</small>
-        </article>
-        <article>
-          <div className="admin-v241-kpi-icon"><Check size={16} /></div>
-          <span>Valor aceito</span>
-          <strong className="admin-kpi-money">{formatAdminCurrency(acceptedValue)}</strong>
-          <small>Somente propostas aceitas</small>
-        </article>
-        <article>
-          <div className="admin-v241-kpi-icon"><Folder size={16} /></div>
-          <span>Conteúdo publicado</span>
-          <strong>{publishedProjects + publishedTestimonials}</strong>
-          <small>{publishedProjects} projetos · {publishedTestimonials} depoimentos</small>
-        </article>
-      </section>
-
-      <section className="admin-attention-grid" aria-label="Itens que precisam de atenção">
-        {attention.map((item) => {
-          const Icon = item.icon;
-          return (
-            <Link className={`admin-attention-card tone-${item.tone}`} href={item.href} key={item.label}>
-              <span className="admin-attention-icon"><Icon size={17} /></span>
-              <div><span>{item.label}</span><strong>{item.value}</strong><small>{item.detail}</small></div>
-              <ArrowRight size={16} />
-            </Link>
-          );
-        })}
-      </section>
-
-      <div className="admin-dashboard-columns">
-        <section className="admin-panel admin-panel-flush">
-          <div className="admin-panel-heading">
-            <div><span>CRM</span><h2>Pipeline comercial</h2></div>
-            <Link href="/admin/leads">Ver todos <ArrowRight size={14} /></Link>
+      <section className="admin-v250-kpis" aria-label="Indicadores principais">
+        <Link href="/admin/leads">
+          <span className="admin-v250-kpi-icon"><Users size={17} /></span>
+          <div>
+            <small>Leads ativos</small>
+            <strong>{activeLeads.length}</strong>
+            <p>{newLeads.length} novos</p>
           </div>
-          <div className="admin-pipeline admin-pipeline-rich">
+        </Link>
+
+        <Link href="/admin/propostas">
+          <span className="admin-v250-kpi-icon"><FileText size={17} /></span>
+          <div>
+            <small>Propostas abertas</small>
+            <strong>{openProposals.length}</strong>
+            <p>{proposals.length} no histórico</p>
+          </div>
+        </Link>
+
+        <Link href="/admin/propostas?status=accepted">
+          <span className="admin-v250-kpi-icon success"><Check size={17} /></span>
+          <div>
+            <small>Valor aceito</small>
+            <strong className="money">{formatAdminCurrency(acceptedValue)}</strong>
+            <p>Somente propostas aceitas</p>
+          </div>
+        </Link>
+
+        <Link href="/admin/projetos">
+          <span className="admin-v250-kpi-icon"><Folder size={17} /></span>
+          <div>
+            <small>Conteúdo publicado</small>
+            <strong>{publishedProjects + publishedTestimonials}</strong>
+            <p>{publishedProjects} projetos · {publishedTestimonials} depoimentos</p>
+          </div>
+        </Link>
+      </section>
+
+      <section className="admin-v250-primary-grid">
+        <article className="admin-v250-panel admin-v250-pipeline-panel">
+          <div className="admin-v250-panel-head">
+            <div>
+              <span>CRM</span>
+              <h2>Pipeline comercial</h2>
+            </div>
+            <Link href="/admin/leads">
+              Ver todos <ArrowRight size={13} />
+            </Link>
+          </div>
+
+          <div className="admin-v250-pipeline">
             {pipeline.map((status) => {
               const count = leads.filter((lead) => lead.status === status).length;
-              const percentage = leads.length ? Math.round((count / leads.length) * 100) : 0;
+              const percentage = leads.length
+                ? Math.round((count / leads.length) * 100)
+                : 0;
+
               return (
                 <div key={status}>
-                  <strong>{count}</strong>
-                  <span>{adminStatusLabel(status)}</span>
+                  <div>
+                    <span>{adminStatusLabel(status)}</span>
+                    <strong>{count}</strong>
+                  </div>
                   <i><b style={{ width: `${percentage}%` }} /></i>
                 </div>
               );
             })}
           </div>
-        </section>
+        </article>
 
-        <section className="admin-panel admin-panel-flush">
-          <div className="admin-panel-heading">
-            <div><span>Conteúdo</span><h2>Publicação</h2></div>
-            <Link href="/admin/projetos">Gerenciar <ArrowRight size={14} /></Link>
+        <aside className="admin-v250-panel admin-v250-attention">
+          <div className="admin-v250-panel-head">
+            <div>
+              <span>Agora</span>
+              <h2>Precisa de atenção</h2>
+            </div>
           </div>
-          <div className="admin-content-health">
-            <div><span className="success"><Check size={14} /></span><strong>{publishedProjects}</strong><small>Projetos publicados</small></div>
-            <div><span><Folder size={14} /></span><strong>{projects.length - publishedProjects}</strong><small>Projetos em rascunho</small></div>
-            <div><span className="success"><Check size={14} /></span><strong>{publishedTestimonials}</strong><small>Depoimentos publicados</small></div>
-            <div><span><FileText size={14} /></span><strong>{testimonials.length - publishedTestimonials}</strong><small>Depoimentos em rascunho</small></div>
-          </div>
-        </section>
-      </div>
 
-      <div className="admin-dashboard-columns admin-dashboard-lists">
-        <section className="admin-panel admin-panel-flush">
-          <div className="admin-panel-heading">
-            <div><span>Últimos contatos</span><h2>Leads recentes</h2></div>
-            <Link href="/admin/leads">Abrir CRM <ArrowRight size={14} /></Link>
+          <div className="admin-v250-attention-list">
+            {attention.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  href={item.href}
+                  key={item.label}
+                  className={`tone-${item.tone}`}
+                >
+                  <span className="icon"><Icon size={15} /></span>
+                  <div>
+                    <strong>{item.label}</strong>
+                    <small>{item.detail}</small>
+                  </div>
+                  <b>{item.value}</b>
+                </Link>
+              );
+            })}
           </div>
-          <div className="admin-compact-list">
-            {leads.slice(0, 5).map((lead) => (
+        </aside>
+      </section>
+
+      <section className="admin-v250-secondary-grid">
+        <article className="admin-v250-panel">
+          <div className="admin-v250-panel-head">
+            <div>
+              <span>CRM</span>
+              <h2>Leads recentes</h2>
+            </div>
+            <Link href="/admin/leads">
+              Abrir CRM <ArrowRight size={13} />
+            </Link>
+          </div>
+
+          <div className="admin-v250-recent-list">
+            {leads.slice(0, 6).map((lead) => (
               <Link href={`/admin/leads/${lead.id}`} key={lead.id}>
-                <span className="admin-avatar">{lead.name.slice(0, 1).toUpperCase()}</span>
-                <div><strong>{lead.name}</strong><small>{lead.project_type} · {formatAdminDate(lead.created_at)}</small></div>
-                <span className={`admin-status status-${lead.status}`}>{adminStatusLabel(lead.status)}</span>
+                <span className="avatar">
+                  {lead.name.slice(0, 1).toUpperCase()}
+                </span>
+                <div>
+                  <strong>{lead.name}</strong>
+                  <small>
+                    {lead.project_type} · {formatAdminDate(lead.created_at)}
+                  </small>
+                </div>
+                <span className={`admin-status status-${lead.status}`}>
+                  {adminStatusLabel(lead.status)}
+                </span>
               </Link>
             ))}
-            {!leads.length && <div className="admin-empty compact">Nenhum lead registrado.</div>}
+            {!leads.length && (
+              <div className="admin-empty compact">Nenhum lead registrado.</div>
+            )}
           </div>
-        </section>
+        </article>
 
-        <section className="admin-panel admin-panel-flush">
-          <div className="admin-panel-heading">
-            <div><span>Agenda</span><h2>Solicitações recentes</h2></div>
-            <Link href="/admin/agendamentos">Abrir agenda <ArrowRight size={14} /></Link>
+        <article className="admin-v250-panel">
+          <div className="admin-v250-panel-head">
+            <div>
+              <span>Agenda</span>
+              <h2>Próximas solicitações</h2>
+            </div>
+            <Link href="/admin/agendamentos">
+              Abrir agenda <ArrowRight size={13} />
+            </Link>
           </div>
-          <div className="admin-compact-list">
-            {appointments.slice(0, 5).map((appointment) => (
+
+          <div className="admin-v250-recent-list">
+            {appointments.slice(0, 6).map((appointment) => (
               <Link href="/admin/agendamentos" key={appointment.id}>
-                <span className="admin-avatar appointment"><Calendar size={14} /></span>
-                <div><strong>{appointment.name}</strong><small>{appointment.preferred_date} · {appointment.preferred_period}</small></div>
-                <span className={`admin-status status-${appointment.status}`}>{adminStatusLabel(appointment.status)}</span>
+                <span className="avatar calendar"><Calendar size={14} /></span>
+                <div>
+                  <strong>{appointment.name}</strong>
+                  <small>
+                    {appointment.preferred_date} · {appointment.preferred_period}
+                  </small>
+                </div>
+                <span className={`admin-status status-${appointment.status}`}>
+                  {adminStatusLabel(appointment.status)}
+                </span>
               </Link>
             ))}
-            {!appointments.length && <div className="admin-empty compact">Nenhum agendamento registrado.</div>}
+            {!appointments.length && (
+              <div className="admin-empty compact">
+                Nenhum agendamento registrado.
+              </div>
+            )}
           </div>
-        </section>
-      </div>
+        </article>
+      </section>
     </main>
   );
 }

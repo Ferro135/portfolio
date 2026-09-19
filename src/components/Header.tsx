@@ -8,18 +8,14 @@ import { AluneriLogo } from "@/components/AluneriLogo";
 import { brand } from "@/data/portfolio";
 
 const ptLinks = [
-  ["/#inicio", "Início"],
   ["/projetos", "Projetos"],
-  ["/#processo", "Processo"],
   ["/servicos", "Serviços"],
   ["/sobre", "Sobre"],
   ["/contato", "Contato"],
 ] as const;
 
 const enLinks = [
-  ["/en#home", "Home"],
   ["/en/projects", "Projects"],
-  ["/en#process", "Process"],
   ["/en/services", "Services"],
   ["/en/about", "About"],
   ["/en/contact", "Contact"],

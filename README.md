@@ -2,6 +2,19 @@
 
 Portfólio da **ALUNERI — Produtos Digitais & Sistemas**, desenvolvido com Next.js, TypeScript e Tailwind CSS.
 
+## Destaques da V2.5
+
+- redesign Clean Studio com menos ruído visual;
+- Hero usando projeto real em destaque;
+- projetos exibidos um por vez em layout amplo;
+- serviços em lista editorial;
+- processo em timeline;
+- navegação pública reduzida;
+- Admin reorganizado para priorizar operação;
+- dashboard com KPIs, pipeline, pendências e atividade recente;
+- sidebar e topbar simplificadas;
+- sem mudanças no Supabase.
+
 ## Destaques da V2.4
 
 - redesign visual da Home sem alterar conteúdo ou funcionalidades;

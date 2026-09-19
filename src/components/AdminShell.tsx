@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { AdminNavigation } from "@/components/AdminNavigation";
 import { AdminCommandPalette } from "@/components/AdminCommandPalette";
 import { AdminSessionGuard } from "@/components/AdminSessionGuard";
-import { Download, ExternalLink, Lock, LogOut } from "@/components/Icons";
+import { Download, ExternalLink, LogOut } from "@/components/Icons";
 import { AluneriLogo } from "@/components/AluneriLogo";
 import { AdminClock } from "@/components/AdminClock";
 
@@ -16,24 +16,29 @@ export function AdminShell({ children }: { children: ReactNode }) {
     redirect("/admin/login");
   }
 
-  const environment = process.env.VERCEL_ENV || (process.env.NODE_ENV === "production" ? "production" : "local");
+  const environment =
+    process.env.VERCEL_ENV ||
+    (process.env.NODE_ENV === "production" ? "production" : "local");
 
   return (
-    <div className="admin-app admin-v241">
+    <div className="admin-app admin-v250">
       <AdminSessionGuard />
-      <aside className="admin-sidebar">
-        <Link className="admin-brand admin-v241-brand" href="/admin" aria-label="ALUNERI Admin">
-          <AluneriLogo className="admin-brand-logo" priority />
-          <div className="admin-v241-brand-copy"><span>Control Center</span><small>Workspace privado</small></div>
-        </Link>
 
-        <div className="admin-environment-badge">
-          <i />
-          <span>{environment}</span>
-          <small>v2.4.1</small>
+      <aside className="admin-sidebar admin-v250-sidebar">
+        <div>
+          <Link className="admin-v250-brand" href="/admin" aria-label="ALUNERI Admin">
+            <AluneriLogo className="admin-brand-logo" priority />
+            <span>Admin</span>
+          </Link>
+
+          <div className="admin-v250-environment">
+            <i />
+            <span>{environment}</span>
+            <small>v2.5.0</small>
+          </div>
+
+          <AdminNavigation />
         </div>
-
-        <AdminNavigation />
 
         <div className="admin-sidebar-footer">
           <a href="/api/admin/export">
@@ -54,17 +59,18 @@ export function AdminShell({ children }: { children: ReactNode }) {
       </aside>
 
       <div className="admin-main">
-        <header className="admin-topbar">
-          <div className="admin-topbar-title admin-v241-topbar-title">
-            <span className="admin-v241-lock"><Lock size={13} /></span>
-            <div><span>Central privada ALUNERI</span><small>Operação, comercial e conteúdo</small></div>
+        <header className="admin-topbar admin-v250-topbar">
+          <div className="admin-v250-topbar-copy">
+            <strong>Painel administrativo</strong>
+            <small>Operação, comercial e conteúdo</small>
           </div>
+
           <div className="admin-topbar-actions">
             <AdminClock />
-            <span className="admin-global-shortcut"><kbd>Ctrl/⌘</kbd><b>+</b><kbd>Alt</kbd><b>+</b><kbd>A</kbd></span>
             <AdminCommandPalette />
           </div>
         </header>
+
         {children}
       </div>
     </div>

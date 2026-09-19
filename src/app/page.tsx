@@ -8,17 +8,21 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Code,
   Github,
-  Layers,
   Mail,
   Monitor,
   Spark,
   WhatsApp,
 } from "@/components/Icons";
-import { AluneriLogo } from "@/components/AluneriLogo";
-import { brand, capabilities, contact, faqs, processSteps, projects, technologyGroups } from "@/data/portfolio";
-
+import {
+  brand,
+  capabilities,
+  contact,
+  faqs,
+  processSteps,
+  projects,
+  technologyGroups,
+} from "@/data/portfolio";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -34,266 +38,249 @@ const faqSchema = {
 };
 
 export default function Home() {
+  const featured = projects[0];
+
   return (
-    <main id="conteudo" className="v241-home">
+    <main id="conteudo" className="v250-home">
       <StructuredData data={faqSchema} />
       <Header />
 
-      <section className="hero-section v241-hero" id="inicio">
-        <div className="hero-orb hero-orb-one" />
-        <div className="hero-orb hero-orb-two" />
-        <div className="shell hero-grid">
-          <div className="hero-copy reveal-up">
-            <div className="hero-kicker">
-              <span className="hero-kicker-dot" />
-              <span className="eyebrow">{brand.tagline}</span>
-              <span className="hero-kicker-line" />
-              <small>Estratégia · Interface · Desenvolvimento</small>
+      <section className="v250-hero" id="inicio">
+        <div className="shell v250-hero-grid">
+          <div className="v250-hero-copy">
+            <div className="v250-status">
+              <i />
+              <span>{brand.availability}</span>
             </div>
+
+            <span className="v250-overline">{brand.tagline}</span>
+
             <h1>
-              Transformamos ideias em<br />
-              sistemas que <span className="gradient-text">funcionam.</span>
+              Produtos digitais
+              <span>claros, rápidos e feitos para funcionar.</span>
             </h1>
+
             <p>
-              Criamos sites, dashboards e aplicações web modernas, com foco em experiência,
-              performance e simplicidade — do conceito ao deploy.
+              Sites, SaaS, dashboards e sistemas web desenvolvidos do conceito
+              ao deploy — com foco em experiência, operação real e evolução.
             </p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#projetos">
-                Ver projetos <ArrowRight />
-              </a>
-              <Link className="button button-secondary" href="/contato">
-                Solicitar orçamento <ArrowUpRight size={16} />
+
+            <div className="v250-hero-actions">
+              <Link className="v250-primary-button" href="/contato">
+                Falar sobre um projeto <ArrowRight size={16} />
               </Link>
-              {contact.whatsapp && (
-                <a className="button button-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer">
-                  <WhatsApp /> WhatsApp direto
-                </a>
-              )}
+              <Link className="v250-text-link" href="/projetos">
+                Ver projetos <ArrowUpRight size={15} />
+              </Link>
             </div>
-            <div className="hero-proof">
-              <span><Check /> Interfaces responsivas</span>
-              <span><Check /> Sistemas completos</span>
-              <span><Check /> Deploy e evolução</span>
+
+            <div className="v250-proof-row">
+              <span><Check size={14} /> Responsivo</span>
+              <span><Check size={14} /> Do design ao backend</span>
+              <span><Check size={14} /> Deploy e evolução</span>
             </div>
-            <Link className="hero-inline-link" href="/agendar">
-              Prefere conversar primeiro? <strong>Agendar uma conversa</strong> <ArrowRight size={14} />
-            </Link>
           </div>
 
-          <div className="hero-visual reveal-up reveal-delay-1">
-            <div className="visual-glow" />
-            <div className="visual-window visual-window-back"><span /><span /><span /></div>
-            <div className="visual-window visual-window-main">
-              <div className="window-topbar">
-                <div><i /><i /><i /></div>
-                <span>aluneri.system</span>
+          <Link
+            href={`/projetos/${featured.slug}`}
+            className="v250-featured-project"
+            aria-label={`Ver case ${featured.title}`}
+          >
+            <div className="v250-featured-head">
+              <div>
+                <span>Projeto em destaque</span>
+                <strong>{featured.title}</strong>
               </div>
-              <div className="window-content">
-                <aside>
-                  <AluneriLogo compact className="mini-aluneri-mark" />
-                  <span className="mini-line long" />
-                  <span className="mini-line" />
-                  <span className="mini-line short" />
-                  <span className="mini-line" />
-                </aside>
-                <div className="window-body">
-                  <small>PRODUTO DIGITAL</small>
-                  <strong>Clareza no design.<br />Força no sistema.</strong>
-                  <p>Experiências pensadas para pessoas e construídas para evoluir.</p>
-                  <div className="code-chip"><Code /></div>
-                </div>
-                <div className="window-art">
-                  <span className="mountain m1" />
-                  <span className="mountain m2" />
-                  <span className="moon" />
-                  <div className="art-grid" />
-                </div>
+              <ArrowUpRight size={19} />
+            </div>
+
+            <div className="v250-featured-visual">
+              <ProjectVisual project={featured} />
+            </div>
+
+            <div className="v250-featured-foot">
+              <span>{featured.category}</span>
+              <div>
+                {featured.tags.slice(0, 3).map((tag) => (
+                  <i key={tag}>{tag}</i>
+                ))}
               </div>
             </div>
-            <div className="floating-chip">
-              <span className="floating-icon"><Spark /></span>
-              <div><small>Produtos digitais</small><strong>pensados para crescer</strong></div>
-            </div>
-            <div className="process-list">
-              <span>ESTRATÉGIA</span>
-              <span>INTERFACE</span>
-              <span>DESENVOLVIMENTO</span>
-              <span>EVOLUÇÃO</span>
-            </div>
-            <div className="v241-hero-signals" aria-label="Destaques do estúdio">
-              <span><b>01</b><small>Produto</small></span>
-              <span><b>02</b><small>Experiência</small></span>
-              <span><b>03</b><small>Engenharia</small></span>
-            </div>
-          </div>
+          </Link>
         </div>
 
-        <div className="shell stats-panel reveal-up reveal-delay-2">
-          <div className="stat-item">
-            <span className="stat-icon"><Layers /></span>
-            <div><strong>2</strong><b>Projetos em destaque</b><small>Produtos reais, apresentados com contexto</small></div>
-          </div>
-          <div className="stat-item">
-            <span className="stat-icon"><Monitor /></span>
-            <div><strong>100%</strong><b>Responsivo</b><small>Experiência consistente em desktop e mobile</small></div>
-          </div>
-          <div className="stat-item">
-            <span className="stat-icon"><Code /></span>
-            <div><strong className="stat-text">Web & Sistemas</strong><b>Produto de ponta a ponta</b><small>Interface, dados, integrações e publicação</small></div>
-          </div>
-        </div>
-
-        <div className="shell studio-strip reveal-up reveal-delay-2" aria-label="Especialidades ALUNERI">
+        <div className="shell v250-capability-bar" aria-label="Especialidades">
           <span>Sites</span>
-          <i />
           <span>SaaS</span>
-          <i />
           <span>Dashboards</span>
-          <i />
           <span>Sistemas administrativos</span>
-          <i />
           <span>Automações</span>
         </div>
-
-        <nav className="shell v241-section-nav reveal-up reveal-delay-2" aria-label="Explorar a página">
-          <span>Explorar</span>
-          <a href="#projetos"><b>01</b> Projetos</a>
-          <a href="#processo"><b>02</b> Processo</a>
-          <a href="#sobre"><b>03</b> Estúdio</a>
-          <a href="#tecnologias"><b>04</b> Tecnologia</a>
-          <a href="#contato"><b>05</b> Contato</a>
-        </nav>
       </section>
 
-      <section className="section projects-section v241-section v241-projects" id="projetos" data-section="01" data-reveal>
+      <section className="v250-section v250-projects" id="projetos">
         <div className="shell">
-          <div className="section-heading">
+          <div className="v250-section-head">
             <div>
-              <span className="eyebrow">Projetos selecionados</span>
-              <h2>Projetos em destaque</h2>
+              <span>01 · Projetos</span>
+              <h2>Trabalho real, apresentado sem excesso.</h2>
             </div>
             <p>
-              Produtos construídos para resolver problemas diferentes, com a mesma prioridade:
-              tornar processos complexos mais claros e fáceis de usar.
+              Cada case mostra o problema, a solução e as decisões que fizeram
+              o produto ficar mais simples de usar e manter.
             </p>
           </div>
 
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <article className="project-card" key={project.id} data-reveal>
-                <div className="project-number">{project.number}</div>
-                <ProjectVisual project={project} />
-                <div className="project-body">
-                  <div className="project-meta">{project.eyebrow}</div>
-                  <div className="project-title-row">
-                    <div>
-                      <small>{project.category}</small>
-                      <h3>{project.title}</h3>
-                    </div>
-                    <Link href={`/projetos/${project.slug}`} aria-label={`Explorar case ${project.title}`}><ArrowUpRight /></Link>
-                  </div>
+          <div className="v250-project-list">
+            {projects.map((project, index) => (
+              <article className="v250-project-row" key={project.id}>
+                <Link
+                  className="v250-project-media"
+                  href={`/projetos/${project.slug}`}
+                  aria-label={`Abrir projeto ${project.title}`}
+                >
+                  <ProjectVisual project={project} />
+                  <span className="v250-project-index">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </Link>
+
+                <div className="v250-project-copy">
+                  <span className="v250-project-eyebrow">{project.eyebrow}</span>
+                  <h3>{project.title}</h3>
                   <p>{project.description}</p>
-                  <div className="project-impact-mini">
-                    <strong>Impacto</strong>
-                    <span>{project.impact[0].description}</span>
+
+                  <div className="v250-project-facts">
+                    <div>
+                      <span>Categoria</span>
+                      <strong>{project.category}</strong>
+                    </div>
+                    <div>
+                      <span>Foco</span>
+                      <strong>{project.principles.slice(0, 2).join(" · ")}</strong>
+                    </div>
                   </div>
-                  <div className="project-footer-row">
-                    <div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                    <Link className="case-link" href={`/projetos/${project.slug}`}>Explorar case <ArrowRight size={15} /></Link>
+
+                  <div className="v250-project-tags">
+                    {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
                   </div>
+
+                  <Link className="v250-text-link" href={`/projetos/${project.slug}`}>
+                    Ver case completo <ArrowRight size={15} />
+                  </Link>
                 </div>
               </article>
             ))}
           </div>
-          <div className="projects-section-actions"><Link className="button button-secondary" href="/projetos">Ver todos os projetos <ArrowRight size={16} /></Link><Link className="case-link" href="/resultados">Ver resultados publicados <ArrowRight size={15} /></Link></div>
-        </div>
-      </section>
 
-      <section className="section process-section v241-section v241-process" id="processo" data-section="02" data-reveal>
-        <div className="shell">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">Da ideia ao produto</span>
-              <h2>Um processo simples para construir melhor.</h2>
-            </div>
-            <p>Menos etapas burocráticas, mais clareza sobre o que estamos resolvendo e por que cada decisão existe.</p>
-          </div>
-
-          <div className="process-grid">
-            {processSteps.map((step) => (
-              <article key={step.number} data-reveal>
-                <span className="process-number">{step.number}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section philosophy-section v241-section v241-philosophy" id="sobre" data-section="03" data-reveal>
-        <div className="shell philosophy-grid">
-          <div className="philosophy-heading">
-            <span className="eyebrow">Sobre a ALUNERI</span>
-            <h2>Menos ruído.<br />Mais produto.</h2>
-            <Link className="case-link about-link" href="/sobre">Conhecer a ALUNERI <ArrowRight size={15} /></Link>
-          </div>
-          <div className="philosophy-copy">
-            <p>
-              A ALUNERI cria produtos digitais focados em transformar processos complexos em experiências
-              simples, modernas e funcionais. Design, usabilidade e estrutura técnica trabalham juntos
-              para que cada produto seja fácil de usar hoje e preparado para evoluir amanhã.
-            </p>
-            <div className="principles-grid">
-              <article><span>01</span><strong>Soluções reais</strong><p>Cada interface começa pelo problema que precisa ser resolvido.</p></article>
-              <article><span>02</span><strong>Experiência simples</strong><p>Fluxos claros, hierarquia visual e menos passos desnecessários.</p></article>
-              <article><span>03</span><strong>Base para evoluir</strong><p>Estrutura organizada para facilitar manutenção, melhorias e novos recursos.</p></article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section capabilities-section v241-section v241-capabilities" data-section="04" data-reveal>
-        <div className="shell">
-          <div className="section-heading compact-heading">
-            <div>
-              <span className="eyebrow">O que podemos construir</span>
-              <h2>Produto, não só páginas.</h2>
-            </div>
-            <p>O formato muda conforme o problema. A prioridade continua sendo clareza, uso real e uma base técnica preparada para crescer.</p>
-          </div>
-          <div className="capabilities-grid">
-            {capabilities.map((capability, index) => (
-              <article key={capability.title} data-reveal>
-                <span>0{index + 1}</span>
-                <h3>{capability.title}</h3>
-                <p>{capability.description}</p>
-              </article>
-            ))}
-          </div>
-          <div className="capabilities-footer">
-            <Link className="button button-secondary" href="/servicos">
-              Ver serviços em detalhe <ArrowRight size={16} />
+          <div className="v250-section-action">
+            <Link className="v250-secondary-button" href="/projetos">
+              Ver todos os projetos <ArrowRight size={15} />
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="section technologies-section v241-section v241-technologies" id="tecnologias" data-section="05" data-reveal>
-        <div className="shell">
-          <div className="section-heading tech-heading">
-            <div><span className="eyebrow">Tecnologias</span><h2>Tecnologias</h2></div>
-            <p>Ferramentas escolhidas de acordo com o produto, priorizando desenvolvimento rápido, manutenção e performance.</p>
+      <section className="v250-section v250-services">
+        <div className="shell v250-services-layout">
+          <div className="v250-sticky-copy">
+            <span>02 · Serviços</span>
+            <h2>Construído em torno do problema, não de uma lista de efeitos.</h2>
+            <p>
+              A solução pode ser um site, um SaaS ou uma ferramenta interna.
+              O ponto de partida é sempre entender o que precisa funcionar melhor.
+            </p>
+            <Link className="v250-text-link" href="/servicos">
+              Explorar serviços <ArrowRight size={15} />
+            </Link>
           </div>
-          <div className="tech-groups">
+
+          <div className="v250-service-list">
+            {capabilities.map((capability, index) => (
+              <article key={capability.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                </div>
+                <ArrowUpRight size={17} />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="v250-section v250-process" id="processo">
+        <div className="shell">
+          <div className="v250-section-head compact">
+            <div>
+              <span>03 · Processo</span>
+              <h2>Do problema à publicação.</h2>
+            </div>
+            <p>
+              Um processo enxuto, com decisões visíveis e menos etapas
+              desnecessárias.
+            </p>
+          </div>
+
+          <div className="v250-process-list">
+            {processSteps.map((step, index) => (
+              <article key={step.number}>
+                <span>{step.number}</span>
+                <div className="v250-process-line"><i /></div>
+                <div>
+                  <small>Etapa {index + 1}</small>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="v250-section v250-about" id="sobre">
+        <div className="shell v250-about-grid">
+          <div>
+            <span>04 · ALUNERI</span>
+            <h2>Menos ruído.<br />Mais produto.</h2>
+          </div>
+
+          <div className="v250-about-copy">
+            <p>
+              A ALUNERI combina interface e desenvolvimento para transformar
+              processos complexos em produtos mais claros, modernos e fáceis
+              de operar.
+            </p>
+
+            <div className="v250-principles">
+              <div><strong>Simplicidade</strong><span>Menos passos e decisões mais claras.</span></div>
+              <div><strong>Estrutura</strong><span>Base organizada para evoluir sem refazer tudo.</span></div>
+              <div><strong>Uso real</strong><span>Prioridade para o que as pessoas realmente precisam fazer.</span></div>
+            </div>
+
+            <Link className="v250-text-link" href="/sobre">
+              Conhecer a ALUNERI <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="v250-section v250-tech" id="tecnologias">
+        <div className="shell">
+          <div className="v250-section-head compact">
+            <div>
+              <span>05 · Tecnologia</span>
+              <h2>Ferramentas escolhidas para manter o produto simples de evoluir.</h2>
+            </div>
+          </div>
+
+          <div className="v250-tech-grid">
             {technologyGroups.map((group) => (
-              <article className="tech-group" key={group.title}>
+              <article key={group.title}>
                 <h3>{group.title}</h3>
-                <div className="tech-list">
-                  {group.items.map((technology, index) => (
-                    <span className="tech-pill" key={technology}><i className={`tech-dot tech-${index % 10}`} /> {technology}</span>
-                  ))}
+                <div>
+                  {group.items.map((item) => <span key={item}>{item}</span>)}
                 </div>
               </article>
             ))}
@@ -303,18 +290,25 @@ export default function Home() {
 
       <Testimonials />
 
-      <section className="section faq-section v241-section v241-faq" id="faq" data-section="06" data-reveal>
-        <div className="shell faq-grid">
-          <div className="faq-heading">
-            <span className="eyebrow">Perguntas frequentes</span>
-            <h2>Antes de começar.</h2>
-            <p>Algumas respostas rápidas para reduzir dúvidas antes da primeira conversa.</p>
-            <Link className="button button-secondary" href="/contato">Preencher briefing <ArrowRight /></Link>
+      <section className="v250-section v250-faq" id="faq">
+        <div className="shell v250-faq-grid">
+          <div className="v250-sticky-copy">
+            <span>06 · Dúvidas</span>
+            <h2>Antes da primeira conversa.</h2>
+            <p>
+              Respostas diretas para as dúvidas que normalmente aparecem antes
+              de começar um projeto.
+            </p>
           </div>
-          <div className="faq-list">
+
+          <div className="v250-faq-list">
             {faqs.map((item, index) => (
               <details key={item.question} open={index === 0}>
-                <summary><span>{String(index + 1).padStart(2, "0")}</span>{item.question}<i>+</i></summary>
+                <summary>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{item.question}</strong>
+                  <i>+</i>
+                </summary>
                 <p>{item.answer}</p>
               </details>
             ))}
@@ -322,40 +316,53 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section contact-section v241-section v241-contact" id="contato" data-section="07" data-reveal>
+      <section className="v250-contact" id="contato">
         <div className="shell">
-          <div className="contact-card">
-            <div className="contact-orb" />
-            <div className="contact-copy">
-              <span className="eyebrow">Próximo projeto</span>
-              <h2>Tem uma ideia?<br />Vamos torná-la real.</h2>
-              <p>Você pode começar com um briefing rápido ou falar direto pelo WhatsApp. Quanto mais contexto, melhor a primeira conversa.</p>
-              <span className="contact-status"><span className="pulse-dot" /> {brand.availability}</span>
+          <div className="v250-contact-panel">
+            <div>
+              <span>Próximo projeto</span>
+              <h2>Tem uma ideia? Vamos organizar o próximo passo.</h2>
+              <p>
+                Comece com um briefing, marque uma conversa ou fale direto
+                pelo WhatsApp.
+              </p>
             </div>
-            <div className="contact-links">
-              <Link className="contact-primary" href="/contato">
-                <span><Spark /></span><div><small>Orçamento</small><strong>Preencher briefing do projeto</strong></div><ArrowUpRight className="contact-arrow" />
+
+            <div className="v250-contact-actions">
+              <Link href="/contato">
+                <span><Spark size={17} /></span>
+                <div><small>Projeto</small><strong>Preencher briefing</strong></div>
+                <ArrowUpRight size={16} />
               </Link>
-              <Link className="contact-secondary" href="/agendar">
-                <span><Monitor /></span><div><small>Conversa</small><strong>Agendar uma reunião</strong></div><ArrowUpRight className="contact-arrow" />
+              <Link href="/agendar">
+                <span><Monitor size={17} /></span>
+                <div><small>Reunião</small><strong>Agendar conversa</strong></div>
+                <ArrowUpRight size={16} />
               </Link>
               {contact.whatsapp && (
-                <a className="contact-secondary" href={contact.whatsapp} target="_blank" rel="noreferrer">
-                  <span><WhatsApp /></span><div><small>WhatsApp</small><strong>{contact.whatsappDisplay}</strong></div><ArrowUpRight className="contact-arrow" />
+                <a href={contact.whatsapp} target="_blank" rel="noreferrer">
+                  <span><WhatsApp size={17} /></span>
+                  <div><small>WhatsApp</small><strong>{contact.whatsappDisplay}</strong></div>
+                  <ArrowUpRight size={16} />
                 </a>
               )}
               {contact.email && (
-                <a className="contact-secondary" href={`mailto:${contact.email}`}>
-                  <span><Mail /></span><div><small>Email</small><strong>{contact.email}</strong></div><ArrowUpRight className="contact-arrow" />
+                <a href={`mailto:${contact.email}`}>
+                  <span><Mail size={17} /></span>
+                  <div><small>Email</small><strong>{contact.email}</strong></div>
+                  <ArrowUpRight size={16} />
                 </a>
               )}
-              <a className="contact-secondary" href={contact.github} target="_blank" rel="noreferrer">
-                <span><Github /></span><div><small>GitHub</small><strong>github.com/Ferro135</strong></div><ArrowUpRight className="contact-arrow" />
+              <a href={contact.github} target="_blank" rel="noreferrer">
+                <span><Github size={17} /></span>
+                <div><small>GitHub</small><strong>Ferro135</strong></div>
+                <ArrowUpRight size={16} />
               </a>
             </div>
           </div>
         </div>
       </section>
+
       <SiteFooter />
     </main>
   );
